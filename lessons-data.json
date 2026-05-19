@@ -1,0 +1,166 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Hiragana Basics",
+      "description": "Master all 46 Hiragana characters with stroke order and pronunciation",
+      "category": "Writing System",
+      "difficulty": "Beginner",
+      "xpReward": 500,
+      "totalUnits": 12,
+      "units": [
+        {
+          "unitId": 1,
+          "title": "Introduction to Hiragana",
+          "description": "Learn the basics of the Hiragana writing system",
+          "content": {
+            "theory": "Hiragana is one of the three writing systems used in Japanese...",
+            "characters": ["あ", "い", "う", "え", "お"]
+          },
+          "exercises": [
+            {
+              "type": "multiple-choice",
+              "question": "What is the romanization of あ?",
+              "options": ["a", "i", "u", "e"],
+              "correct": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Katakana Mastery",
+      "description": "Learn Katakana for foreign words and modern Japanese",
+      "category": "Writing System",
+      "difficulty": "Beginner",
+      "xpReward": 500,
+      "totalUnits": 12,
+      "units": []
+    },
+    {
+      "id": 3,
+      "title": "Basic Kanji (N5)",
+      "description": "80 essential Kanji characters for JLPT N5 level",
+      "category": "Kanji",
+      "difficulty": "Beginner",
+      "xpReward": 800,
+      "totalUnits": 20,
+      "kanji": [
+        {
+          "character": "日",
+          "onyomi": ["ニチ", "ジツ"],
+          "kunyomi": ["ひ", "か"],
+          "meaning": "day, sun",
+          "strokeCount": 4,
+          "examples": [
+            {
+              "word": "日本",
+              "reading": "にほん",
+              "meaning": "Japan"
+            },
+            {
+              "word": "今日",
+              "reading": "きょう",
+              "meaning": "today"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Grammar Foundations",
+      "description": "Core sentence structures and particles",
+      "category": "Grammar",
+      "difficulty": "Beginner",
+      "xpReward": 600,
+      "totalUnits": 15,
+      "topics": [
+        {
+          "topic": "Particles は and が",
+          "explanation": "Understanding topic and subject markers",
+          "examples": [
+            {
+              "japanese": "私は学生です。",
+              "romaji": "Watashi wa gakusei desu.",
+              "english": "I am a student.",
+              "note": "は marks the topic"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Everyday Vocabulary",
+      "description": "500 common words and phrases for daily conversation",
+      "category": "Vocabulary",
+      "difficulty": "Beginner",
+      "xpReward": 1000,
+      "totalUnits": 25,
+      "vocabulary": [
+        {
+          "word": "おはよう",
+          "romaji": "ohayou",
+          "meaning": "good morning",
+          "category": "greetings",
+          "level": "N5"
+        },
+        {
+          "word": "ありがとう",
+          "romaji": "arigatou",
+          "meaning": "thank you",
+          "category": "greetings",
+          "level": "N5"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "JLPT N4 Preparation",
+      "description": "Intermediate level exam preparation",
+      "category": "JLPT",
+      "difficulty": "Intermediate",
+      "xpReward": 1500,
+      "totalUnits": 30,
+      "units": []
+    }
+  ],
+  "flashcardDecks": [
+    {
+      "id": "hiragana",
+      "name": "Hiragana",
+      "description": "All 46 basic Hiragana characters",
+      "totalCards": 46,
+      "cards": [
+        {
+          "front": "あ",
+          "back": "a",
+          "type": "Hiragana",
+          "example": "あなた (anata) - you"
+        },
+        {
+          "front": "い",
+          "back": "i",
+          "type": "Hiragana",
+          "example": "いえ (ie) - house"
+        }
+      ]
+    },
+    {
+      "id": "katakana",
+      "name": "Katakana",
+      "description": "All 46 basic Katakana characters",
+      "totalCards": 46,
+      "cards": []
+    },
+    {
+      "id": "n5-kanji",
+      "name": "JLPT N5 Kanji",
+      "description": "Essential kanji for JLPT N5",
+      "totalCards": 80,
+      "cards": []
+    }
+  ]
+}
