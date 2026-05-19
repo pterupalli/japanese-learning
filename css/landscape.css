@@ -1,0 +1,827 @@
+/* ============================================
+   Japanese Landscape Scene
+   Mount Fuji, Clouds, Green Fields
+   ============================================ */
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ============================================
+   Landscape Scene Container
+   ============================================ */
+
+.landscape-scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* ============================================
+   Sky with Beautiful Gradient
+   ============================================ */
+
+.sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        #87CEEB 0%,      /* Light sky blue */
+        #B0E0F6 30%,     /* Lighter blue */
+        #E8F4F8 60%,     /* Very light blue */
+        #FFF8E1 85%,     /* Warm horizon */
+        #FFE4B5 100%     /* Peachy horizon */
+    );
+    z-index: 1;
+}
+
+/* ============================================
+   Animated Clouds
+   ============================================ */
+
+.clouds-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    z-index: 2;
+}
+
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 100px;
+    animation: drift linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 100px;
+}
+
+.cloud-1 {
+    width: 120px;
+    height: 40px;
+    top: 10%;
+    left: -150px;
+    animation: drift-1 80s linear infinite;
+}
+
+.cloud-1::before {
+    width: 60px;
+    height: 50px;
+    top: -25px;
+    left: 25px;
+}
+
+.cloud-1::after {
+    width: 70px;
+    height: 40px;
+    top: -15px;
+    right: 20px;
+}
+
+.cloud-2 {
+    width: 150px;
+    height: 50px;
+    top: 20%;
+    left: -200px;
+    animation: drift-2 100s linear infinite;
+}
+
+.cloud-2::before {
+    width: 70px;
+    height: 60px;
+    top: -30px;
+    left: 30px;
+}
+
+.cloud-2::after {
+    width: 80px;
+    height: 50px;
+    top: -20px;
+    right: 25px;
+}
+
+.cloud-3 {
+    width: 100px;
+    height: 35px;
+    top: 15%;
+    right: -150px;
+    animation: drift-3 70s linear infinite reverse;
+}
+
+.cloud-3::before {
+    width: 50px;
+    height: 45px;
+    top: -20px;
+    left: 20px;
+}
+
+.cloud-3::after {
+    width: 60px;
+    height: 35px;
+    top: -10px;
+    right: 15px;
+}
+
+.cloud-4 {
+    width: 130px;
+    height: 45px;
+    top: 5%;
+    left: 30%;
+    animation: drift-4 90s linear infinite;
+}
+
+.cloud-4::before {
+    width: 65px;
+    height: 55px;
+    top: -25px;
+    left: 25px;
+}
+
+.cloud-4::after {
+    width: 75px;
+    height: 45px;
+    top: -18px;
+    right: 20px;
+}
+
+.cloud-5 {
+    width: 110px;
+    height: 38px;
+    top: 25%;
+    right: 20%;
+    animation: drift-5 85s linear infinite reverse;
+}
+
+.cloud-5::before {
+    width: 55px;
+    height: 48px;
+    top: -22px;
+    left: 22px;
+}
+
+.cloud-5::after {
+    width: 65px;
+    height: 38px;
+    top: -12px;
+    right: 18px;
+}
+
+.cloud-6 {
+    width: 140px;
+    height: 48px;
+    top: 12%;
+    right: 50%;
+    animation: drift-6 95s linear infinite;
+}
+
+.cloud-6::before {
+    width: 68px;
+    height: 58px;
+    top: -28px;
+    left: 28px;
+}
+
+.cloud-6::after {
+    width: 78px;
+    height: 48px;
+    top: -16px;
+    right: 22px;
+}
+
+@keyframes drift-1 {
+    0% { left: -150px; }
+    100% { left: 110%; }
+}
+
+@keyframes drift-2 {
+    0% { left: -200px; }
+    100% { left: 110%; }
+}
+
+@keyframes drift-3 {
+    0% { right: -150px; }
+    100% { right: 110%; }
+}
+
+@keyframes drift-4 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 200px)); }
+}
+
+@keyframes drift-5 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-100vw - 200px)); }
+}
+
+@keyframes drift-6 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 200px)); }
+}
+
+/* ============================================
+   Mount Fuji - The Star of the Show
+   ============================================ */
+
+.mount-fuji {
+    position: absolute;
+    bottom: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    z-index: 4;
+}
+
+.mountain-peak {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 300px solid transparent;
+    border-right: 300px solid transparent;
+    border-bottom: 400px solid #7B8FA1;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+}
+
+.snow-cap {
+    position: absolute;
+    bottom: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 150px solid #F8F9FA;
+    filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.5));
+}
+
+/* ============================================
+   Distant Mountain Layers
+   ============================================ */
+
+.mountains-distant {
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    z-index: 3;
+}
+
+.mountain-layer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.mountain-1 {
+    background: linear-gradient(to top, #8B9DAF 0%, #A8B8C8 100%);
+    clip-path: polygon(
+        0% 100%, 
+        0% 60%, 
+        15% 45%, 
+        25% 50%, 
+        35% 35%, 
+        45% 40%, 
+        55% 30%, 
+        65% 38%, 
+        75% 48%, 
+        85% 42%, 
+        100% 55%, 
+        100% 100%
+    );
+    opacity: 0.7;
+}
+
+.mountain-2 {
+    background: linear-gradient(to top, #9FAEBF 0%, #B5C4D4 100%);
+    clip-path: polygon(
+        0% 100%, 
+        0% 70%, 
+        10% 55%, 
+        20% 60%, 
+        30% 48%, 
+        40% 52%, 
+        50% 40%, 
+        60% 45%, 
+        70% 58%, 
+        80% 50%, 
+        90% 62%, 
+        100% 68%, 
+        100% 100%
+    );
+    opacity: 0.6;
+}
+
+.mountain-3 {
+    background: linear-gradient(to top, #B0BFCF 0%, #C5D4E4 100%);
+    clip-path: polygon(
+        0% 100%, 
+        0% 75%, 
+        12% 65%, 
+        24% 70%, 
+        36% 62%, 
+        48% 68%, 
+        60% 58%, 
+        72% 65%, 
+        84% 72%, 
+        96% 68%, 
+        100% 75%, 
+        100% 100%
+    );
+    opacity: 0.5;
+}
+
+/* ============================================
+   Green Fields - Layered
+   ============================================ */
+
+.fields {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    z-index: 5;
+}
+
+.field {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.field-1 {
+    height: 100%;
+    background: linear-gradient(to bottom, #7CB342 0%, #558B2F 100%);
+    clip-path: polygon(
+        0% 30%, 
+        10% 25%, 
+        20% 28%, 
+        30% 22%, 
+        40% 26%, 
+        50% 20%, 
+        60% 24%, 
+        70% 21%, 
+        80% 25%, 
+        90% 23%, 
+        100% 27%, 
+        100% 100%, 
+        0% 100%
+    );
+}
+
+.field-2 {
+    height: 80%;
+    background: linear-gradient(to bottom, #8BC34A 0%, #689F38 100%);
+    clip-path: polygon(
+        0% 40%, 
+        15% 35%, 
+        30% 38%, 
+        45% 32%, 
+        60% 36%, 
+        75% 33%, 
+        90% 37%, 
+        100% 35%, 
+        100% 100%, 
+        0% 100%
+    );
+}
+
+.field-3 {
+    height: 60%;
+    background: linear-gradient(to bottom, #9CCC65 0%, #7CB342 100%);
+    clip-path: polygon(
+        0% 50%, 
+        20% 45%, 
+        40% 48%, 
+        60% 44%, 
+        80% 47%, 
+        100% 45%, 
+        100% 100%, 
+        0% 100%
+    );
+}
+
+/* ============================================
+   Cherry Blossom Petals
+   ============================================ */
+
+.petals-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.petal {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #FFB7C5;
+    border-radius: 50% 0 50% 0;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+.petal-1 {
+    left: 10%;
+    animation: fall-1 15s linear infinite;
+    animation-delay: 0s;
+}
+
+.petal-2 {
+    left: 25%;
+    animation: fall-2 18s linear infinite;
+    animation-delay: 3s;
+}
+
+.petal-3 {
+    left: 45%;
+    animation: fall-3 20s linear infinite;
+    animation-delay: 6s;
+}
+
+.petal-4 {
+    left: 60%;
+    animation: fall-4 17s linear infinite;
+    animation-delay: 2s;
+}
+
+.petal-5 {
+    left: 75%;
+    animation: fall-5 19s linear infinite;
+    animation-delay: 5s;
+}
+
+.petal-6 {
+    left: 90%;
+    animation: fall-6 16s linear infinite;
+    animation-delay: 8s;
+}
+
+@keyframes fall-1 {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(50px) rotate(360deg);
+    }
+}
+
+@keyframes fall-2 {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(-30px) rotate(360deg);
+    }
+}
+
+@keyframes fall-3 {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(40px) rotate(360deg);
+    }
+}
+
+@keyframes fall-4 {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(-50px) rotate(360deg);
+    }
+}
+
+@keyframes fall-5 {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(35px) rotate(360deg);
+    }
+}
+
+@keyframes fall-6 {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(-45px) rotate(360deg);
+    }
+}
+
+/* ============================================
+   Floating Japanese Characters
+   ============================================ */
+
+.char-float-jp {
+    position: absolute;
+    font-family: var(--font-jp);
+    font-size: clamp(6rem, 12vw, 12rem);
+    font-weight: 200;
+    color: rgba(139, 157, 175, 0.15);
+    z-index: 8;
+    user-select: none;
+    animation: floatSlow 40s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes floatSlow {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.15;
+    }
+    25% {
+        transform: translate(30px, -50px) rotate(5deg);
+        opacity: 0.2;
+    }
+    50% {
+        transform: translate(-20px, -100px) rotate(-3deg);
+        opacity: 0.1;
+    }
+    75% {
+        transform: translate(40px, -50px) rotate(7deg);
+        opacity: 0.18;
+    }
+}
+
+/* ============================================
+   Transparent Navigation
+   ============================================ */
+
+.nav-transparent {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.nav-transparent .logo-jp {
+    color: var(--accent-red);
+    text-shadow: 0 2px 8px rgba(193, 39, 45, 0.2);
+}
+
+.nav-transparent .btn-text {
+    color: var(--text-charcoal);
+}
+
+.nav-transparent .btn-primary {
+    box-shadow: 0 4px 16px rgba(193, 39, 45, 0.3);
+}
+
+/* ============================================
+   Hero Glass Morphism Card
+   ============================================ */
+
+.hero {
+    position: relative;
+    z-index: 100;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+}
+
+.hero-glass {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    padding: 4rem 3rem;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+    animation: fadeInUp 1.2s ease-out;
+    max-width: 900px;
+}
+
+.hero-glass .hero-badge {
+    background: rgba(193, 39, 45, 0.15);
+    border: 1px solid rgba(193, 39, 45, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.hero-glass .hero-title {
+    text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
+}
+
+.hero-glass .title-jp {
+    text-shadow: 0 2px 20px rgba(193, 39, 45, 0.3);
+}
+
+.hero-glass .btn-hero {
+    box-shadow: 
+        0 8px 24px rgba(193, 39, 45, 0.35),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hero-glass .btn-hero:hover {
+    box-shadow: 
+        0 12px 32px rgba(193, 39, 45, 0.45),
+        0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   Features Section - Glass Cards
+   ============================================ */
+
+.features {
+    position: relative;
+    z-index: 100;
+    background: linear-gradient(to bottom, transparent 0%, rgba(248, 245, 240, 0.95) 30%);
+    backdrop-filter: blur(10px);
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================
+   Roadmap and CTA Sections
+   ============================================ */
+
+.roadmap,
+.cta-section {
+    position: relative;
+    z-index: 100;
+}
+
+.roadmap {
+    background: rgba(248, 245, 240, 0.95);
+}
+
+.roadmap-item {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+}
+
+/* ============================================
+   Responsive Landscape
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .mountain-peak {
+        border-left: 200px solid transparent;
+        border-right: 200px solid transparent;
+        border-bottom: 300px solid #7B8FA1;
+    }
+    
+    .snow-cap {
+        bottom: 180px;
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+        border-bottom: 120px solid #F8F9FA;
+    }
+    
+    .mount-fuji {
+        bottom: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .mountain-peak {
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        border-bottom: 200px solid #7B8FA1;
+    }
+    
+    .snow-cap {
+        bottom: 120px;
+        border-left: 75px solid transparent;
+        border-right: 75px solid transparent;
+        border-bottom: 80px solid #F8F9FA;
+    }
+    
+    .mount-fuji {
+        bottom: 25%;
+    }
+    
+    .fields {
+        height: 35%;
+    }
+    
+    .hero-glass {
+        padding: 3rem 2rem;
+        margin: 1rem;
+    }
+    
+    .cloud {
+        transform: scale(0.7);
+    }
+    
+    .char-float-jp {
+        font-size: clamp(4rem, 10vw, 8rem);
+    }
+}
+
+/* ============================================
+   Parallax Effect on Scroll
+   ============================================ */
+
+@media (min-width: 768px) {
+    .landscape-scene {
+        transform-style: preserve-3d;
+    }
+    
+    .sky {
+        transform: translateZ(0);
+    }
+    
+    .clouds-layer {
+        transform: translateZ(20px);
+    }
+    
+    .mount-fuji {
+        transform: translateX(-50%) translateZ(30px);
+    }
+    
+    .mountains-distant {
+        transform: translateZ(15px);
+    }
+    
+    .fields {
+        transform: translateZ(50px);
+    }
+}
+
+/* ============================================
+   Smooth Animations
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .cloud,
+    .petal,
+    .char-float-jp {
+        animation: none;
+    }
+    
+    .landscape-scene * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
