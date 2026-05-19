@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Japanese Learning Platform</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Japanese Characters Background -->
+    <div class="floating-characters" id="floatingChars"></div>
+
+    <!-- 3D Grid Background -->
+    <div class="grid-background"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">日</div>
+                <span>Japanese Learning</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="#" id="logoutBtn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard-main">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-badge">✨ Welcome Back</div>
+                <h1 class="welcome-title">
+                    こんにちは、<span id="userName">Student</span>さん
+                </h1>
+                <p class="welcome-subtitle">Ready to continue your Japanese learning journey?</p>
+            </section>
+
+            <!-- Quick Stats -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="lessonsCount">0</div>
+                        <div class="stat-label">Lessons Completed</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="xpCount">0</div>
+                        <div class="stat-label">Total XP</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="streakCount">0</div>
+                        <div class="stat-label">Day Streak</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="kanjiCount">0</div>
+                        <div class="stat-label">Kanji Learned</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- YouTube Search Widget -->
+            <section class="youtube-search-section">
+                <h2 class="section-title">🔍 Search Japanese Lessons</h2>
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        id="youtubeSearch" 
+                        class="search-input" 
+                        placeholder="Search for Japanese lessons, grammar, JLPT prep..."
+                    >
+                    <button class="search-btn" id="searchBtn">
+                        <span>Search YouTube</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16z" stroke="currentColor" stroke-width="2"/>
+                            <path d="m19 19-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Popular Japanese Classes -->
+            <section class="popular-classes">
+                <h2 class="section-title">🎥 Recommended for You</h2>
+                <p class="recommendation-note" id="recommendationNote">Based on your current level and progress</p>
+                
+                <div id="videoRecommendations">
+                    <!-- Videos will be dynamically loaded based on user level -->
+                </div>
+            </section>
+
+            <!-- Learning Progress Section -->
+            <section class="learning-tracks">
+                <h2 class="section-title">📚 Your Learning Path</h2>
+                <div class="tracks-grid">
+                    <div class="track-card">
+                        <div class="track-header">
+                            <h3>Hiragana Basics</h3>
+                            <span class="track-level">Level 1</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="track-desc">Master the foundation of Japanese writing</p>
+                        <button class="track-btn">Start Learning</button>
+                    </div>
+
+                    <div class="track-card">
+                        <div class="track-header">
+                            <h3>Katakana Basics</h3>
+                            <span class="track-level">Level 1</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="track-desc">Learn foreign words and modern terms</p>
+                        <button class="track-btn">Start Learning</button>
+                    </div>
+
+                    <div class="track-card">
+                        <div class="track-header">
+                            <h3>Essential Kanji</h3>
+                            <span class="track-level">Level 2</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="track-desc">JLPT N5 kanji characters</p>
+                        <button class="track-btn">Start Learning</button>
+                    </div>
+
+                    <div class="track-card">
+                        <div class="track-header">
+                            <h3>Basic Grammar</h3>
+                            <span class="track-level">Level 2</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="track-desc">Essential grammar patterns</p>
+                        <button class="track-btn">Start Learning</button>
+                    </div>
+
+                    <div class="track-card">
+                        <div class="track-header">
+                            <h3>Vocabulary Builder</h3>
+                            <span class="track-level">Level 3</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="track-desc">Common words and phrases</p>
+                        <button class="track-btn">Start Learning</button>
+                    </div>
+
+                    <div class="track-card">
+                        <div class="track-header">
+                            <h3>JLPT N4 Prep</h3>
+                            <span class="track-level">Level 4</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="track-desc">Intermediate level preparation</p>
+                        <button class="track-btn">Start Learning</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>© 2026 Pradeep Terupalli</p>
+                <p>Japanese Learning Platform</p>
+            </div>
+            <div class="footer-right">
+                <p class="japanese-text">がんばってください!</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
