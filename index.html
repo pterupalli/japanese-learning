@@ -1,653 +1,1006 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pradeep Terupalli - Japanese Learning Dashboard | 2026</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif+JP:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #c1272d;
-            --primary-dark: #a01f24;
-            --accent: #d4af37;
-            --bg: #000000;
-            --bg-card: #0a0a0a;
-            --text: #ffffff;
-            --text-muted: #888888;
-            --border: #1a1a1a;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日本語道 | Japanese Mastery System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #07091a;
+  --ink2: #0d1033;
+  --ink3: #141840;
+  --surface: rgba(255,255,255,0.03);
+  --surface2: rgba(255,255,255,0.06);
+  --border: rgba(147,197,253,0.1);
+  --border2: rgba(147,197,253,0.2);
+  --blue: #3b82f6;
+  --blue-dim: rgba(59,130,246,0.15);
+  --pink: #f472b6;
+  --pink-dim: rgba(244,114,182,0.12);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.12);
+  --teal: #2dd4bf;
+  --teal-dim: rgba(45,212,191,0.12);
+  --gold: #fbbf24;
+  --gold-dim: rgba(251,191,36,0.12);
+  --red: #f87171;
+  --red-dim: rgba(248,113,113,0.12);
+  --green: #4ade80;
+  --green-dim: rgba(74,222,128,0.12);
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #475569;
+  --text4: #1e293b;
+  --font-display: 'Shippori Mincho', serif;
+  --font-ui: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* ── ANIMATED BG ── */
+.bg-layer {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(59,130,246,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 80%, rgba(167,139,250,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 60% 10%, rgba(244,114,182,0.04) 0%, transparent 60%);
+}
+.bg-grid {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(147,197,253,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147,197,253,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.bg-chars {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+}
+.bg-char {
+  position: absolute;
+  color: rgba(147,197,253,0.05);
+  font-size: 64px;
+  animation: floatChar linear infinite;
+  user-select: none;
+}
+@keyframes floatChar {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.03; }
+  50% { opacity: 0.08; }
+  100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+/* ── LAYOUT ── */
+.app { position: relative; z-index: 1; }
 
-        /* Animated gradient background */
-        .gradient-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
-            z-index: -1;
-        }
+/* ── NAV ── */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(7,9,26,0.9);
+  backdrop-filter: blur(12px);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+}
+.nav-kanji {
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 700;
+  color: var(--blue);
+  background: var(--blue-dim);
+  border: 1px solid rgba(59,130,246,0.3);
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+}
+.nav-title { font-family: var(--font-ui); font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: 2px; }
+.nav-sub { font-size: 10px; color: var(--text3); letter-spacing: 3px; margin-top: 1px; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 11px; color: var(--text2); text-decoration: none; letter-spacing: 2px; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--blue); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.level-pill {
+  background: var(--gold-dim); border: 1px solid rgba(251,191,36,0.3);
+  color: var(--gold); font-size: 10px; letter-spacing: 2px;
+  padding: 5px 12px; border-radius: 20px; font-family: var(--font-mono);
+}
+.nav-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: #fff;
+  cursor: pointer;
+}
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
+/* ── HERO ── */
+.hero {
+  padding: 4rem 2.5rem 2rem;
+  display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start;
+}
+.hero-eyebrow {
+  font-size: 10px; letter-spacing: 5px; color: var(--pink); font-family: var(--font-mono);
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;
+}
+.hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--pink); display: block; }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px); font-weight: 700;
+  color: var(--text); line-height: 1.1; margin-bottom: 0.5rem;
+}
+.hero-title .accent { color: var(--blue); }
+.hero-sub-jp {
+  font-family: var(--font-display); font-size: 13px;
+  color: var(--text3); letter-spacing: 6px; margin-bottom: 1rem;
+}
+.hero-desc { font-size: 14px; color: var(--text2); line-height: 1.7; max-width: 520px; margin-bottom: 2rem; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #fff; border: none; padding: 12px 24px;
+  border-radius: 8px; font-family: var(--font-ui); font-size: 12px;
+  font-weight: 700; letter-spacing: 2px; cursor: pointer; transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.85; }
+.btn-ghost {
+  background: transparent; color: var(--text2);
+  border: 1px solid var(--border2); padding: 12px 24px;
+  border-radius: 8px; font-family: var(--font-ui); font-size: 12px;
+  letter-spacing: 2px; cursor: pointer; transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
 
-        /* 3D Grid Background */
-        .grid-3d {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(193, 39, 45, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(193, 39, 45, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            transform: perspective(500px) rotateX(60deg);
-            transform-origin: center center;
-            z-index: 0;
-            opacity: 0.3;
-        }
+/* HERO STATS */
+.hero-stats {
+  display: flex; flex-direction: column; gap: 12px; min-width: 200px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem;
+}
+.hero-stat-row { display: flex; align-items: center; justify-content: space-between; }
+.hero-stat-label { font-size: 11px; color: var(--text3); letter-spacing: 1px; }
+.hero-stat-val { font-family: var(--font-mono); font-size: 13px; color: var(--text); }
+.hero-stat-val.blue { color: var(--blue); }
+.hero-stat-val.gold { color: var(--gold); }
+.hero-stat-val.green { color: var(--green); }
+.stat-divider { height: 1px; background: var(--border); }
+.xp-bar-wrap { margin-top: 8px; }
+.xp-bar-label { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.xp-bar-label span { font-size: 10px; color: var(--text3); letter-spacing: 1px; }
+.xp-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+.xp-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--purple)); border-radius: 2px; width: 34%; }
 
-        /* Floating Japanese Characters */
-        .japanese-chars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
+/* ── SECTION COMMON ── */
+.section { padding: 2rem 2.5rem; }
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;
+}
+.section-label { font-size: 10px; letter-spacing: 5px; color: var(--text3); font-family: var(--font-mono); margin-bottom: 4px; }
+.section-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text); }
+.section-link { font-size: 11px; color: var(--blue); letter-spacing: 1px; cursor: pointer; text-decoration: none; }
 
-        .jp-char {
-            position: absolute;
-            font-family: 'Noto Serif JP', serif;
-            color: var(--primary);
-            opacity: 0;
-            animation: floatChar linear infinite;
-        }
+/* ── MASTERY STAGES ── */
+.stages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.stage-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden; cursor: pointer;
+  transition: border-color 0.25s, transform 0.2s;
+  position: relative;
+}
+.stage-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.stage-card.active-stage { border-color: var(--blue); }
+.stage-card.locked { opacity: 0.45; cursor: default; }
+.stage-top {
+  padding: 1.25rem 1.25rem 1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.stage-num {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
+  padding: 4px 10px; border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+}
+.stage-info { flex: 1; }
+.stage-jp { font-family: var(--font-display); font-size: 20px; font-weight: 700; line-height: 1; }
+.stage-en { font-size: 11px; letter-spacing: 3px; margin-top: 3px; }
+.stage-level { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; margin-top: 6px; }
+.stage-lock { font-size: 18px; margin-left: auto; opacity: 0.4; }
+.stage-body { padding: 1rem 1.25rem; }
+.stage-desc { font-size: 12px; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
+.stage-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+.skill-chip {
+  font-size: 10px; letter-spacing: 1px; padding: 4px 10px;
+  border-radius: 4px; font-family: var(--font-mono);
+}
+.stage-progress-wrap { }
+.stage-progress-label { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.stage-progress-label span { font-size: 10px; color: var(--text3); letter-spacing: 1px; }
+.stage-bar { height: 3px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+.stage-fill { height: 100%; border-radius: 2px; }
+.stage-outcome {
+  margin-top: 10px; padding: 8px 10px;
+  background: rgba(255,255,255,0.02); border-radius: 6px;
+  border-left: 2px solid;
+  font-size: 11px; color: var(--text2); line-height: 1.5;
+  font-style: italic;
+}
 
-        @keyframes floatChar {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
+/* Stage color tokens */
+.s1 { --sc: var(--blue); --sc-dim: var(--blue-dim); }
+.s2 { --sc: var(--teal); --sc-dim: var(--teal-dim); }
+.s3 { --sc: var(--purple); --sc-dim: var(--purple-dim); }
+.s4 { --sc: var(--gold); --sc-dim: var(--gold-dim); }
+.s5 { --sc: var(--pink); --sc-dim: var(--pink-dim); }
+.s6 { --sc: var(--red); --sc-dim: var(--red-dim); }
+.stage-card .stage-num { color: var(--sc); background: var(--sc-dim); }
+.stage-card .stage-jp { color: var(--sc); }
+.stage-card .stage-en { color: var(--sc); opacity: 0.7; }
+.stage-card.active-stage { border-color: var(--sc); }
+.stage-fill { background: var(--sc); }
+.stage-outcome { border-left-color: var(--sc); }
+.skill-chip { background: var(--sc-dim); color: var(--sc); }
 
-        /* Header */
-        header {
-            padding: 1.5rem 4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            transition: all 0.3s ease;
-        }
+/* ── CORE PRINCIPLES ── */
+.principles-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;
+}
+.principle-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.25rem;
+}
+.principle-icon {
+  font-family: var(--font-display); font-size: 28px; margin-bottom: 0.75rem;
+}
+.principle-num { font-family: var(--font-mono); font-size: 9px; color: var(--text3); letter-spacing: 3px; margin-bottom: 6px; }
+.principle-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: 0.5px; }
+.principle-body { font-size: 12px; color: var(--text2); line-height: 1.7; }
 
-        header.scrolled {
-            padding: 1rem 4rem;
-            background: rgba(0, 0, 0, 0.95);
-            border-bottom: 1px solid rgba(193, 39, 45, 0.3);
-        }
+/* ── SKILL BENCHMARKS ── */
+.benchmarks-wrap { display: flex; flex-direction: column; gap: 10px; }
+.benchmark-row {
+  display: grid; grid-template-columns: 80px 1fr 120px 80px;
+  align-items: center; gap: 16px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.85rem 1.25rem;
+}
+.bm-stage { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; padding: 3px 8px; border-radius: 4px; text-align: center; }
+.bm-skills { font-size: 12px; color: var(--text2); }
+.bm-skills strong { color: var(--text); font-weight: 500; font-size: 11px; display: block; margin-bottom: 2px; }
+.bm-bar-wrap { }
+.bm-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+.bm-fill { height: 100%; border-radius: 2px; }
+.bm-label { font-size: 10px; color: var(--text3); letter-spacing: 1px; margin-top: 4px; font-family: var(--font-mono); }
+.bm-jlpt { font-family: var(--font-mono); font-size: 11px; text-align: right; }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+/* ── LESSONS GRID ── */
+.lessons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.lesson-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.25rem; cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden;
+}
+.lesson-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.lesson-glyph {
+  font-family: var(--font-display); font-size: 36px; font-weight: 700;
+  line-height: 1; margin-bottom: 0.75rem; display: block;
+}
+.lesson-name { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--text); margin-bottom: 4px; }
+.lesson-desc { font-size: 11px; color: var(--text3); line-height: 1.6; margin-bottom: 10px; }
+.lesson-badge {
+  font-size: 9px; letter-spacing: 2px; padding: 3px 8px; border-radius: 4px;
+  font-family: var(--font-mono); display: inline-block;
+}
 
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Noto Serif JP', serif;
-            font-weight: 900;
-            font-size: 1.75rem;
-            box-shadow: 0 0 30px rgba(193, 39, 45, 0.4);
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
+/* ── DAILY PLAN ── */
+.plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.plan-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.25rem;
+}
+.plan-time { font-family: var(--font-mono); font-size: 10px; color: var(--blue); letter-spacing: 2px; margin-bottom: 8px; }
+.plan-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.plan-detail { font-size: 11px; color: var(--text2); line-height: 1.6; }
+.plan-tag {
+  display: inline-block; margin-top: 8px;
+  font-size: 9px; letter-spacing: 2px; padding: 3px 8px; border-radius: 4px;
+  background: var(--blue-dim); color: var(--blue); font-family: var(--font-mono);
+}
 
-        @keyframes pulse-glow {
-            0%, 100% {
-                box-shadow: 0 0 30px rgba(193, 39, 45, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 50px rgba(193, 39, 45, 0.7);
-            }
-        }
+/* ── PROGRESS TRACKER ── */
+.tracker-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.tracker-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.25rem;
+}
+.tracker-title { font-size: 12px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 1rem; }
+.tracker-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.tracker-kana {
+  font-family: var(--font-display); font-size: 20px;
+  width: 36px; text-align: center; flex-shrink: 0;
+}
+.tracker-info { flex: 1; }
+.tracker-name { font-size: 11px; color: var(--text2); margin-bottom: 4px; }
+.tracker-bar { height: 3px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+.tracker-fill { height: 100%; border-radius: 2px; }
+.tracker-pct { font-family: var(--font-mono); font-size: 10px; color: var(--text3); min-width: 30px; text-align: right; }
 
-        .logo-text {
-            font-size: 1.125rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border); padding: 1.5rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.5rem;
+}
+.footer-brand { font-family: var(--font-display); font-size: 14px; color: var(--text3); }
+.footer-motto { font-family: var(--font-display); font-size: 12px; color: var(--text4); letter-spacing: 3px; }
+.footer-copy { font-size: 10px; color: var(--text4); letter-spacing: 1px; font-family: var(--font-mono); }
 
-        nav {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
+/* ── TABS ── */
+.tab-bar { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+.tab-btn {
+  font-family: var(--font-ui); font-size: 11px; letter-spacing: 2px;
+  color: var(--text3); background: transparent; border: none;
+  padding: 8px 16px; cursor: pointer; border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
 
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            font-size: 0.95rem;
-        }
+/* ── BADGE ROW ── */
+.badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 0.75rem; }
+.badge {
+  font-size: 10px; letter-spacing: 1px; padding: 5px 12px;
+  border-radius: 20px; border: 1px solid; font-family: var(--font-mono);
+}
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
+/* ── CALLOUT ── */
+.callout {
+  background: var(--blue-dim); border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 10px; padding: 1rem 1.25rem;
+  font-size: 12px; color: var(--text2); line-height: 1.7; margin-top: 1rem;
+}
+.callout strong { color: var(--blue); }
 
-        nav a:hover {
-            color: var(--text);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8rem 4rem 4rem;
-            z-index: 10;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-tag {
-            display: inline-block;
-            background: rgba(193, 39, 45, 0.1);
-            border: 1px solid rgba(193, 39, 45, 0.3);
-            color: var(--primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 30px;
-            font-size: 0.875rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            animation: fadeInDown 1s ease-out;
-            box-shadow: 0 0 20px rgba(193, 39, 45, 0.2);
-        }
-
-        h1 {
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease-out 0.2s both;
-            letter-spacing: -0.03em;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #ffffff 0%, var(--primary) 50%, var(--accent) 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 5s ease infinite;
-        }
-
-        @keyframes gradient-shift {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        .japanese-title {
-            font-family: 'Noto Serif JP', serif;
-            display: block;
-            margin: 0.5rem 0;
-            font-size: clamp(4rem, 12vw, 10rem);
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 40px rgba(193, 39, 45, 0.5));
-        }
-
-        .subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease-out 0.4s both;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .btn {
-            padding: 1.25rem 3rem;
-            font-size: 1.125rem;
-            font-weight: 700;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            box-shadow: 0 10px 40px rgba(193, 39, 45, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 60px rgba(193, 39, 45, 0.6);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(193, 39, 45, 0.3);
-        }
-
-        /* Features Section */
-        .features {
-            max-width: 1400px;
-            margin: 8rem auto;
-            padding: 0 4rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            text-align: center;
-            background: linear-gradient(135deg, #ffffff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 5rem;
-            font-size: 1.25rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 3rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(193, 39, 45, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .feature-card:hover::after {
-            opacity: 1;
-        }
-
-        .feature-card:hover {
-            border-color: rgba(193, 39, 45, 0.3);
-            transform: translateY(-10px);
-            box-shadow: 0 30px 80px rgba(193, 39, 45, 0.2);
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, rgba(193, 39, 45, 0.2), rgba(212, 175, 55, 0.2));
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.25rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(193, 39, 45, 0.3);
-        }
-
-        .feature-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .feature-desc {
-            color: var(--text-muted);
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        /* Footer */
-        footer {
-            max-width: 1400px;
-            margin: 8rem auto 2rem;
-            padding: 3rem 4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header {
-                padding: 1rem 1.5rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav {
-                gap: 1.5rem;
-            }
-
-            .hero {
-                padding: 6rem 1.5rem 3rem;
-            }
-
-            .features {
-                padding: 0 1.5rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            footer {
-                padding: 2rem 1.5rem;
-            }
-        }
-    </style>
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-stats { display: none; }
+  .benchmark-row { grid-template-columns: 1fr 1fr; }
+  .tracker-grid { grid-template-columns: 1fr; }
+  nav { padding: 0.75rem 1rem; }
+  .nav-links { display: none; }
+  .section { padding: 1.5rem 1rem; }
+}
+</style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="gradient-bg"></div>
-    <div class="grid-3d"></div>
 
-    <!-- Floating Japanese Characters -->
-    <div class="japanese-chars" id="japaneseChars"></div>
+<!-- Background layers -->
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<div class="bg-chars" id="bgChars" aria-hidden="true"></div>
 
-    <!-- Header -->
-    <header id="header">
-        <div class="logo">
-            <div class="logo-icon">日</div>
-            <span class="logo-text">Japanese Learning</span>
+<div class="app">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-kanji">道</div>
+    <div>
+      <div class="nav-title">日本語道</div>
+      <div class="nav-sub">JAPANESE MASTERY SYSTEM</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#stages" class="active">MASTERY PATH</a></li>
+    <li><a href="#lessons">LESSONS</a></li>
+    <li><a href="#principles">PRINCIPLES</a></li>
+    <li><a href="#tracker">PROGRESS</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="level-pill">STAGE 1 · BEGINNER</div>
+    <div class="nav-avatar">P</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">JAPANESE LANGUAGE MASTERY SYSTEM</div>
+    <h1 class="hero-title">From Zero to<br><span class="accent">流暢に話す</span></h1>
+    <p class="hero-sub-jp">ぜろ から じゅうりゅう まで</p>
+    <p class="hero-desc">A world-class, structured system to take you from absolute beginner to expert-level fluency. Six progressive stages with clear outcomes, benchmarks, and daily study protocols designed around how your brain actually learns language.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">始める — Begin Stage 1</button>
+      <button class="btn-ghost">View Full Roadmap</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat-row">
+      <span class="hero-stat-label">CURRENT STAGE</span>
+      <span class="hero-stat-val blue">1 / 6</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="hero-stat-row">
+      <span class="hero-stat-label">TOTAL XP</span>
+      <span class="hero-stat-val gold">0 XP</span>
+    </div>
+    <div class="hero-stat-row">
+      <span class="hero-stat-label">DAY STREAK</span>
+      <span class="hero-stat-val">0 days 🔥</span>
+    </div>
+    <div class="hero-stat-row">
+      <span class="hero-stat-label">VOCAB KNOWN</span>
+      <span class="hero-stat-val green">0 words</span>
+    </div>
+    <div class="hero-stat-row">
+      <span class="hero-stat-label">KANJI LEARNED</span>
+      <span class="hero-stat-val">0 / 2136</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="xp-bar-wrap">
+      <div class="xp-bar-label"><span>Stage 1 Progress</span><span>0%</span></div>
+      <div class="xp-bar"><div class="xp-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MASTERY STAGES -->
+<section class="section" id="stages">
+  <div class="section-head">
+    <div>
+      <div class="section-label">PROGRESSIVE LEARNING SYSTEM</div>
+      <div class="section-title">Six Stages of Mastery</div>
+    </div>
+    <a class="section-link" href="#benchmarks">View benchmarks →</a>
+  </div>
+
+  <div class="stages-grid">
+
+    <!-- Stage 1 -->
+    <div class="stage-card s1 active-stage">
+      <div class="stage-top">
+        <div class="stage-num">STAGE 01</div>
+        <div class="stage-info">
+          <div class="stage-jp">入門</div>
+          <div class="stage-en">NYŪMON · INITIATION</div>
+          <div class="stage-level">▸ JLPT N5 ENTRY · MONTHS 1–2</div>
         </div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="#features">Features</a>
-            <a href="#about">About</a>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-tag">✨ Japanese Learning Platform</div>
-            <h1>
-                <span class="gradient-text">Master</span><br>
-                <span class="japanese-title">日本語</span><br>
-                <span class="gradient-text"></span>
-            </h1>
-            <p class="subtitle">
-                Your personal journey to Japanese fluency. Track progress, master kanji, 
-                and achieve your language goals with an elegant learning experience.
-            </p>
-            <div class="cta-buttons">
-                <a href="dashboard.html" class="btn btn-primary">
-                    <span>Start Learning</span>
-                    <span>→</span>
-                </a>
-                <a href="#features" class="btn btn-secondary">
-                    <span>Explore Features</span>
-                </a>
-            </div>
+      </div>
+      <div class="stage-body">
+        <p class="stage-desc">Build the phonetic foundation of the entire language. Master Hiragana and Katakana — the two phonetic scripts that unlock pronunciation, reading, and 70% of modern Japanese text. Learn survival vocabulary and your first sentence patterns.</p>
+        <div class="stage-skills">
+          <span class="skill-chip">46 Hiragana</span>
+          <span class="skill-chip">46 Katakana</span>
+          <span class="skill-chip">100 Vocab</span>
+          <span class="skill-chip">Basic Greetings</span>
+          <span class="skill-chip">Particles は/が/を</span>
         </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <h2 class="section-title">Complete Learning System</h2>
-        <p class="section-subtitle">Everything you need to master Japanese</p>
-
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3 class="feature-title">Structured Lessons</h3>
-                <p class="feature-desc">Progressive curriculum from Hiragana to advanced JLPT preparation with clear learning paths.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🃏</div>
-                <h3 class="feature-title">Smart Flashcards</h3>
-                <p class="feature-desc">Spaced repetition system that adapts to your learning pace for optimal retention.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3 class="feature-title">Progress Tracking</h3>
-                <p class="feature-desc">Detailed analytics, XP system, daily goals, and achievement badges to keep you motivated.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">⏱️</div>
-                <h3 class="feature-title">Study Tools</h3>
-                <p class="feature-desc">Pomodoro timer, practice exercises, and daily challenges for effective learning.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">漢</div>
-                <h3 class="feature-title">Kanji Mastery</h3>
-                <p class="feature-desc">2,136 essential kanji organized by JLPT levels with stroke order and mnemonics.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">📺</div>
-                <h3 class="feature-title">Rich Resources</h3>
-                <p class="feature-desc">Curated video lessons, grammar guides, and cultural content integrated into your learning.</p>
-            </div>
+        <div class="stage-progress-wrap">
+          <div class="stage-progress-label"><span>Progress</span><span>0%</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:0%"></div></div>
         </div>
-    </section>
+        <div class="stage-outcome">Outcome: Read any hiragana/katakana text aloud. Introduce yourself, ask directions, order food, count to 10,000.</div>
+      </div>
+    </div>
 
-    <!-- Footer -->
-    <footer id="about">
-        <p style="font-size: 1.125rem; margin-bottom: 0.5rem;">&copy; 2026 Pradeep Terupalli</p>
-        <p style="font-size: 1rem;">Japanese Learning Platform</p>
-        <p style="margin-top: 1rem; font-size: 1.25rem; font-family: 'Noto Serif JP', serif;">がんばってください！</p>
-    </footer>
+    <!-- Stage 2 -->
+    <div class="stage-card s2">
+      <div class="stage-top">
+        <div class="stage-num">STAGE 02</div>
+        <div class="stage-info">
+          <div class="stage-jp">基礎</div>
+          <div class="stage-en">KISO · FOUNDATION</div>
+          <div class="stage-level">▸ JLPT N5 · MONTHS 2–4</div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <p class="stage-desc">Construct your first real sentences. Learn 100 essential Kanji, master verb conjugation (dictionary → て-form → た-form), and build the grammar skeleton that supports all future learning. Introduce past, present, and request forms.</p>
+        <div class="stage-skills">
+          <span class="skill-chip">100 Kanji</span>
+          <span class="skill-chip">300 Vocab</span>
+          <span class="skill-chip">Verb Groups</span>
+          <span class="skill-chip">て-form</span>
+          <span class="skill-chip">Adjective types</span>
+          <span class="skill-chip">N5 Grammar</span>
+        </div>
+        <div class="stage-progress-wrap">
+          <div class="stage-progress-label"><span>Progress</span><span>0%</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:0%"></div></div>
+        </div>
+        <div class="stage-outcome">Outcome: Pass JLPT N5. Hold a basic conversation. Describe daily routines in present and past tense.</div>
+      </div>
+    </div>
 
-    <script>
-        // Create floating Japanese characters
-        const japaneseChars = ['日', '本', '語', '学', '習', 'あ', 'い', 'う', 'え', 'お', '漢', '字', '勉', '強', '文', '読', '書', '話', '聞', '会'];
-        const charsContainer = document.getElementById('japaneseChars');
-        
-        // Create 30 floating characters
-        for (let i = 0; i < 30; i++) {
-            const char = document.createElement('div');
-            char.className = 'jp-char';
-            char.textContent = japaneseChars[Math.floor(Math.random() * japaneseChars.length)];
-            
-            // Random positioning and styling
-            char.style.left = Math.random() * 100 + '%';
-            char.style.fontSize = (Math.random() * 60 + 40) + 'px';
-            char.style.animationDuration = (Math.random() * 15 + 15) + 's';
-            char.style.animationDelay = Math.random() * 10 + 's';
-            
-            charsContainer.appendChild(char);
-        }
+    <!-- Stage 3 -->
+    <div class="stage-card s3 locked">
+      <div class="stage-top">
+        <div class="stage-num">STAGE 03</div>
+        <div class="stage-info">
+          <div class="stage-jp">発展</div>
+          <div class="stage-en">HATTEN · EXPANSION</div>
+          <div class="stage-level">▸ JLPT N4 · MONTHS 5–8</div>
+        </div>
+        <div class="stage-lock">🔒</div>
+      </div>
+      <div class="stage-body">
+        <p class="stage-desc">Expand dramatically. Reach 500 Kanji, 1,000 vocabulary, and master intermediate grammar — conditionals, potential form, causative, passive. Begin real comprehensible input: graded readers, easy anime with Japanese subtitles.</p>
+        <div class="stage-skills">
+          <span class="skill-chip">500 Kanji</span>
+          <span class="skill-chip">1000 Vocab</span>
+          <span class="skill-chip">Conditional ば/と/たら</span>
+          <span class="skill-chip">Passive / Causative</span>
+          <span class="skill-chip">Graded Readers</span>
+        </div>
+        <div class="stage-progress-wrap">
+          <div class="stage-progress-label"><span>Progress</span><span>Locked</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:0%"></div></div>
+        </div>
+        <div class="stage-outcome">Outcome: Pass JLPT N4. Read simple manga with occasional dictionary lookups. Watch slice-of-life anime at 70% comprehension.</div>
+      </div>
+    </div>
 
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    <!-- Stage 4 -->
+    <div class="stage-card s4 locked">
+      <div class="stage-top">
+        <div class="stage-num">STAGE 04</div>
+        <div class="stage-info">
+          <div class="stage-jp">中級</div>
+          <div class="stage-en">CHŪKYŪ · INTERMEDIATE</div>
+          <div class="stage-level">▸ JLPT N3 · MONTHS 9–14</div>
+        </div>
+        <div class="stage-lock">🔒</div>
+      </div>
+      <div class="stage-body">
+        <p class="stage-desc">The critical bridge. 1,000+ Kanji, 3,000+ vocabulary. Keigo (polite/formal speech) introduced. Grammar solidifies through mass input — novels, news articles, podcasts. Speaking practice becomes daily. The hardest stage; most learners stall here.</p>
+        <div class="stage-skills">
+          <span class="skill-chip">1000 Kanji</span>
+          <span class="skill-chip">3000 Vocab</span>
+          <span class="skill-chip">Keigo basics</span>
+          <span class="skill-chip">Comprehensible Input</span>
+          <span class="skill-chip">N3 Grammar</span>
+        </div>
+        <div class="stage-progress-wrap">
+          <div class="stage-progress-label"><span>Progress</span><span>Locked</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:0%"></div></div>
+        </div>
+        <div class="stage-outcome">Outcome: Pass JLPT N3. Read manga fluently. Hold real conversations with native speakers on familiar topics.</div>
+      </div>
+    </div>
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
+    <!-- Stage 5 -->
+    <div class="stage-card s5 locked">
+      <div class="stage-top">
+        <div class="stage-num">STAGE 05</div>
+        <div class="stage-info">
+          <div class="stage-jp">上級</div>
+          <div class="stage-en">JŌKYŪ · ADVANCED</div>
+          <div class="stage-level">▸ JLPT N2 · MONTHS 15–24</div>
+        </div>
+        <div class="stage-lock">🔒</div>
+      </div>
+      <div class="stage-body">
+        <p class="stage-desc">Native immersion takeover. 1,800+ Kanji, 6,000+ words. Read novels, watch undubbed media, consume Japanese YouTube and Twitter without aids. Formal writing (ビジネス日本語). Accent and pitch-accent training begins here.</p>
+        <div class="stage-skills">
+          <span class="skill-chip">1800 Kanji</span>
+          <span class="skill-chip">6000 Vocab</span>
+          <span class="skill-chip">Business Japanese</span>
+          <span class="skill-chip">Pitch Accent</span>
+          <span class="skill-chip">Native Media</span>
+        </div>
+        <div class="stage-progress-wrap">
+          <div class="stage-progress-label"><span>Progress</span><span>Locked</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:0%"></div></div>
+        </div>
+        <div class="stage-outcome">Outcome: Pass JLPT N2. Work professionally in Japanese. Read novels. Watch any TV show without subtitles.</div>
+      </div>
+    </div>
+
+    <!-- Stage 6 -->
+    <div class="stage-card s6 locked">
+      <div class="stage-top">
+        <div class="stage-num">STAGE 06</div>
+        <div class="stage-info">
+          <div class="stage-jp">達人</div>
+          <div class="stage-en">TATSUJIN · MASTERY</div>
+          <div class="stage-level">▸ JLPT N1 · MONTHS 25–36+</div>
+        </div>
+        <div class="stage-lock">🔒</div>
+      </div>
+      <div class="stage-body">
+        <p class="stage-desc">Near-native proficiency. All 2,136 Jōyō Kanji mastered. 10,000+ vocabulary. Classical Japanese introduction. Regional dialects (関西弁). Write academic papers, give presentations, translate documents. Indistinguishable from educated native speakers in most contexts.</p>
+        <div class="stage-skills">
+          <span class="skill-chip">2136 Kanji</span>
+          <span class="skill-chip">10000+ Vocab</span>
+          <span class="skill-chip">Classical Japanese</span>
+          <span class="skill-chip">Regional Dialect</span>
+          <span class="skill-chip">Academic Writing</span>
+        </div>
+        <div class="stage-progress-wrap">
+          <div class="stage-progress-label"><span>Progress</span><span>Locked</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:0%"></div></div>
+        </div>
+        <div class="stage-outcome">Outcome: Pass JLPT N1. Achieve expert-level fluency. Live, work, study in Japan without linguistic barriers.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CORE PRINCIPLES -->
+<section class="section" id="principles">
+  <div class="section-head">
+    <div>
+      <div class="section-label">THE METHODOLOGY</div>
+      <div class="section-title">Seven Core Principles</div>
+    </div>
+  </div>
+  <div class="principles-grid">
+    <div class="principle-card">
+      <div class="principle-icon" style="color:var(--blue)">繰</div>
+      <div class="principle-num">PRINCIPLE 01</div>
+      <div class="principle-title">Spaced Repetition First</div>
+      <div class="principle-body">Every word and kanji is reviewed at precisely the moment you're about to forget it. Anki SRS is non-negotiable at every stage. 20 new cards/day, minimum. Compound retention beats cramming by 400%.</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon" style="color:var(--teal)">入</div>
+      <div class="principle-num">PRINCIPLE 02</div>
+      <div class="principle-title">Comprehensible Input (i+1)</div>
+      <div class="principle-body">You acquire language by understanding messages slightly above your current level. Krashen's Input Hypothesis: grammar is absorbed unconsciously through massive exposure — not memorized from tables.</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon" style="color:var(--purple)">音</div>
+      <div class="principle-num">PRINCIPLE 03</div>
+      <div class="principle-title">Phonetics Before Literacy</div>
+      <div class="principle-body">Hiragana and Katakana must be fully automatized before studying kanji. Solid phonetic foundations prevent mispronunciation habits that are extremely difficult to unlearn later.</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon" style="color:var(--gold)">毎</div>
+      <div class="principle-num">PRINCIPLE 04</div>
+      <div class="principle-title">Daily Consistency Beats Intensity</div>
+      <div class="principle-body">30 minutes every day outperforms 4 hours every weekend. Language learning is a biological process — the brain needs repeated, spaced exposure over time. Streaks are sacred.</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon" style="color:var(--pink)">話</div>
+      <div class="principle-num">PRINCIPLE 05</div>
+      <div class="principle-title">Output Accelerates Acquisition</div>
+      <div class="principle-body">Speaking forces you to retrieve, not just recognize. Start speaking from Day 1 — even badly. Weekly italki sessions from Stage 2. The discomfort is the learning signal.</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon" style="color:var(--red)">楽</div>
+      <div class="principle-num">PRINCIPLE 06</div>
+      <div class="principle-title">Enjoyment Sustains Effort</div>
+      <div class="principle-body">Language learning takes years. Your enjoyment of Japanese content — anime, manga, games, music — is not a distraction. It is the fuel. Optimize your input for what genuinely excites you.</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon" style="color:var(--green)">測</div>
+      <div class="principle-num">PRINCIPLE 07</div>
+      <div class="principle-title">Measure Everything</div>
+      <div class="principle-body">Track vocab count, kanji count, study hours, comprehension %. What gets measured gets improved. Set weekly targets. Take the JLPT at each milestone — external pressure creates real deadlines.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILL BENCHMARKS -->
+<section class="section" id="benchmarks">
+  <div class="section-head">
+    <div>
+      <div class="section-label">CLEAR OUTCOMES AT EACH STAGE</div>
+      <div class="section-title">Skill Benchmarks</div>
+    </div>
+  </div>
+
+  <div class="benchmarks-wrap">
+    <div class="benchmark-row">
+      <div class="bm-stage" style="color:var(--blue);background:var(--blue-dim)">S1 · N5↑</div>
+      <div class="bm-skills"><strong>Phonetics & Survival</strong>Complete kana, 100 words, greetings, self-intro, basic numbers & time</div>
+      <div class="bm-bar-wrap">
+        <div class="bm-bar"><div class="bm-fill" style="width:16%;background:var(--blue)"></div></div>
+        <div class="bm-label">100 / 10,000+ vocab</div>
+      </div>
+      <div class="bm-jlpt" style="color:var(--blue)">Pre-N5</div>
+    </div>
+    <div class="benchmark-row">
+      <div class="bm-stage" style="color:var(--teal);background:var(--teal-dim)">S2 · N5</div>
+      <div class="bm-skills"><strong>Core Grammar + N5 Kanji</strong>100 Kanji, 300 vocab, verb conjugation, て-form, simple conversations</div>
+      <div class="bm-bar-wrap">
+        <div class="bm-bar"><div class="bm-fill" style="width:3%;background:var(--teal)"></div></div>
+        <div class="bm-label">300 / 10,000+ vocab</div>
+      </div>
+      <div class="bm-jlpt" style="color:var(--teal)">JLPT N5</div>
+    </div>
+    <div class="benchmark-row">
+      <div class="bm-stage" style="color:var(--purple);background:var(--purple-dim)">S3 · N4</div>
+      <div class="bm-skills"><strong>Intermediate Grammar + Media Intake</strong>500 Kanji, 1000 vocab, conditionals, graded readers, easy anime</div>
+      <div class="bm-bar-wrap">
+        <div class="bm-bar"><div class="bm-fill" style="width:10%;background:var(--purple)"></div></div>
+        <div class="bm-label">1,000 / 10,000+ vocab</div>
+      </div>
+      <div class="bm-jlpt" style="color:var(--purple)">JLPT N4</div>
+    </div>
+    <div class="benchmark-row">
+      <div class="bm-stage" style="color:var(--gold);background:var(--gold-dim)">S4 · N3</div>
+      <div class="bm-skills"><strong>Keigo + Comprehension Breakthrough</strong>1000 Kanji, 3000 vocab, business speech, native conversations on familiar topics</div>
+      <div class="bm-bar-wrap">
+        <div class="bm-bar"><div class="bm-fill" style="width:30%;background:var(--gold)"></div></div>
+        <div class="bm-label">3,000 / 10,000+ vocab</div>
+      </div>
+      <div class="bm-jlpt" style="color:var(--gold)">JLPT N3</div>
+    </div>
+    <div class="benchmark-row">
+      <div class="bm-stage" style="color:var(--pink);background:var(--pink-dim)">S5 · N2</div>
+      <div class="bm-skills"><strong>Native Media + Business Fluency</strong>1800 Kanji, 6000 vocab, novels, undubbed TV, pitch accent, ビジネス日本語</div>
+      <div class="bm-bar-wrap">
+        <div class="bm-bar"><div class="bm-fill" style="width:60%;background:var(--pink)"></div></div>
+        <div class="bm-label">6,000 / 10,000+ vocab</div>
+      </div>
+      <div class="bm-jlpt" style="color:var(--pink)">JLPT N2</div>
+    </div>
+    <div class="benchmark-row">
+      <div class="bm-stage" style="color:var(--red);background:var(--red-dim)">S6 · N1</div>
+      <div class="bm-skills"><strong>Expert Mastery</strong>All 2136 Jōyō Kanji, 10,000+ vocab, classical Japanese, regional dialects, academic writing</div>
+      <div class="bm-bar-wrap">
+        <div class="bm-bar"><div class="bm-fill" style="width:100%;background:var(--red)"></div></div>
+        <div class="bm-label">10,000+ vocab</div>
+      </div>
+      <div class="bm-jlpt" style="color:var(--red)">JLPT N1</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The 36-Month Commitment:</strong> Expert-level Japanese requires approximately 2,200–3,000 hours of quality study. At 60 minutes/day, that is 3–4 years. At 2 hours/day with immersion, it's achievable in 18–24 months. There are no shortcuts — but there is a <em>right sequence</em>.
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section class="section" id="lessons">
+  <div class="section-head">
+    <div>
+      <div class="section-label">STAGE 1 — ACTIVE NOW</div>
+      <div class="section-title">Your Current Lessons</div>
+    </div>
+    <a class="section-link" href="dashboard.html">Full dashboard →</a>
+  </div>
+
+  <div class="lessons-grid">
+    <div class="lesson-card" style="border-color:rgba(59,130,246,0.3)">
+      <span class="lesson-glyph" style="color:var(--blue)">あ</span>
+      <div class="lesson-name">HIRAGANA</div>
+      <div class="lesson-desc">46 base characters. The complete phonetic foundation of Japanese.</div>
+      <span class="lesson-badge" style="background:var(--blue-dim);color:var(--blue)">STAGE 1 · ACTIVE</span>
+    </div>
+    <div class="lesson-card" style="border-color:rgba(45,212,191,0.3)">
+      <span class="lesson-glyph" style="color:var(--teal)">ア</span>
+      <div class="lesson-name">KATAKANA</div>
+      <div class="lesson-desc">Foreign words, loanwords, and onomatopoeia. Modern Japanese essential.</div>
+      <span class="lesson-badge" style="background:var(--teal-dim);color:var(--teal)">STAGE 1 · ACTIVE</span>
+    </div>
+    <div class="lesson-card" style="border-color:rgba(167,139,250,0.3)">
+      <span class="lesson-glyph" style="color:var(--purple)">漢</span>
+      <div class="lesson-name">KANJI</div>
+      <div class="lesson-desc">Start with 100 core Kanji. Radicals, readings, compounds.</div>
+      <span class="lesson-badge" style="background:var(--purple-dim);color:var(--purple)">STAGE 2 · LOCKED</span>
+    </div>
+    <div class="lesson-card" style="border-color:rgba(251,191,36,0.3)">
+      <span class="lesson-glyph" style="color:var(--gold)">文</span>
+      <div class="lesson-name">GRAMMAR</div>
+      <div class="lesson-desc">Particles, verb forms, sentence structure — the skeleton of Japanese.</div>
+      <span class="lesson-badge" style="background:var(--gold-dim);color:var(--gold)">STAGE 2 · LOCKED</span>
+    </div>
+    <div class="lesson-card" style="border-color:rgba(244,114,182,0.3)">
+      <span class="lesson-glyph" style="color:var(--pink)">語</span>
+      <div class="lesson-name">VOCABULARY</div>
+      <div class="lesson-desc">JLPT-graded vocab lists with SRS integration. 10,000 words total.</div>
+      <span class="lesson-badge" style="background:var(--pink-dim);color:var(--pink)">STAGE 2 · LOCKED</span>
+    </div>
+    <div class="lesson-card" style="border-color:rgba(248,113,113,0.3)">
+      <span class="lesson-glyph" style="color:var(--red)">N4</span>
+      <div class="lesson-name">JLPT N4 PREP</div>
+      <div class="lesson-desc">Full exam prep: grammar, vocabulary, reading, listening.</div>
+      <span class="lesson-badge" style="background:var(--red-dim);color:var(--red)">STAGE 3 · LOCKED</span>
+    </div>
+  </div>
+</section>
+
+<!-- DAILY STUDY PLAN -->
+<section class="section">
+  <div class="section-head">
+    <div>
+      <div class="section-label">STAGE 1 DAILY PROTOCOL</div>
+      <div class="section-title">Today's Study Plan</div>
+    </div>
+  </div>
+  <div class="plan-grid">
+    <div class="plan-card">
+      <div class="plan-time">00–10 MIN</div>
+      <div class="plan-title">Anki SRS Review</div>
+      <div class="plan-detail">Review due cards from yesterday. No skipping. Consistency over volume.</div>
+      <span class="plan-tag">SPACED REPETITION</span>
+    </div>
+    <div class="plan-card">
+      <div class="plan-time">10–25 MIN</div>
+      <div class="plan-title">New Hiragana Block</div>
+      <div class="plan-detail">Learn 5 new hiragana. Write each 10x by hand. Test recognition.</div>
+      <span class="plan-tag" style="background:var(--teal-dim);color:var(--teal)">ACTIVE LEARNING</span>
+    </div>
+    <div class="plan-card">
+      <div class="plan-time">25–40 MIN</div>
+      <div class="plan-title">Pronunciation Drill</div>
+      <div class="plan-detail">Use Forvo or NHK Web Easy to hear native readings. Shadow 5 sentences.</div>
+      <span class="plan-tag" style="background:var(--purple-dim);color:var(--purple)">PHONETICS</span>
+    </div>
+    <div class="plan-card">
+      <div class="plan-time">40–60 MIN</div>
+      <div class="plan-title">Immersion Input</div>
+      <div class="plan-detail">Watch 15 min of easy Japanese content (anime, kids' TV) with Japanese subs.</div>
+      <span class="plan-tag" style="background:var(--pink-dim);color:var(--pink)">INPUT</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS TRACKER -->
+<section class="section" id="tracker">
+  <div class="section-head">
+    <div>
+      <div class="section-label">YOUR LEARNING DATA</div>
+      <div class="section-title">Progress Tracker</div>
+    </div>
+  </div>
+  <div class="tracker-grid">
+    <div class="tracker-card">
+      <div class="tracker-title">HIRAGANA MASTERY</div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--blue)">あ</div>
+        <div class="tracker-info">
+          <div class="tracker-name">あ-row (a i u e o)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--blue)"></div></div>
+        </div>
+        <div class="tracker-pct">0%</div>
+      </div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--blue)">か</div>
+        <div class="tracker-info">
+          <div class="tracker-name">か-row (ka ki ku ke ko)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--blue)"></div></div>
+        </div>
+        <div class="tracker-pct">0%</div>
+      </div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--blue)">さ</div>
+        <div class="tracker-info">
+          <div class="tracker-name">さ-row (sa si su se so)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--blue)"></div></div>
+        </div>
+        <div class="tracker-pct">0%</div>
+      </div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--blue)">た</div>
+        <div class="tracker-info">
+          <div class="tracker-name">た-row (ta chi tsu te to)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--blue)"></div></div>
+        </div>
+        <div class="tracker-pct">0%</div>
+      </div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--text3)">…</div>
+        <div class="tracker-info">
+          <div class="tracker-name">8 more rows (な は ま や ら わ ん + dakuten)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--blue)"></div></div>
+        </div>
+        <div class="tracker-pct">0%</div>
+      </div>
+    </div>
+    <div class="tracker-card">
+      <div class="tracker-title">STAGE COMPLETION OVERVIEW</div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--blue)">入</div>
+        <div class="tracker-info">
+          <div class="tracker-name">Stage 1 — Initiation (ACTIVE)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--blue)"></div></div>
+        </div>
+        <div class="tracker-pct">0%</div>
+      </div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--text4)">基</div>
+        <div class="tracker-info">
+          <div class="tracker-name">Stage 2 — Foundation (Locked)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--teal)"></div></div>
+        </div>
+        <div class="tracker-pct">—</div>
+      </div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--text4)">発</div>
+        <div class="tracker-info">
+          <div class="tracker-name">Stage 3 — Expansion (Locked)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--purple)"></div></div>
+        </div>
+        <div class="tracker-pct">—</div>
+      </div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--text4)">中</div>
+        <div class="tracker-info">
+          <div class="tracker-name">Stage 4 — Intermediate (Locked)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--gold)"></div></div>
+        </div>
+        <div class="tracker-pct">—</div>
+      </div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--text4)">上</div>
+        <div class="tracker-info">
+          <div class="tracker-name">Stage 5 — Advanced (Locked)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--pink)"></div></div>
+        </div>
+        <div class="tracker-pct">—</div>
+      </div>
+      <div class="tracker-item">
+        <div class="tracker-kana" style="color:var(--text4)">達</div>
+        <div class="tracker-info">
+          <div class="tracker-name">Stage 6 — Mastery (Locked)</div>
+          <div class="tracker-bar"><div class="tracker-fill" style="width:0%;background:var(--red)"></div></div>
+        </div>
+        <div class="tracker-pct">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">日本語道 — The Way of Japanese</div>
+  <div class="footer-motto">一歩一歩 · One Step at a Time</div>
+  <div class="footer-copy">© 2026 Pradeep Terupalli · Japanese Learning Platform</div>
+</footer>
+
+</div><!-- .app -->
+
+<script>
+// ── Floating background characters ──
+const chars = ['あ','い','う','え','お','か','き','く','け','こ','さ','し','す','せ','そ','た','ち','つ','て','と','な','に','ぬ','ね','の','は','ひ','ふ','へ','ほ','ま','み','む','め','も','や','ゆ','よ','ら','り','る','れ','ろ','わ','を','ん','日','本','語','学','習','文','字','言','葉','力','道','心','魂','武','武','美','静'];
+const container = document.getElementById('bgChars');
+for (let i = 0; i < 28; i++) {
+  const el = document.createElement('span');
+  el.className = 'bg-char';
+  el.textContent = chars[Math.floor(Math.random() * chars.length)];
+  el.style.left = Math.random() * 100 + 'vw';
+  el.style.top = Math.random() * 100 + 'vh';
+  el.style.animationDuration = (18 + Math.random() * 24) + 's';
+  el.style.animationDelay = (-Math.random() * 30) + 's';
+  el.style.fontSize = (32 + Math.random() * 48) + 'px';
+  container.appendChild(el);
+}
+
+// ── Smooth nav active state on scroll ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+
+// ── Stage card click interaction ──
+document.querySelectorAll('.stage-card:not(.locked)').forEach(card => {
+  card.addEventListener('click', () => {
+    document.getElementById('lessons').scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
 </body>
 </html>
