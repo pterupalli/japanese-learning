@@ -1,0 +1,199 @@
+/*
+ ================================================================
+  PATCH — paste this :root block at the TOP of the existing
+  <style> tag in both index.html AND dashboard.html.
+  It overrides the old dark-navy variables with the new
+  Washi + Vermillion palette without touching any JS or HTML.
+ ================================================================
+*/
+
+:root {
+  /* ── OLD NAVY → NEW INK-ON-PARCHMENT ── */
+  --ink:    #1a1814;   /* was #07091a */
+  --ink2:   #221e1a;   /* was #0d1033 */
+  --ink3:   #2a2520;   /* was #141840 */
+
+  /* Surfaces — warm cream instead of near-black */
+  --surface:  rgba(247,244,238,.06);
+  --surface2: rgba(247,244,238,.10);
+
+  /* Borders — warm, not cold blue-white */
+  --border:  rgba(26,24,20,.10);
+  --border2: rgba(26,24,20,.20);
+
+  /* ── PRIMARY ACCENT — single vermillion, replaces scattered neons ── */
+  --blue:   #5b8db8;   --blue-dim:   rgba(91,141,184,.12);
+  --blue-d: rgba(91,141,184,.12);   /* dashboard alias */
+
+  --pink:   #a05580;   --pink-dim:   rgba(160,85,128,.12);
+  --pink-d: rgba(160,85,128,.12);
+
+  --purple: #7a60b0;   --purple-dim: rgba(122,96,176,.12);
+  --purple-d: rgba(122,96,176,.12);
+
+  --teal:   #3d9080;   --teal-dim:   rgba(61,144,128,.12);
+  --teal-d: rgba(61,144,128,.12);
+
+  --gold:   #b8922a;   --gold-dim:   rgba(184,146,42,.12);
+  --gold-d: rgba(184,146,42,.12);
+
+  --red:    #c0392b;   --red-dim:    rgba(192,57,43,.12);
+  --red-d:  rgba(192,57,43,.12);
+
+  --green:  #5a8f55;   --green-dim:  rgba(90,143,85,.12);
+  --green-d: rgba(90,143,85,.12);
+
+  /* ── TEXT ── */
+  --text:  #f0ece4;    /* on dark surfaces (sidebar/hero) */
+  --text2: rgba(240,236,228,.55);
+  --text3: rgba(240,236,228,.28);
+  --text4: rgba(240,236,228,.10);
+
+  /* On light surfaces (content area) use inline color values
+     or override in the content-area selectors below */
+
+  /* ── TYPOGRAPHY — keep existing font vars ── */
+  /* --font-display, --font-ui, --font-mono unchanged */
+}
+
+/*
+  Additional overrides for the LIGHT content area.
+  These target elements that render on the cream background.
+*/
+
+/* Body background → warm cream */
+body { background: #f7f4ee !important; color: #2c2824; }
+
+/* Nav always stays dark (already #07091a → now #1a1814) */
+nav, .header { background: rgba(26,24,20,.95) !important; }
+
+/* Section/page background */
+.section, .dashboard-main, .content { background: transparent; }
+
+/* Cards on light bg */
+.stat-card, .stage-card, .principle-card, .lesson-card,
+.plan-card, .tracker-card, .benchmark-row,
+.lesson-panel, .kana-wrap, .vocab-row, .kanji-table,
+.yt-card, .plan-item {
+  background: #ffffff;
+  border-color: rgba(26,24,20,.09);
+}
+
+/* Headings on light bg */
+.section-title, .step-title, .welcome-title,
+.sec-title, .tracker-title, .principle-title {
+  color: #1a1814;
+}
+
+/* Muted text on light bg */
+.stage-desc, .principle-body, .plan-detail,
+.lesson-desc, .tracker-name, .bm-skills, .step-description {
+  color: #6b6560;
+}
+
+/* Labels and mono text on light bg */
+.section-label, .sec-label, .stat-label, .plan-time,
+.kana-rom, .tracker-pct, .kana-group-lbl, .nav-sec-lbl,
+.stage-level, .bm-label, .principle-num {
+  color: #9e9890;
+}
+
+/* Active accent — vermillion throughout */
+.nav-link.active, .kana-tab.active,
+.tab-btn.active, .section-link, .sec-link {
+  color: #c0392b;
+}
+
+/* XP fill bar */
+.xp-fill, .sxp-fill { background: #c0392b; }
+
+/* Streak badge */
+.topbar-streak, .welcome-badge {
+  background: rgba(184,146,42,.10);
+  border-color: rgba(184,146,42,.25);
+  color: #8f6e1a;
+}
+
+/* Search inputs */
+.topbar-search, .yt-input, .search-input {
+  background: #ffffff;
+  border-color: rgba(26,24,20,.12);
+  color: #2c2824;
+}
+.topbar-search:focus, .yt-input:focus, .search-input:focus {
+  border-color: #c0392b;
+}
+
+/* Primary buttons */
+.btn-primary, .search-btn, .track-btn, .yt-search-btn {
+  background: #c0392b;
+  color: #ffffff;
+}
+.btn-primary:hover, .search-btn:hover,
+.track-btn:hover, .yt-search-btn:hover {
+  background: #a93226;
+}
+
+/* Floating bg chars — vermillion tint */
+.bg-char, .floating-char { color: rgba(192,57,43,.04); }
+
+/* Heatmap — vermillion scale instead of blue */
+.hcell[data-l="1"] { background: rgba(192,57,43,.15); }
+.hcell[data-l="2"] { background: rgba(192,57,43,.35); }
+.hcell[data-l="3"] { background: rgba(192,57,43,.60); }
+.hcell[data-l="4"] { background: rgba(192,57,43,.90); }
+
+/* Kana mastered state */
+.kana-cell.mastered { background: rgba(192,57,43,.08); border-color: rgba(192,57,43,.35); }
+.kana-cell.mastered .kana-char { color: #c0392b; }
+.kana-cell.mastered .kana-rom  { color: #c0392b; opacity: .7; }
+.kana-cell:hover { border-color: rgba(192,57,43,.4); background: rgba(192,57,43,.05); }
+
+/* Modal close button */
+.modal-close-btn { background: #f7f4ee; border-color: rgba(26,24,20,.1); color: #6b6560; }
+.modal-close-btn:hover { background: rgba(192,57,43,.08); color: #c0392b; }
+
+/* Mastered button in modal */
+.mstatus-btn.s-mastered { background: #c0392b; border-color: #c0392b; color: #ffffff; }
+.mstatus-btn.s-mastered:hover { background: #a93226; }
+.mstatus-btn.s-reset { background: #f7f4ee; border-color: rgba(26,24,20,.12); color: #9e9890; }
+
+/* Footer stays dark */
+footer { background: #1a1814; }
+.footer-brand, .footer-jp { color: rgba(240,236,228,.45); }
+.footer-copy, .footer-motto { color: rgba(240,236,228,.2); }
+
+/* Progress fills */
+.lesson-progress-fill { background: #c0392b; }
+.stage-bar-pct { color: #c0392b; }
+.stage-bar-name .en { color: #c0392b; }
+
+/* Nav link on dark sidebar */
+.nav-link.active { color: #c0392b; background: rgba(192,57,43,.12); border-left-color: #c0392b; }
+
+/* Brand kanji box */
+.nav-kanji, .brand-kanji { color: #c0392b; border-color: rgba(192,57,43,.35); }
+
+/* Level pill */
+.level-pill, .user-level-pill { background: rgba(192,57,43,.12); border-color: rgba(192,57,43,.3); color: #c0392b; }
+
+/* User avatar */
+.nav-avatar, .user-avatar { background: #c0392b; }
+
+/* Plan item done state */
+.plan-item.done { background: rgba(90,143,85,.06); border-color: rgba(90,143,85,.3); }
+.plan-item.done .plan-checkbox { background: #5a8f55; border-color: #5a8f55; }
+
+/* Vocab badges */
+.vb-known    { background: rgba(90,143,85,.10);  color: #3d7040; }
+.vb-learning { background: rgba(184,146,42,.10); color: #8f6e1a; }
+.vb-new      { background: rgba(26,24,20,.05);   color: #9e9890; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ddd8cc; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #c8c3bb; }
+
+/* ── Selection ── */
+::selection { background: rgba(192,57,43,.15); color: #7d2318; }
