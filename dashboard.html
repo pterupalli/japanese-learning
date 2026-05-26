@@ -356,9 +356,38 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .vocab-yt{width:24px;height:24px;background:var(--red-lt);border:1px solid rgba(192,57,43,.2);
   border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;flex-shrink:0;transition:background .15s;color:var(--red)}
 .vocab-yt:hover{background:rgba(192,57,43,.2)}
-.vocab-audio{width:24px;height:24px;background:var(--teal-lt);border:1px solid rgba(26,127,110,.2);
-  border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;flex-shrink:0;color:var(--teal)}
-.vocab-audio:hover{background:rgba(26,127,110,.2)}
+.vocab-audio{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;height:30px;
+  background:var(--teal-lt);border:1px solid rgba(26,127,110,.25);
+  border-radius:6px;font-size:11px;cursor:pointer;flex-shrink:0;
+  color:var(--teal);font-family:var(--font-mono);font-weight:500;
+  transition:background .15s,transform .1s;letter-spacing:.04em;
+}
+.vocab-audio:hover{background:rgba(26,127,110,.18);transform:translateY(-1px)}
+.vocab-audio.ap-playing{
+  background:rgba(26,127,110,.25);border-color:var(--teal);
+  color:var(--teal);
+  animation:audioPlaying .6s ease infinite alternate;
+}
+@keyframes audioPlaying{
+  from{box-shadow:0 0 0 0 rgba(26,127,110,.3)}
+  to{box-shadow:0 0 0 6px rgba(26,127,110,0)}
+}
+/* kana modal audio button playing state */
+.modal-audio-btn.ap-playing{
+  background:rgba(192,57,43,.18);border-color:var(--red);
+  animation:audioPlaying2 .6s ease infinite alternate;
+}
+@keyframes audioPlaying2{
+  from{box-shadow:0 0 0 0 rgba(192,57,43,.3)}
+  to{box-shadow:0 0 0 6px rgba(192,57,43,0)}
+}
+/* kana cell playing */
+.kana-cell.ap-playing{
+  border-color:var(--red)!important;background:rgba(192,57,43,.15)!important;
+  animation:audioPlaying2 .6s ease infinite alternate;
+}
 .vocab-badge{font-size:9px;letter-spacing:.1em;padding:2px 8px;border-radius:4px;font-family:var(--font-mono);flex-shrink:0}
 .vb-known{background:var(--moss-lt);color:var(--moss)}.vb-learning{background:var(--gold-lt);color:var(--gold)}.vb-new{background:var(--cream2);color:var(--ink4)}
 .cycle-btn{background:var(--cream);border:1px solid var(--border2);color:var(--ink3);font-size:9px;
@@ -922,7 +951,70 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <script src="js/firebase-config.js"></script>
-<script src="js/audio-pronunciation.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════
+   AUDIO PRONUNCIATION — inlined so it works without a server
+   No external file needed. Works from file:// directly.
+═══════════════════════════════════════════════════ */
+const AP=(()=>{
+  const synth=window.speechSynthesis;
+  let _voice=null,_rate=0.82,_pitch=1.0,_volume=1.0;
+
+  function _pickVoice(){
+    const all=synth.getVoices();
+    const jp=all.filter(v=>v.lang&&v.lang.startsWith('ja')).sort((a,b)=>a.localService===b.localService?0:a.localService?-1:1);
+    _voice=jp[0]||all[0]||null;
+  }
+
+  if(typeof speechSynthesis!=='undefined'){
+    if(synth.getVoices().length>0)_pickVoice();
+    else synth.addEventListener('voiceschanged',_pickVoice,{once:true});
+  }
+
+  function speak(text,opts={}){
+    if(typeof speechSynthesis==='undefined'||!text||!text.trim())return;
+    synth.cancel();
+    const u=new SpeechSynthesisUtterance(text.trim());
+    u.voice=_voice;u.lang='ja-JP';
+    u.rate=opts.rate!==undefined?opts.rate:_rate;
+    u.pitch=opts.pitch!==undefined?opts.pitch:_pitch;
+    u.volume=opts.volume!==undefined?opts.volume:_volume;
+    if(opts.onStart)u.onstart=opts.onStart;
+    if(opts.onEnd)u.onend=opts.onEnd;
+    if(opts.onError)u.onerror=opts.onError;
+    synth.speak(u);
+  }
+
+  /* Speak kana slowly, repeated once for learner clarity */
+  function speakKana(char,btn){
+    if(btn){btn.classList.add('ap-playing');setTimeout(()=>btn.classList.remove('ap-playing'),1400);}
+    speak(char,{rate:0.7,onEnd:()=>setTimeout(()=>speak(char,{rate:0.7}),500)});
+  }
+
+  /* Speak vocab word with visual feedback on button */
+  function speakVocab(jp,btn){
+    if(btn){btn.classList.add('ap-playing');setTimeout(()=>btn.classList.remove('ap-playing'),1200);}
+    speak(jp,{rate:_rate});
+  }
+
+  /* Speak kanji reading */
+  function speakKanji(char,btn){
+    if(btn){btn.classList.add('ap-playing');setTimeout(()=>btn.classList.remove('ap-playing'),1000);}
+    speak(char,{rate:0.8});
+  }
+
+  const PHRASES={sessionEnd:'お疲れ様でした',mastered:'よくできました',stageUp:'おめでとうございます',correct:'せいかい'};
+  function praise(key='mastered'){speak(PHRASES[key]||PHRASES.mastered,{rate:0.9});}
+
+  function status(){
+    return{supported:typeof speechSynthesis!=='undefined',voice:_voice?_voice.name:null,lang:_voice?_voice.lang:null,rate:_rate};
+  }
+
+  return{speak,speakKana,speakVocab,speakKanji,praise,status,
+    setRate:r=>_rate=Math.max(0.5,Math.min(1.5,r)),
+    setPitch:p=>_pitch=Math.max(0.5,Math.min(2,p))};
+})();
+</script>
 <script>
 /* ═══════════════════════════════════════════════════
    DATA STORE
@@ -1314,15 +1406,21 @@ function openKanaModal(rom,type){
  const st=P[type][rom]||'none';
  const modal=document.getElementById('kanaModal');modal.classList.add('open');
  buildFullTable();
+ /* auto-play pronunciation when modal opens */
  if(window.AP){
-  const char=k.char;
-  const btn=document.getElementById('mk-audio-btn');
-  if(btn){btn.classList.add('playing');setTimeout(()=>btn.classList.remove('playing'),700);}
-  AP.speakKana(char);
+  setTimeout(()=>{
+   const btn=document.getElementById('mk-audio-btn');
+   AP.speakKana(k.char,btn);
+  },200); /* small delay so modal animation completes first */
  }
 }
 
-function playModalKana(){if(currentModalKana&&window.AP)AP.speakKana(currentModalKana.char);}
+function playModalKana(){
+ if(!currentModalKana)return;
+ if(!window.AP){toast('Audio not available in this browser','error');return;}
+ const btn=document.getElementById('mk-audio-btn');
+ AP.speakKana(currentModalKana.char,btn);
+}
 
 function closeModal(){document.getElementById('kanaModal').classList.remove('open');}
 
@@ -1416,19 +1514,30 @@ function renderVocabList(){
    if(filter&&!v.jp.includes(filter)&&!v.r.includes(filter)&&!v.en.toLowerCase().includes(filter))return;
    const row=document.createElement('div');row.className='vocab-row';
    const bdgCls=st==='known'?'vb-known':st==='learning'?'vb-learning':'vb-new';
-   row.innerHTML=`<div class="vocab-jp">${v.jp}</div>
+   row.innerHTML=`
+    <div class="vocab-jp">${v.jp}</div>
     <div class="vocab-reading">${v.r}</div>
     <div class="vocab-en">${v.en}</div>
     <span class="vocab-badge ${bdgCls}">${st.toUpperCase()}</span>
-    <button class="vocab-audio" onclick="speakVocab('${v.jp}')" title="Play audio">▶</button>
+    <button class="vocab-audio" data-jp="${v.jp}" title="Play pronunciation">▶ Play</button>
     <button class="vocab-yt" onclick="openYT('${v.jp} ${v.r} japanese pronunciation')" title="YouTube">YT</button>
     <button class="cycle-btn" onclick="cycleVocab('${v.jp}')">CYCLE</button>`;
+   /* attach audio click directly so btn reference is always correct */
+   const audioBtn=row.querySelector('.vocab-audio');
+   audioBtn.addEventListener('click',function(){speakVocabBtn(v.jp,this);});
    el.appendChild(row);
   });
  });
 }
 
+/* ── AUDIO HELPERS ── */
+function speakVocabBtn(jp,btn){
+ if(!window.AP){toast('Audio not available — check your browser supports Web Speech API','error');return;}
+ AP.speakVocab(jp,btn);
+}
+/* legacy — kept for cycleVocab call */
 function speakVocab(jp){if(window.AP)AP.speakVocab(jp);}
+
 
 function cycleVocab(jp){
  const prev=P.vocab[jp]||'new';
@@ -1459,17 +1568,30 @@ function renderKanjiSection(){
 function renderKanjiTable(){
  const tbody=document.getElementById('kanjiTbody');tbody.innerHTML='';
  KANJI.forEach(k=>{
-  const st=P.kanji[k.k]||'locked';const locked=P.stage<2;
+  const st=P.kanji[k.k]||'locked';
   const bdgCls=st==='known'?'background:var(--moss-lt);color:var(--moss)':st==='learning'?'background:var(--gold-lt);color:var(--gold)':'background:var(--cream2);color:var(--ink4)';
   const tr=document.createElement('tr');
   tr.innerHTML=`<td><span class="kanji-char" onclick="cycleKanji('${k.k}','${k.jlpt}')">${k.k}</span></td>
-   <td>${k.m}</td><td style="font-family:var(--font-jp)">${k.on}</td>
-   <td style="font-family:var(--font-jp)">${k.kun}</td>
+   <td>${k.m}</td>
+   <td style="font-family:var(--font-jp);font-size:13px">${k.on}</td>
+   <td style="font-family:var(--font-jp);font-size:13px">${k.kun}</td>
    <td><span class="kanji-badge" style="background:var(--red-lt);color:var(--red)">${k.jlpt}</span></td>
-   <td style="display:flex;align-items:center;gap:7px">
-    <span class="kanji-badge" style="${bdgCls}">${st.toUpperCase()}</span>
-    <button style="background:none;border:1px solid rgba(192,57,43,.2);border-radius:5px;padding:3px 8px;font-size:11px;color:var(--red);cursor:pointer" onclick="openYT('${k.k} ${k.m} kanji stroke order reading')">YT</button>
+   <td>
+    <div style="display:flex;align-items:center;gap:6px">
+     <span class="kanji-badge" style="${bdgCls}">${st.toUpperCase()}</span>
+     <button class="vocab-audio kanji-play-btn" data-kanji="${k.k}" title="Play pronunciation">▶ Play</button>
+     <button style="background:none;border:1px solid rgba(192,57,43,.2);border-radius:5px;padding:3px 8px;font-size:11px;color:var(--red);cursor:pointer" onclick="openYT('${k.k} ${k.m} kanji stroke order reading')">YT</button>
+    </div>
    </td>`;
+  /* attach audio click directly */
+  const playBtn=tr.querySelector('.kanji-play-btn');
+  if(playBtn){
+   playBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(window.AP)AP.speakKanji(k.k,this);
+    else toast('Audio not available in this browser','error');
+   });
+  }
   tbody.appendChild(tr);
  });
 }
