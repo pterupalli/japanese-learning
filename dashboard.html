@@ -9,10 +9,10 @@
 <style>
 :root{
   --cream:#f4f0e8;--cream2:#ece6d9;--cream3:#e0d8c8;
-  --white:#ffffff;--ink:#1a1510;--ink2:#3d3528;--ink3:#7a6e5e;--ink4:#b0a494;
+  --white:#ffffff;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;
   --red:#c0392b;--red-h:#a93226;--red-lt:rgba(192,57,43,.10);--red-glow:rgba(192,57,43,.22);
   --red-d:rgba(192,57,43,.10);
-  --gold:#b8922a;--gold-lt:rgba(184,146,42,.10);--gold-d:rgba(184,146,42,.12);
+  --gold:#7a5a00;--gold-lt:rgba(184,146,42,.10);--gold-d:rgba(184,146,42,.12);
   --teal:#1a7f6e;--teal-lt:rgba(26,127,110,.10);--teal-d:rgba(26,127,110,.12);
   --indigo:#3d52b0;--indigo-lt:rgba(61,82,176,.10);--indigo-d:rgba(61,82,176,.12);
   --moss:#4a7c3f;--moss-lt:rgba(74,124,63,.10);--moss-d:rgba(74,124,63,.12);
@@ -158,39 +158,129 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   border-radius:var(--r-sm);font-size:10px;letter-spacing:.1em;color:var(--lc,var(--red));transition:background .15s}
 .lp-btn:hover{background:var(--lcd,var(--red-lt))}
 
-/* ── KANA ── */
+/* ── KANA EXPLAINER ── */
+.kana-explainer{
+  background:linear-gradient(135deg,#1a1510 0%,#2c1e10 100%);
+  border-radius:var(--r-xl);padding:28px 32px;margin-bottom:16px;
+  display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;
+}
+.kana-exp-eyebrow{font-size:9px;letter-spacing:.2em;color:var(--red);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:8px}
+.kana-exp-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:10px}
+.kana-exp-body{font-size:13px;color:rgba(244,240,232,.55);line-height:1.8;max-width:540px}
+.kana-exp-body strong{color:rgba(244,240,232,.85);font-weight:500}
+.kana-exp-chars{display:flex;gap:12px;align-items:flex-end}
+.kana-exp-char-block{text-align:center}
+.kana-exp-jp{font-family:var(--font-jp);font-size:42px;font-weight:700;line-height:1;margin-bottom:4px}
+.kana-exp-en{font-size:10px;font-family:var(--font-mono);letter-spacing:.1em}
+.kana-exp-char-block.hira .kana-exp-jp{color:var(--red)}
+.kana-exp-char-block.hira .kana-exp-en{color:rgba(192,57,43,.7)}
+.kana-exp-char-block.kata .kana-exp-jp{color:#4a9fd4}
+.kana-exp-char-block.kata .kana-exp-en{color:rgba(74,159,212,.7)}
+.kana-exp-divider{font-family:var(--font-jp);font-size:28px;color:rgba(244,240,232,.1);margin-bottom:8px}
+.kana-exp-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);
+  color:var(--red);font-size:10px;font-family:var(--font-mono);
+  padding:5px 12px;border-radius:20px;margin-top:14px;letter-spacing:.08em;
+}
+
+/* ── KANA WRAP ── */
 .kana-wrap{background:white;border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden}
-.kana-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.kana-hdr span{font-size:12px;color:var(--ink3)}
-.kana-hdr-count{font-family:var(--font-mono);font-size:11px;color:var(--red)}
-.kana-tabs-bar{display:flex;gap:2px;padding:10px 18px;border-bottom:1px solid var(--border);background:var(--cream)}
-.kana-tab{font-size:10px;letter-spacing:.1em;color:var(--ink3);background:transparent;border:none;
-  padding:6px 14px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;cursor:pointer;font-family:var(--font-mono)}
-.kana-tab:hover{color:var(--ink2)}
-.kana-tab.active{color:var(--red);border-bottom-color:var(--red)}
-.kana-legend{display:flex;gap:14px;padding:8px 18px;border-bottom:1px solid var(--border)}
-.kana-legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--ink3);font-family:var(--font-mono)}
-.kana-legend-dot{width:9px;height:9px;border-radius:2px}
-.kana-grid-wrap{padding:14px 18px}
-.kana-group-lbl{font-size:8px;letter-spacing:.2em;color:var(--ink4);font-family:var(--font-mono);margin:0 0 6px;text-transform:uppercase}
-.kana-row-group{margin-bottom:12px}
-.kana-grid{display:flex;flex-wrap:wrap;gap:5px}
-.kana-cell{width:52px;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  border-radius:var(--r-sm);border:1px solid var(--border);background:white;cursor:pointer;
-  transition:border-color .15s,background .15s,transform .15s}
-.kana-cell:hover{border-color:rgba(192,57,43,.45);background:var(--red-lt);transform:scale(1.08)}
-.kana-cell.mastered{background:var(--red-lt);border-color:rgba(192,57,43,.35)}
-.kana-cell.learning{background:var(--gold-lt);border-color:rgba(184,146,42,.32)}
-.kana-char{font-family:var(--font-jp);font-size:19px;color:var(--ink);line-height:1}
-.kana-rom{font-size:8px;color:var(--ink4);letter-spacing:.04em;font-family:var(--font-mono);margin-top:2px}
-.kana-cell.mastered .kana-char{color:var(--red)}.kana-cell.mastered .kana-rom{color:var(--red);opacity:.7}
-.kana-cell.learning .kana-char{color:var(--gold)}.kana-cell.learning .kana-rom{color:var(--gold);opacity:.7}
-.kana-prog-row{display:flex;gap:10px;padding:0 18px 14px;flex-wrap:wrap}
-.kana-prog-item{flex:1;min-width:110px;background:var(--cream);border-radius:var(--r-sm);padding:9px 12px;border:1px solid var(--border)}
-.kana-prog-item-lbl{font-size:8px;color:var(--ink4);letter-spacing:.12em;font-family:var(--font-mono);margin-bottom:5px;text-transform:uppercase}
-.kana-prog-item-bar{height:4px;background:var(--cream3);border-radius:2px;overflow:hidden}
-.kana-prog-item-fill{height:100%;border-radius:2px}
-.kana-prog-item-count{font-size:11px;font-family:var(--font-mono);margin-top:4px;font-weight:500}
+
+/* header */
+.kana-hdr{padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.kana-hdr-left h3{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.kana-hdr-left p{font-size:12px;color:var(--ink3)}
+.kana-hdr-count{font-family:var(--font-mono);font-size:13px;color:var(--red);font-weight:500}
+
+/* tabs */
+.kana-tabs-bar{display:flex;gap:4px;padding:12px 22px;border-bottom:1px solid var(--border);background:var(--cream)}
+.kana-tab{
+  font-size:12px;color:var(--ink3);background:white;border:1px solid var(--border);
+  padding:7px 18px;border-radius:8px;transition:all .15s;cursor:pointer;font-family:var(--font-ui);
+  font-weight:500;
+}
+.kana-tab:hover{color:var(--ink);border-color:var(--border2)}
+.kana-tab.active{color:var(--red);background:var(--red-lt);border-color:rgba(192,57,43,.3);font-weight:600}
+
+/* legend */
+.kana-legend{display:flex;gap:20px;padding:10px 22px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.kana-legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2)}
+.kana-legend-dot{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+
+/* grid */
+.kana-grid-wrap{padding:20px 22px}
+.kana-row-group{margin-bottom:18px}
+.kana-group-lbl{
+  font-size:11px;letter-spacing:.12em;color:var(--ink3);font-family:var(--font-mono);
+  margin:0 0 10px;text-transform:uppercase;font-weight:500;
+  display:flex;align-items:center;gap:8px;
+}
+.kana-group-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
+.kana-grid{display:flex;flex-wrap:wrap;gap:8px}
+
+/* CELLS — bigger, more readable */
+.kana-cell{
+  width:72px;height:76px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-radius:10px;border:1.5px solid var(--border);background:white;cursor:pointer;
+  transition:border-color .15s,background .15s,transform .15s,box-shadow .15s;
+  gap:4px;
+}
+.kana-cell:hover{
+  border-color:rgba(192,57,43,.5);background:var(--red-lt);
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 8px 20px rgba(192,57,43,.15);
+}
+.kana-cell.mastered{background:var(--red-lt);border-color:rgba(192,57,43,.4);border-width:2px}
+.kana-cell.learning{background:var(--gold-lt);border-color:rgba(184,146,42,.4);border-width:2px}
+
+/* CHARACTER — big and readable */
+.kana-char{
+  font-family:var(--font-jp);font-size:28px;font-weight:400;
+  color:var(--ink);line-height:1;
+}
+/* ROMAJI — actually readable now */
+.kana-rom{
+  font-size:11px;color:var(--ink3);font-family:var(--font-mono);
+  letter-spacing:.04em;font-weight:500;
+}
+.kana-cell.mastered .kana-char{color:var(--red)}
+.kana-cell.mastered .kana-rom{color:var(--red);font-weight:600}
+.kana-cell.learning .kana-char{color:var(--gold-dk,#8f6e1a)}
+.kana-cell.learning .kana-rom{color:var(--gold-dk,#8f6e1a);font-weight:600}
+
+/* progress bars */
+.kana-prog-row{display:flex;gap:12px;padding:0 22px 18px;flex-wrap:wrap}
+.kana-prog-item{flex:1;min-width:130px;background:var(--cream);border-radius:var(--r-md);padding:12px 16px;border:1px solid var(--border)}
+.kana-prog-item-lbl{font-size:12px;color:var(--ink2);font-weight:500;margin-bottom:7px}
+.kana-prog-item-bar{height:6px;background:var(--cream3);border-radius:3px;overflow:hidden}
+.kana-prog-item-fill{height:100%;border-radius:3px}
+.kana-prog-item-count{font-size:13px;font-family:var(--font-mono);margin-top:6px;font-weight:600}
+
+/* ── FULL TABLE ── */
+.kana-full-table{width:100%;border-collapse:separate;border-spacing:4px}
+.kana-full-table th{
+  font-size:12px;letter-spacing:.08em;color:var(--ink3);font-family:var(--font-mono);
+  padding:6px 4px;text-align:center;font-weight:600;background:var(--cream);
+  border-radius:6px;
+}
+.kana-full-table td{padding:2px;text-align:center}
+.ft-cell{
+  width:64px;height:62px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;border-radius:8px;margin:0 auto;cursor:pointer;
+  transition:background .15s,transform .15s;border:1.5px solid var(--border);
+  background:white;gap:3px;
+}
+.ft-cell:hover{background:var(--red-lt);border-color:rgba(192,57,43,.4);transform:scale(1.06)}
+.ft-cell .fc{font-family:var(--font-jp);font-size:24px;color:var(--ink);line-height:1}
+.ft-cell .fr{font-size:11px;color:var(--ink3);font-family:var(--font-mono);font-weight:500}
+.ft-cell.mastered{background:var(--red-lt);border-color:rgba(192,57,43,.4);border-width:2px}
+.ft-cell.mastered .fc{color:var(--red)}.ft-cell.mastered .fr{color:var(--red);font-weight:600}
+.ft-cell.learning{background:var(--gold-lt);border-color:rgba(184,146,42,.4);border-width:2px}
+.ft-cell.learning .fc{color:#8f6e1a}.ft-cell.learning .fr{color:#8f6e1a;font-weight:600}
+.ft-cell.empty-cell{background:var(--cream);border-color:transparent;cursor:default}
+.ft-cell.empty-cell:hover{transform:none}
 
 /* kana modal */
 .modal-overlay{position:fixed;inset:0;z-index:9000;background:rgba(26,21,16,.65);backdrop-filter:blur(10px);
@@ -255,17 +345,6 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .mc-cell.mastered{background:var(--red-lt)}.mc-cell.mastered .mcc{color:var(--red)}.mc-cell.mastered .mcr{color:var(--red);opacity:.7}
 .mc-cell.learning{background:var(--gold-lt)}.mc-cell.learning .mcc{color:var(--gold)}.mc-cell.learning .mcr{color:var(--gold);opacity:.7}
 
-/* full kana table */
-.kana-full-table{width:100%;border-collapse:collapse}
-.kana-full-table th{font-size:8px;letter-spacing:.12em;color:var(--ink4);font-family:var(--font-mono);padding:5px 3px;text-align:center;border-bottom:1px solid var(--border);font-weight:400}
-.kana-full-table td{padding:3px;text-align:center;border:1px solid rgba(26,21,16,.03)}
-.ft-cell{width:46px;height:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  border-radius:5px;margin:0 auto;cursor:pointer;transition:background .15s}
-.ft-cell:hover{background:var(--cream2)}
-.ft-cell .fc{font-family:var(--font-jp);font-size:17px;color:var(--ink)}
-.ft-cell .fr{font-size:8px;color:var(--ink4);font-family:var(--font-mono)}
-.ft-cell.mastered{background:var(--red-lt)}.ft-cell.mastered .fc{color:var(--red)}.ft-cell.mastered .fr{color:var(--red);opacity:.7}
-.ft-cell.learning{background:var(--gold-lt)}.ft-cell.learning .fc{color:var(--gold)}.ft-cell.learning .fr{color:var(--gold);opacity:.7}
 
 /* ── VOCAB ── */
 .vocab-row{display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--border);
@@ -695,12 +774,42 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
 <!-- KANA TRACKER -->
 <div id="kana" class="block">
   <div class="sec-head">
-    <div><div class="sec-eyebrow">Click any character → full study popup</div><div class="sec-title">Kana tracker</div></div>
+    <div><div class="sec-eyebrow">46 hiragana + 46 katakana</div><div class="sec-title">Kana tracker</div></div>
     <span class="sec-link" id="kanaProgress">0 / 92 mastered</span>
   </div>
+
+  <!-- WHAT IS KANA? — shown until user has mastered at least 5 -->
+  <div class="kana-explainer" id="kanaExplainer">
+    <div>
+      <div class="kana-exp-eyebrow">Step 1 of Japanese literacy</div>
+      <div class="kana-exp-title">What is Kana?</div>
+      <div class="kana-exp-body">
+        Japanese has two phonetic alphabets — <strong>Hiragana</strong> and <strong>Katakana</strong> — each with 46 characters.<br><br>
+        Unlike English letters, each character represents a whole syllable sound. Once you know all 92, you can read and write any Japanese word phonetically.<br><br>
+        <strong>Hiragana</strong> (あいうえお) is used for native Japanese words and grammar.<br>
+        <strong>Katakana</strong> (アイウエオ) is used for foreign words and loanwords.
+      </div>
+      <div class="kana-exp-badge">Click any character below to study it in full detail</div>
+    </div>
+    <div class="kana-exp-chars">
+      <div class="kana-exp-char-block hira">
+        <div class="kana-exp-jp">あ</div>
+        <div class="kana-exp-en">a · hiragana</div>
+      </div>
+      <div class="kana-exp-divider">=</div>
+      <div class="kana-exp-char-block kata">
+        <div class="kana-exp-jp">ア</div>
+        <div class="kana-exp-en">a · katakana</div>
+      </div>
+    </div>
+  </div>
+
   <div class="kana-wrap">
     <div class="kana-hdr">
-      <span>Click any kana → pronunciation, stroke order, examples, YouTube</span>
+      <div class="kana-hdr-left">
+        <h3>Click any character → pronunciation, stroke order, memory tip, examples</h3>
+        <p>Master each one for +5 XP. Your progress saves automatically.</p>
+      </div>
       <div class="kana-hdr-count" id="kanaHeaderCount">0 / 92</div>
     </div>
     <div class="kana-tabs-bar">
@@ -709,9 +818,9 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
       <button class="kana-tab" data-ktab="table">Full table view</button>
     </div>
     <div class="kana-legend">
-      <div class="kana-legend-item"><div class="kana-legend-dot" style="background:var(--red-lt);border:1px solid rgba(192,57,43,.4)"></div>Mastered +5XP</div>
-      <div class="kana-legend-item"><div class="kana-legend-dot" style="background:var(--gold-lt);border:1px solid rgba(184,146,42,.3)"></div>Learning</div>
-      <div class="kana-legend-item"><div class="kana-legend-dot" style="background:white;border:1px solid var(--border)"></div>Not started</div>
+      <div class="kana-legend-item"><div class="kana-legend-dot" style="background:var(--red-lt);border:2px solid rgba(192,57,43,.4)"></div>Mastered — +5 XP earned</div>
+      <div class="kana-legend-item"><div class="kana-legend-dot" style="background:var(--gold-lt);border:2px solid rgba(184,146,42,.4)"></div>Learning — still reviewing</div>
+      <div class="kana-legend-item"><div class="kana-legend-dot" style="background:white;border:1.5px solid var(--border)"></div>Not started yet</div>
     </div>
     <div id="kanaTabHira" class="kana-grid-wrap"></div>
     <div id="kanaTabKata" class="kana-grid-wrap" style="display:none"></div>
@@ -719,7 +828,7 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
     <div class="kana-prog-row">
       <div class="kana-prog-item"><div class="kana-prog-item-lbl">Hiragana</div><div class="kana-prog-item-bar"><div class="kana-prog-item-fill" id="hiraBar" style="width:0%;background:var(--red)"></div></div><div class="kana-prog-item-count" style="color:var(--red)" id="hiraCount">0 / 46</div></div>
       <div class="kana-prog-item"><div class="kana-prog-item-lbl">Katakana</div><div class="kana-prog-item-bar"><div class="kana-prog-item-fill" id="kataBar" style="width:0%;background:var(--teal)"></div></div><div class="kana-prog-item-count" style="color:var(--teal)" id="kataCount">0 / 46</div></div>
-      <div class="kana-prog-item"><div class="kana-prog-item-lbl">Total</div><div class="kana-prog-item-bar"><div class="kana-prog-item-fill" id="totalBar" style="width:0%;background:var(--indigo)"></div></div><div class="kana-prog-item-count" style="color:var(--indigo)" id="totalCount">0 / 92</div></div>
+      <div class="kana-prog-item"><div class="kana-prog-item-lbl">Total mastered</div><div class="kana-prog-item-bar"><div class="kana-prog-item-fill" id="totalBar" style="width:0%;background:var(--indigo)"></div></div><div class="kana-prog-item-count" style="color:var(--indigo)" id="totalCount">0 / 92</div></div>
     </div>
   </div>
 </div>
@@ -988,7 +1097,7 @@ const STAGE_NAMES=['','入門 — Initiation','基礎 — Foundation','発展 �
 const STAGE_COLORS=['','var(--red)','var(--teal)','var(--indigo)','var(--gold)','var(--moss)','var(--purple)'];
 
 function addXP(n){P.xp+=n;while(P.stage<6&&P.xp>=STAGE_XP[P.stage+1]){P.stage++;toast('🎉 Stage '+P.stage+' unlocked! '+STAGE_NAMES[P.stage],'success');}}
-function stagePct(){if(P.stage>=6)return 100;const s=P.stage;return Math.min(100,Math.round((P.xp-STAGE_XP[s])/(STAGE_XP[s+1]-STAGE_XP[s])*100));}
+function stagePct(){if(P.stage>=6)return 100;const s=P.stage;const base=STAGE_XP[s-1]||0;return Math.max(0,Math.min(100,Math.round((P.xp-base)/(STAGE_XP[s]-base)*100)));}
 function todayStr(){return new Date().toISOString().slice(0,10);}
 
 /* ── Firebase ── */
@@ -1057,6 +1166,9 @@ function renderStats(){
  setEl('streakDisplay',P.streak);
  setEl('statKana',Math.round(tot/92*100)+'%');setEl('kanaTrend',tot+'/92');
  setEl('kanaProgress',tot+' / 92 mastered');setEl('kanaHeaderCount',tot+' / 92');
+ /* hide kana explainer once user has started mastering */
+ const exp=document.getElementById('kanaExplainer');
+ if(exp)exp.style.display=(Object.values(P.hiragana).filter(v=>v==='mastered').length>=5)?'none':'grid';
  setEl('hiraBar_width',Math.round(hM/46*100));setEl('kataBar_width',Math.round(kM/46*100));setEl('totalBar_width',Math.round(tot/92*100));
  const hb=document.getElementById('hiraBar');if(hb)hb.style.width=Math.round(hM/46*100)+'%';
  const kb=document.getElementById('kataBar');if(kb)kb.style.width=Math.round(kM/46*100)+'%';
@@ -1142,25 +1254,35 @@ function buildFullTable(){
  const wrap=document.getElementById('kanaFullTableWrap');wrap.innerHTML='';
  const tbl=document.createElement('table');tbl.className='kana-full-table';
  const thead=tbl.createTHead();const hr=thead.insertRow();
- ['','A','I','U','E','O'].forEach(h=>{const th=document.createElement('th');th.textContent=h;hr.appendChild(th);});
+ ['Row','A','I','U','E','O'].forEach(h=>{const th=document.createElement('th');th.textContent=h;hr.appendChild(th);});
  const rows=[
-  {lbl:'Vowels',roms:['a','i','u','e','o']},{lbl:'K',roms:['ka','ki','ku','ke','ko']},
-  {lbl:'S',roms:['sa','shi','su','se','so']},{lbl:'T',roms:['ta','chi','tsu','te','to']},
-  {lbl:'N',roms:['na','ni','nu','ne','no']},{lbl:'H',roms:['ha','hi','fu','he','ho']},
-  {lbl:'M',roms:['ma','mi','mu','me','mo']},{lbl:'Y',roms:['ya','','yu','','yo']},
-  {lbl:'R',roms:['ra','ri','ru','re','ro']},{lbl:'W/N',roms:['wa','','','','n']},
+  {lbl:'Vowels',roms:['a','i','u','e','o']},
+  {lbl:'K-row',roms:['ka','ki','ku','ke','ko']},
+  {lbl:'S-row',roms:['sa','shi','su','se','so']},
+  {lbl:'T-row',roms:['ta','chi','tsu','te','to']},
+  {lbl:'N-row',roms:['na','ni','nu','ne','no']},
+  {lbl:'H-row',roms:['ha','hi','fu','he','ho']},
+  {lbl:'M-row',roms:['ma','mi','mu','me','mo']},
+  {lbl:'Y-row',roms:['ya','','yu','','yo']},
+  {lbl:'R-row',roms:['ra','ri','ru','re','ro']},
+  {lbl:'W/N',roms:['wa','','','','n']},
  ];
  const tbody=tbl.createTBody();
  rows.forEach(row=>{
-  const tr=tbody.insertRow();const th=document.createElement('th');th.textContent=row.lbl;tr.appendChild(th);
+  const tr=tbody.insertRow();
+  const th=document.createElement('th');th.textContent=row.lbl;tr.appendChild(th);
   row.roms.forEach(rom=>{
    const td=tr.insertCell();
-   if(!rom){td.innerHTML='<div class="mc-cell"></div>';return;}
+   if(!rom){
+    const empty=document.createElement('div');empty.className='ft-cell empty-cell';
+    td.appendChild(empty);return;
+   }
    const k=HIRAGANA.find(h=>h.rom===rom);
-   if(!k){td.innerHTML='<div class="mc-cell"></div>';return;}
+   if(!k){const empty=document.createElement('div');empty.className='ft-cell empty-cell';td.appendChild(empty);return;}
    const st=P.hiragana[rom]||'none';
-   const cell=document.createElement('div');cell.className='mc-cell'+(st==='mastered'?' mastered':st==='learning'?' learning':'');
-   cell.innerHTML='<div class="mcc">'+k.char+'</div><div class="mcr">'+rom+'</div>';
+   const cell=document.createElement('div');
+   cell.className='ft-cell'+(st==='mastered'?' mastered':st==='learning'?' learning':'');
+   cell.innerHTML='<div class="fc">'+k.char+'</div><div class="fr">'+rom+'</div>';
    cell.onclick=()=>openKanaModal(rom,'hiragana');
    td.appendChild(cell);
   });
@@ -1224,23 +1346,26 @@ bind('btn-reset','onclick',()=>modalSetStatus('none'));
 on('kanaModal','click',e=>{if(e.target===document.getElementById('kanaModal'))closeModal();});
 
 bind('logSessionBtn','onclick',function(){
+ const btn=this;
  const mins=parseInt(document.getElementById('logMinutes').value)||0;
  if(mins<1){toast('Enter at least 1 minute','error');return;}
+ btn.disabled=true;btn.textContent='Logging…';
  const today=todayStr();
  P.studyLog[today]=(P.studyLog[today]||0)+mins;
  P.studyMinutesTotal+=mins;
  const xpEarned=Math.floor(mins/5)*2;
  if(xpEarned>0)addXP(xpEarned);
- const y=new Date();const yStr=y.toISOString().slice(0,10);
+ const y=new Date();
  const prev=P.lastStudyDate;
  if(prev){const prevDate=new Date(prev);const diff=Math.round((y-prevDate)/(1000*60*60*24));
   if(diff===1)P.streak++;else if(diff>1)P.streak=1;
  }else P.streak=1;
- P.lastStudyDate=yStr;
+ P.lastStudyDate=today;
  document.getElementById('logMinutes').value='';
  toast('✓ '+mins+' min logged! +'+xpEarned+' XP','success');
  if(window.AP)AP.praise('sessionEnd');
  save();renderAll();
+ setTimeout(()=>{btn.disabled=false;btn.textContent='Log session +XP';},1200);
 });
 
 bind('resetPlanBtn','onclick',function(){
@@ -1306,10 +1431,10 @@ function renderVocabList(){
 function speakVocab(jp){if(window.AP)AP.speakVocab(jp);}
 
 function cycleVocab(jp){
- const cur=P.vocab[jp]||'new';
- const next=cur==='new'?'learning':cur==='learning'?'known':'new';
+ const prev=P.vocab[jp]||'new';
+ const next=prev==='new'?'learning':prev==='learning'?'known':'new';
  P.vocab[jp]=next;
- if(next==='known'){addXP(10);toast('✓ +10 XP — vocab known!','success');if(window.AP)AP.speakVocab(jp);}
+ if(next==='known'&&prev!=='known'){addXP(10);toast('✓ +10 XP — vocab known!','success');if(window.AP)AP.speakVocab(jp);}
  save();renderAll();
 }
 
@@ -1372,41 +1497,16 @@ function renderHeatmap(){
  }
 }
 
-document.getElementById('logSessionBtn').onclick=function(){
- const mins=parseInt(document.getElementById('logMinutes').value)||0;
- if(mins<1){toast('Enter at least 1 minute','error');return;}
- const today=todayStr();
- P.studyLog[today]=(P.studyLog[today]||0)+mins;
- P.studyMinutesTotal+=mins;
- const xpEarned=Math.floor(mins/5)*2;
- if(xpEarned>0)addXP(xpEarned);
- const y=new Date();const yStr=y.toISOString().slice(0,10);
- const prev=P.lastStudyDate;
- if(prev){
-  const prevDate=new Date(prev);const diff=Math.round((y-prevDate)/(1000*60*60*24));
-  if(diff===1)P.streak++;else if(diff>1)P.streak=1;
- }else P.streak=1;
- P.lastStudyDate=yStr;
- document.getElementById('logMinutes').value='';
- toast('✓ '+mins+' min logged! +'+xpEarned+' XP','success');
- if(window.AP)AP.praise('sessionEnd');
- save();renderAll();
-};
-
 /* ── DAILY PLAN ── */
 function renderPlan(){
  const today=todayStr();const done=P.planDone[today]||{};
- const tasks=['anki','kana','pronunciation','input'];
  let doneCount=0;
- tasks.forEach(task=>{
+ ['anki','kana','pronunciation','input'].forEach(task=>{
   if(done[task])doneCount++;
-  ['','Hero'].forEach(suffix=>{
-   const id='pc-'+task+(suffix==='Hero'?'-hero':'');
-   const item=document.querySelector('[data-task="'+task+'"'+(suffix===''?']':']'));
-   const chk=document.getElementById('pc-'+task+(suffix===''?'':'-hero'));
-   if(item)item.classList.toggle('done',!!done[task]);
-   if(chk)chk.textContent=done[task]?'✓':'';
-  });
+  const item=document.querySelector('.plan-hero [data-task="'+task+'"]');
+  const chk =document.getElementById('pc-'+task);
+  if(item)item.classList.toggle('done',!!done[task]);
+  if(chk)chk.textContent=done[task]?'✓':'';
  });
  const xpDisplay=document.getElementById('planXpDisplay');
  if(xpDisplay)xpDisplay.textContent='+'+doneCount*15+' XP';
@@ -1422,10 +1522,6 @@ document.querySelectorAll('.plan-item').forEach(item=>{
   save();renderPlan();renderStats();
  });
 });
-
-document.getElementById('resetPlanBtn').onclick=function(){
- const today=todayStr();P.planDone[today]={};save();renderPlan();toast('Plan reset for today','success');
-};
 
 /* ── YOUTUBE ── */
 function renderYT(){
