@@ -385,7 +385,7 @@ button{font-family:var(--font-ui);cursor:pointer}
     </button>
   </div>
   <!-- Only visible once user has any XP -->
-  <div class="hero-card" id="heroCard">
+  <div class="hero-card empty" id="heroCard">
     <div class="hc-label">Your progress</div>
     <div class="hc-row"><span class="hc-lbl">Current stage</span><span class="hc-val r" id="heroStage">1 / 6</span></div>
     <div class="hc-row"><span class="hc-lbl">Total XP</span><span class="hc-val g" id="heroXP">0 XP</span></div>
@@ -626,9 +626,11 @@ function loadProgress(){
       document.getElementById('heroPct').textContent=pct+'%';
       document.getElementById('heroBar').style.width=pct+'%';
       if(streak>0){
-        document.getElementById('navStreak').style.display='flex';
-        document.getElementById('streakNav').textContent=streak;
-      }
+      const nb=document.getElementById('navStreak');
+      const sn=document.getElementById('streakNav');
+      if(nb){nb.style.display='flex';}
+      if(sn)sn.textContent=streak;
+    }
     }
   }catch(e){}
 }
