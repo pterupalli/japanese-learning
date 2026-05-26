@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLPT Lesson | 日本語道</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f4f0e8;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;--red:#c0392b;--red-lt:rgba(192,57,43,.10);--border:rgba(26,21,16,.09);--border2:rgba(26,21,16,.16);--purple:#7b5ea7;--font-jp:'Noto Serif JP',serif;--font-ui:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:15px;-webkit-font-smoothing:antialiased}body{font-family:var(--font-ui);background:var(--cream);color:var(--ink);overflow-x:hidden}a{text-decoration:none;color:inherit}button{font-family:var(--font-ui);cursor:pointer}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(26,21,16,.12);border-radius:3px}
+.nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(244,240,232,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:11px}.nav-logo{width:36px;height:36px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--font-jp);font-size:18px;font-weight:700;color:#fff}.nav-brand-name{font-size:14px;font-weight:600;color:var(--ink)}.nav-brand-sub{font-size:9px;color:var(--ink4);letter-spacing:.14em;font-family:var(--font-mono)}.nav-back{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink3);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:white}.nav-back:hover{border-color:var(--border2)}
+.lesson-hero{background:linear-gradient(135deg,#18102a 0%,#2a1a44 100%);padding:60px 56px 56px;position:relative;overflow:hidden;}
+.lesson-hero::before{content:'N1';font-family:var(--font-mono);font-size:200px;font-weight:700;position:absolute;right:-10px;top:-20px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;user-select:none;}
+.hero-eyebrow{font-size:10px;letter-spacing:.22em;color:#a98fd4;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:12px}
+.hero-title{font-family:var(--font-jp);font-size:clamp(32px,5vw,52px);font-weight:700;color:#f4f0e8;line-height:1.15;margin-bottom:10px}
+.hero-sub{font-size:14px;color:rgba(244,240,232,.5);line-height:1.8;max-width:560px;margin-bottom:28px}
+.hero-pill{font-size:10px;letter-spacing:.12em;padding:5px 14px;border-radius:20px;font-family:var(--font-mono);border:1px solid;display:inline-block;margin-right:8px;margin-bottom:4px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7)}
+.content{max-width:900px;margin:0 auto;padding:48px 40px}
+.lb{margin-bottom:48px}
+.be{font-size:9px;letter-spacing:.2em;color:#a98fd4;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.be::before{content:'';width:14px;height:1px;background:#a98fd4}
+.bt{font-family:var(--font-jp);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.bb{font-size:14px;color:var(--ink3);line-height:1.9}.bb strong{color:var(--ink);font-weight:600}
+.level-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px}
+.level-card{background:white;border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+.level-badge{font-family:var(--font-mono);font-size:28px;font-weight:700;margin-bottom:8px}
+.level-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.level-body{font-size:11px;color:var(--ink3);line-height:1.75;margin-bottom:10px}
+.level-stats{display:flex;gap:10px;flex-wrap:wrap}
+.level-stat{font-size:10px;font-family:var(--font-mono);color:var(--ink4);background:var(--cream);padding:3px 8px;border-radius:4px}
+.step-list{display:flex;flex-direction:column;gap:14px;margin-top:20px}
+.step{display:flex;gap:16px;background:white;border:1px solid var(--border);border-radius:14px;padding:18px 20px}
+.step-num{width:32px;height:32px;border-radius:8px;background:rgba(123,94,167,.12);color:var(--purple);font-family:var(--font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}.step-text{font-size:12px;color:var(--ink3);line-height:1.75}
+.yt-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(123,94,167,.1);border:1px solid rgba(123,94,167,.25);color:var(--purple);padding:11px 20px;border-radius:10px;font-size:12px;font-weight:600;letter-spacing:.06em;font-family:var(--font-mono);transition:background .15s;margin-top:14px;margin-right:8px}
+.yt-btn:hover{background:rgba(123,94,167,.2)}
+.cta{background:linear-gradient(135deg,#18102a,#2a1a44);border-radius:18px;padding:32px;text-align:center;margin-top:48px;}
+.cta-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:8px}
+.cta-body{font-size:13px;color:rgba(244,240,232,.5);margin-bottom:22px;line-height:1.7}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--purple);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:13px;font-weight:600}
+@media(max-width:700px){.lesson-hero{padding:40px 24px 36px}.content{padding:32px 20px}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo">道</div>
+    <div><div class="nav-brand-name">日本語道</div><div class="nav-brand-sub">LESSON</div></div>
+  </a>
+  <a href="dashboard.html" class="nav-back">← Back to Dashboard</a>
+</nav>
+<div class="lesson-hero">
+  <div class="hero-eyebrow">Stage 1–6 · Lesson 6 of 6</div>
+  <div class="hero-title">JLPT<br>日本語能力試験</div>
+  <div class="hero-sub">The Japanese Language Proficiency Test. Five levels from N5 (beginner) to N1 (near-native). A clear benchmark for every stage of your journey.</div>
+  <span class="hero-pill">N5 → N1</span>
+  <span class="hero-pill">5 levels</span>
+  <span class="hero-pill">All stages</span>
+</div>
+<div class="content">
+
+  <div class="lb">
+    <div class="be">The Levels</div>
+    <div class="bt">What each JLPT level means</div>
+    <div class="level-grid">
+      <div class="level-card">
+        <div class="level-badge" style="color:var(--red)">N5</div>
+        <div class="level-title">Stage 1 — Beginner</div>
+        <div class="level-body">All hiragana, katakana, ~100 kanji, ~800 vocab. Basic daily conversation and simple sentences.</div>
+        <div class="level-stats"><span class="level-stat">~150 hrs</span><span class="level-stat">~800 vocab</span><span class="level-stat">100 kanji</span></div>
+      </div>
+      <div class="level-card">
+        <div class="level-badge" style="color:#1a7f6e">N4</div>
+        <div class="level-title">Stage 2–3 — Elementary</div>
+        <div class="level-body">~300 kanji, ~1500 vocab. Understand everyday conversations at slower speed.</div>
+        <div class="level-stats"><span class="level-stat">~300 hrs</span><span class="level-stat">~1500 vocab</span><span class="level-stat">300 kanji</span></div>
+      </div>
+      <div class="level-card">
+        <div class="level-badge" style="color:#3d52b0">N3</div>
+        <div class="level-title">Stage 4 — Intermediate</div>
+        <div class="level-body">~650 kanji, ~3700 vocab. Understand daily Japanese in many situations.</div>
+        <div class="level-stats"><span class="level-stat">~600 hrs</span><span class="level-stat">~3700 vocab</span><span class="level-stat">650 kanji</span></div>
+      </div>
+      <div class="level-card">
+        <div class="level-badge" style="color:#7a5a00">N2</div>
+        <div class="level-title">Stage 5 — Upper-Intermediate</div>
+        <div class="level-body">~1000 kanji, ~6000 vocab. Read newspapers; understand most TV with subtitles.</div>
+        <div class="level-stats"><span class="level-stat">~1200 hrs</span><span class="level-stat">~6000 vocab</span><span class="level-stat">1000 kanji</span></div>
+      </div>
+      <div class="level-card">
+        <div class="level-badge" style="color:var(--purple)">N1</div>
+        <div class="level-title">Stage 6 — Advanced</div>
+        <div class="level-body">~2000 kanji, ~10000 vocab. Understand virtually everything — news, literature, native media.</div>
+        <div class="level-stats"><span class="level-stat">~2200+ hrs</span><span class="level-stat">~10000 vocab</span><span class="level-stat">2136 kanji</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lb">
+    <div class="be">Strategy</div>
+    <div class="bt">How to approach the JLPT</div>
+    <div class="step-list">
+      <div class="step"><div class="step-num">01</div><div><div class="step-title">Target N5 first — it's reachable in 3–6 months</div><div class="step-text">Complete Stage 1 in this system and you'll have covered the N5 curriculum. Take the JLPT N5 as your first concrete milestone.</div></div></div>
+      <div class="step"><div class="step-num">02</div><div><div class="step-title">JLPT is offered twice a year — July and December</div><div class="step-text">Register early (usually 3 months before). Test locations in many countries. Check jlpt.jp for official dates and your nearest venue.</div></div></div>
+      <div class="step"><div class="step-num">03</div><div><div class="step-title">Use official practice tests for the final month</div><div class="step-text">JLPT Sensei and the official JLPT website have free practice tests. The format matters — get familiar with time limits and question types.</div></div></div>
+      <div class="step"><div class="step-num">04</div><div><div class="step-title">N2 is the professional benchmark for Japan</div><div class="step-text">Most Japanese companies require N2 for non-native employees. If your goal is working in Japan, N2 is the target. This system takes you there.</div></div></div>
+    </div>
+  </div>
+
+  <div class="lb">
+    <div class="be">Resources</div>
+    <div class="bt">Recommended YouTube</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
+      <button class="yt-btn" onclick="openYT('JLPT N5 complete practice test Japanese')">▶ N5 Practice Test</button>
+      <button class="yt-btn" onclick="openYT('JLPT N5 vocabulary 1000 words complete')">▶ N5 Vocab — 1000 Words</button>
+      <button class="yt-btn" onclick="openYT('how to pass JLPT N5 study plan')">▶ N5 Study Plan</button>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div class="cta-title">Your current target: N5</div>
+    <div class="cta-body">Complete Stage 1 in the dashboard — master kana, learn 25 N5 vocab words, and build your XP. N5 is closer than you think.</div>
+    <button class="cta-btn" onclick="location.href='dashboard.html'">Go to Dashboard →</button>
+  </div>
+
+</div>
+<script>function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}</script>
+</body>
+</html>
