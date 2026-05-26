@@ -372,6 +372,78 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
   .lesson-panels{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ── ONBOARDING CARD (shown when XP=0) ── */
+.onboarding-card{
+  display:none;background:linear-gradient(135deg,#1a1510 0%,#2c1e10 100%);
+  border-radius:var(--r-xl);padding:40px 48px;margin-bottom:28px;
+  position:relative;overflow:hidden;
+}
+.onboarding-card.show{display:block}
+.onboarding-card::before{
+  content:'道';font-family:var(--font-jp);font-size:200px;font-weight:700;
+  position:absolute;right:-20px;top:-20px;
+  color:rgba(255,255,255,.04);line-height:1;pointer-events:none;user-select:none;
+}
+.ob-eyebrow{font-size:9px;letter-spacing:.2em;color:var(--red);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:12px}
+.ob-title{font-family:var(--font-jp);font-size:26px;font-weight:700;color:#f4f0e8;margin-bottom:10px}
+.ob-desc{font-size:13px;color:rgba(244,240,232,.55);line-height:1.75;margin-bottom:28px;max-width:480px}
+.ob-steps{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.ob-step{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);
+  border-radius:var(--r-md);padding:14px 18px;flex:1;min-width:140px;
+}
+.ob-step-num{font-size:9px;font-family:var(--font-mono);color:var(--red);letter-spacing:.1em;margin-bottom:5px}
+.ob-step-title{font-size:12px;font-weight:500;color:#f4f0e8;margin-bottom:3px}
+.ob-step-sub{font-size:11px;color:rgba(244,240,232,.4)}
+.ob-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--red);color:#fff;border:none;
+  padding:12px 24px;border-radius:var(--r-md);font-size:13px;font-weight:600;
+  cursor:pointer;box-shadow:0 4px 16px rgba(192,57,43,.3);
+  transition:background .15s,transform .15s;letter-spacing:.02em;
+}
+.ob-cta:hover{background:var(--red-h);transform:translateY(-1px)}
+
+/* ── PLAN HERO (top of page) ── */
+.plan-hero{
+  background:white;border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:24px 28px;margin-bottom:28px;
+}
+.plan-hero-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border);
+}
+.plan-hero-left .plan-hero-eyebrow{font-size:9px;letter-spacing:.16em;color:var(--red);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:3px}
+.plan-hero-left .plan-hero-title{font-family:var(--font-jp);font-size:20px;font-weight:700;color:var(--ink)}
+.plan-hero-xp{font-family:var(--font-mono);font-size:13px;color:var(--red);display:flex;align-items:center;gap:6px}
+.plan-hero-xp span{font-size:11px;color:var(--ink4)}
+
+/* ── AUDIO PULSE ── */
+@keyframes audioPulse{
+  0%{transform:scale(1);box-shadow:0 0 0 0 rgba(192,57,43,.4)}
+  50%{transform:scale(1.06);box-shadow:0 0 0 8px rgba(192,57,43,0)}
+  100%{transform:scale(1);box-shadow:0 0 0 0 rgba(192,57,43,0)}
+}
+.playing{animation:audioPulse .7s ease forwards}
+.kana-char.playing{color:var(--red)!important}
+
+/* ── LOCKED SECTION BLUR ── */
+.locked-section{position:relative}
+.locked-section .locked-content{filter:blur(5px);pointer-events:none;user-select:none;opacity:.5}
+.locked-overlay{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;z-index:10;
+  background:rgba(244,240,232,.7);backdrop-filter:blur(2px);border-radius:var(--r-xl);
+}
+.locked-overlay-icon{font-size:32px;margin-bottom:10px}
+.locked-overlay-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.locked-overlay-desc{font-size:12px;color:var(--ink3);text-align:center;max-width:260px;line-height:1.6}
+.locked-overlay-xp{
+  margin-top:14px;font-size:11px;font-family:var(--font-mono);
+  background:var(--red-lt);color:var(--red);border:1px solid rgba(192,57,43,.2);
+  padding:6px 16px;border-radius:20px;letter-spacing:.06em;
+}
 </style>
 </head>
 <body>
@@ -469,7 +541,71 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
 <!-- CONTENT -->
 <div class="content">
 
-<!-- GREETING -->
+<!-- ONBOARDING CARD — shown when XP=0 -->
+<div class="onboarding-card" id="onboardingCard">
+  <div class="ob-eyebrow">Welcome to 日本語道</div>
+  <div class="ob-title">Your Japanese journey starts here.</div>
+  <div class="ob-desc">You're at Stage 1 — 入門 (Initiation). Complete your first lesson to earn XP, unlock the Kana Tracker, and start building your study streak. It takes 15 minutes.</div>
+  <div class="ob-steps">
+    <div class="ob-step">
+      <div class="ob-step-num">STEP 01</div>
+      <div class="ob-step-title">Open Hiragana Basics</div>
+      <div class="ob-step-sub">Learn あ い う え お first</div>
+    </div>
+    <div class="ob-step">
+      <div class="ob-step-num">STEP 02</div>
+      <div class="ob-step-title">Click any kana cell</div>
+      <div class="ob-step-sub">Hear it, study it, master it</div>
+    </div>
+    <div class="ob-step">
+      <div class="ob-step-num">STEP 03</div>
+      <div class="ob-step-title">Log your first session</div>
+      <div class="ob-step-sub">Start your study heatmap</div>
+    </div>
+  </div>
+  <button class="ob-cta" onclick="location.href='lesson-hiragana.html'">
+    始める — Open first lesson →
+  </button>
+</div>
+
+<!-- PLAN HERO — promoted to top of page -->
+<div class="plan-hero" id="planHero">
+  <div class="plan-hero-head">
+    <div class="plan-hero-left">
+      <div class="plan-hero-eyebrow">Stage 1 · Daily protocol</div>
+      <div class="plan-hero-title">Today's study plan</div>
+    </div>
+    <div class="plan-hero-xp"><span>Tasks done =</span> <span id="planXpDisplay">+0 XP</span><button class="sec-link" id="resetPlanBtn" style="margin-left:12px;font-size:11px">Reset</button></div>
+  </div>
+  <div class="plan-list" id="planHeroList">
+    <div class="plan-item" data-task="anki">
+      <div class="plan-checkbox" id="pc-anki"></div>
+      <div class="plan-time-col">00–10 min</div>
+      <div><div class="plan-name">Anki SRS Review</div><div class="plan-detail">Review all due cards. Consistency beats volume.</div></div>
+      <span class="plan-tag" style="background:var(--indigo-lt);color:var(--indigo)">SRS</span>
+    </div>
+    <div class="plan-item" data-task="kana">
+      <div class="plan-checkbox" id="pc-kana"></div>
+      <div class="plan-time-col">10–25 min</div>
+      <div><div class="plan-name">Kana Practice</div><div class="plan-detail">Click any character in the Kana Tracker to study it in full detail.</div></div>
+      <span class="plan-tag" style="background:var(--teal-lt);color:var(--teal)">Phonetics</span>
+    </div>
+    <div class="plan-item" data-task="pronunciation">
+      <div class="plan-checkbox" id="pc-pronunciation"></div>
+      <div class="plan-time-col">25–40 min</div>
+      <div><div class="plan-name">Pronunciation Drill</div><div class="plan-detail">Shadow 5 sentences from NHK Web Easy or Forvo.</div></div>
+      <span class="plan-tag" style="background:var(--purple-d);color:var(--purple)">Output</span>
+    </div>
+    <div class="plan-item" data-task="input">
+      <div class="plan-checkbox" id="pc-input"></div>
+      <div class="plan-time-col">40–60 min</div>
+      <div><div class="plan-name">Immersion Input</div><div class="plan-detail">15 min easy Japanese content with Japanese subtitles.</div></div>
+      <span class="plan-tag" style="background:var(--pink-d);color:var(--pink)">Input</span>
+    </div>
+  </div>
+</div>
+
+<!-- GREETING + STATS -->
 <div class="block" id="overview">
   <div class="sec-head">
     <div>
@@ -547,39 +683,6 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
   </div>
 </div>
 
-<!-- DAILY PLAN -->
-<div id="plan" class="block">
-  <div class="sec-head">
-    <div><div class="sec-eyebrow">Today's protocol</div><div class="sec-title">Daily study plan</div></div>
-    <button class="sec-link" id="resetPlanBtn">Reset today</button>
-  </div>
-  <div class="plan-list">
-    <div class="plan-item" data-task="anki">
-      <div class="plan-checkbox" id="pc-anki"></div>
-      <div class="plan-time-col">00–10 min</div>
-      <div><div class="plan-name">Anki SRS Review</div><div class="plan-detail">Review all due cards. Consistency beats volume.</div></div>
-      <span class="plan-tag" style="background:var(--indigo-lt);color:var(--indigo)">SRS</span>
-    </div>
-    <div class="plan-item" data-task="kana">
-      <div class="plan-checkbox" id="pc-kana"></div>
-      <div class="plan-time-col">10–25 min</div>
-      <div><div class="plan-name">Kana Practice</div><div class="plan-detail">Click any character in the Kana Tracker below to study it in detail.</div></div>
-      <span class="plan-tag" style="background:var(--teal-lt);color:var(--teal)">Phonetics</span>
-    </div>
-    <div class="plan-item" data-task="pronunciation">
-      <div class="plan-checkbox" id="pc-pronunciation"></div>
-      <div class="plan-time-col">25–40 min</div>
-      <div><div class="plan-name">Pronunciation Drill</div><div class="plan-detail">Shadow 5 sentences from NHK Web Easy or Forvo.</div></div>
-      <span class="plan-tag" style="background:var(--purple-d);color:var(--purple)">Output</span>
-    </div>
-    <div class="plan-item" data-task="input">
-      <div class="plan-checkbox" id="pc-input"></div>
-      <div class="plan-time-col">40–60 min</div>
-      <div><div class="plan-name">Immersion Input</div><div class="plan-detail">15 min easy Japanese content with Japanese subtitles.</div></div>
-      <span class="plan-tag" style="background:var(--pink-d);color:var(--pink)">Input</span>
-    </div>
-  </div>
-</div>
 
 <!-- LESSONS -->
 <div id="lessons" class="block">
@@ -639,17 +742,40 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
   <div class="tab-panel" id="v-new"><div id="vListNew"></div></div>
 </div>
 
-<!-- KANJI LOG -->
-<div id="kanji" class="block">
+<!-- YOUTUBE — stage-filtered, above kanji -->
+<div id="youtube" class="block">
   <div class="sec-head">
-    <div><div class="sec-eyebrow">Click to cycle · ▶ YouTube per kanji</div><div class="sec-title">Kanji log</div></div>
-    <span class="sec-link" id="kanjiCountLabel">0 / 2136</span>
+    <div><div class="sec-eyebrow">Curated + live search · filtered by stage</div><div class="sec-title">Video lessons</div></div>
   </div>
-  <table class="kanji-table">
-    <thead><tr><th>Kanji</th><th>Meaning</th><th>On-yomi</th><th>Kun-yomi</th><th>JLPT</th><th>Status + video</th></tr></thead>
-    <tbody id="kanjiTbody"></tbody>
-  </table>
+  <div class="yt-search-wrap">
+    <input type="text" class="yt-input" id="ytSearchInput" placeholder="Search: hiragana, grammar, N5 vocab, JLPT…">
+    <button class="yt-search-btn" id="ytSearchBtn">Search ↗</button>
+  </div>
+  <div class="yt-cards" id="ytCards"></div>
 </div>
+
+<!-- KANJI LOG — blurred + locked overlay at Stage 1 -->
+<div id="kanji" class="block locked-section">
+  <div class="locked-content">
+    <div class="sec-head">
+      <div><div class="sec-eyebrow">Click to cycle status · ▶ YouTube per kanji</div><div class="sec-title">Kanji log</div></div>
+      <span class="sec-link" id="kanjiCountLabel">0 / 2136</span>
+    </div>
+    <table class="kanji-table">
+      <thead><tr><th>Kanji</th><th>Meaning</th><th>On-yomi</th><th>Kun-yomi</th><th>JLPT</th><th>Status + video</th></tr></thead>
+      <tbody id="kanjiTbody"></tbody>
+    </table>
+  </div>
+  <div class="locked-overlay" id="kanjiLockedOverlay">
+    <div class="locked-overlay-icon">🔒</div>
+    <div class="locked-overlay-title">Kanji Log — Stage 2</div>
+    <div class="locked-overlay-desc">Kanji study unlocks when you complete Stage 1. Focus on kana first — it's the foundation everything else is built on.</div>
+    <div class="locked-overlay-xp" id="kanjiXpNeeded">500 XP to unlock</div>
+  </div>
+</div>
+
+<!-- YOUTUBE placeholder cleanup -->
+<div id="youtube-old-placeholder" style="display:none"></div>
 
 <!-- STUDY LOG -->
 <div id="heatmap" class="block">
@@ -673,17 +799,6 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
   </div>
 </div>
 
-<!-- YOUTUBE -->
-<div id="youtube" class="block">
-  <div class="sec-head">
-    <div><div class="sec-eyebrow">Curated + live search</div><div class="sec-title">Video lessons</div></div>
-  </div>
-  <div class="yt-search-wrap">
-    <input type="text" class="yt-input" id="ytSearchInput" placeholder="Search: hiragana, grammar, N5 vocab, JLPT…">
-    <button class="yt-search-btn" id="ytSearchBtn">Search ↗</button>
-  </div>
-  <div class="yt-cards" id="ytCards"></div>
-</div>
 
 </div><!-- .content -->
 
@@ -903,9 +1018,24 @@ async function save(){await saveP(currentUser?currentUser.uid:null);}
 
 /* ── RENDER ALL ── */
 function renderAll(){
+ renderOnboarding();
  renderUser();renderStats();renderStageBar();renderLessons();
- renderKanaSection();renderVocabList();renderKanjiTable();
- renderHeatmap();renderYT();renderPlan();renderDate();
+ renderKanaSection();renderVocabList();renderKanjiSection();
+ renderYT();renderPlan();renderDate();renderHeatmap();
+}
+
+/* ── ONBOARDING ── */
+function renderOnboarding(){
+ const card=document.getElementById('onboardingCard');
+ const planHero=document.getElementById('planHero');
+ if(!card)return;
+ if(P.xp===0){
+  card.classList.add('show');
+  if(planHero)planHero.style.display='none';
+ }else{
+  card.classList.remove('show');
+  if(planHero)planHero.style.display='block';
+ }
 }
 
 function renderUser(){
@@ -1062,7 +1192,12 @@ function openKanaModal(rom,type){
  const st=P[type][rom]||'none';
  const modal=document.getElementById('kanaModal');modal.classList.add('open');
  buildFullTable();
- if(window.AP)AP.speakKana(k.char);
+ if(window.AP){
+  const char=k.char;
+  const btn=document.getElementById('mk-audio-btn');
+  if(btn){btn.classList.add('playing');setTimeout(()=>btn.classList.remove('playing'),700);}
+  AP.speakKana(char);
+ }
 }
 
 function playModalKana(){if(currentModalKana&&window.AP)AP.speakKana(currentModalKana.char);}
@@ -1078,23 +1213,69 @@ function modalSetStatus(status){
  document.getElementById('kanaModal').classList.remove('open');
 }
 
-document.getElementById('modalClose').onclick=closeModal;
-document.getElementById('btn-learning').onclick=()=>modalSetStatus('learning');
-document.getElementById('btn-mastered').onclick=()=>modalSetStatus('mastered');
-document.getElementById('btn-reset').onclick=()=>modalSetStatus('none');
-document.getElementById('kanaModal').addEventListener('click',e=>{if(e.target===document.getElementById('kanaModal'))closeModal();});
+/* ── Safe event binding — never throws on missing element ── */
+function bind(id,evt,fn){const el=document.getElementById(id);if(el)el[evt]=fn;}
+function on(id,evt,fn){const el=document.getElementById(id);if(el)el.addEventListener(evt,fn);}
 
-/* kana tabs */
+bind('modalClose','onclick',closeModal);
+bind('btn-learning','onclick',()=>modalSetStatus('learning'));
+bind('btn-mastered','onclick',()=>modalSetStatus('mastered'));
+bind('btn-reset','onclick',()=>modalSetStatus('none'));
+on('kanaModal','click',e=>{if(e.target===document.getElementById('kanaModal'))closeModal();});
+
+bind('logSessionBtn','onclick',function(){
+ const mins=parseInt(document.getElementById('logMinutes').value)||0;
+ if(mins<1){toast('Enter at least 1 minute','error');return;}
+ const today=todayStr();
+ P.studyLog[today]=(P.studyLog[today]||0)+mins;
+ P.studyMinutesTotal+=mins;
+ const xpEarned=Math.floor(mins/5)*2;
+ if(xpEarned>0)addXP(xpEarned);
+ const y=new Date();const yStr=y.toISOString().slice(0,10);
+ const prev=P.lastStudyDate;
+ if(prev){const prevDate=new Date(prev);const diff=Math.round((y-prevDate)/(1000*60*60*24));
+  if(diff===1)P.streak++;else if(diff>1)P.streak=1;
+ }else P.streak=1;
+ P.lastStudyDate=yStr;
+ document.getElementById('logMinutes').value='';
+ toast('✓ '+mins+' min logged! +'+xpEarned+' XP','success');
+ if(window.AP)AP.praise('sessionEnd');
+ save();renderAll();
+});
+
+bind('resetPlanBtn','onclick',function(){
+ const today=todayStr();P.planDone[today]={};save();renderPlan();toast('Plan reset for today','success');
+});
+
+bind('ytSearchBtn','onclick',function(){
+ const q=document.getElementById('ytSearchInput').value.trim();if(q)openYT(q);
+});
+on('ytSearchInput','keypress',e=>{if(e.key==='Enter'){const q=e.target.value.trim();if(q)openYT(q);}});
+
 document.querySelectorAll('.kana-tab').forEach(t=>{
  t.addEventListener('click',function(){
   document.querySelectorAll('.kana-tab').forEach(x=>x.classList.remove('active'));
   this.classList.add('active');
   const tab=this.dataset.ktab;
-  document.getElementById('kanaTabHira').style.display=tab==='hira'?'block':'none';
-  document.getElementById('kanaTabKata').style.display=tab==='kata'?'block':'none';
-  document.getElementById('kanaTabTable').style.display=tab==='table'?'block':'none';
+  const h=document.getElementById('kanaTabHira');const k=document.getElementById('kanaTabKata');const tbl=document.getElementById('kanaTabTable');
+  if(h)h.style.display=tab==='hira'?'block':'none';
+  if(k)k.style.display=tab==='kata'?'block':'none';
+  if(tbl)tbl.style.display=tab==='table'?'block':'none';
  });
 });
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+ btn.addEventListener('click',function(){
+  const tab=this.dataset.tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  this.classList.add('active');
+  const panel=document.getElementById(tab);if(panel)panel.classList.add('active');
+ });
+});
+
+on('globalSearch','input',()=>renderVocabList());
+
 
 /* ── VOCAB ── */
 function renderVocabList(){
@@ -1130,6 +1311,23 @@ function cycleVocab(jp){
  P.vocab[jp]=next;
  if(next==='known'){addXP(10);toast('✓ +10 XP — vocab known!','success');if(window.AP)AP.speakVocab(jp);}
  save();renderAll();
+}
+
+/* ── KANJI SECTION — locked overlay at Stage 1 ── */
+function renderKanjiSection(){
+ const overlay=document.getElementById('kanjiLockedOverlay');
+ const xpEl=document.getElementById('kanjiXpNeeded');
+ if(overlay){
+  if(P.stage<2){
+   overlay.style.display='flex';
+   const need=Math.max(0,500-P.xp);
+   if(xpEl)xpEl.textContent=need>0?need+' XP needed to unlock':'Complete Stage 1 to unlock';
+  }else{
+   overlay.style.display='none';
+  }
+ }
+ renderKanjiTable();
+ setEl('kanjiCountLabel',Object.values(P.kanji).filter(v=>v==='known').length+' / 2136');
 }
 
 /* ── KANJI ── */
@@ -1198,14 +1396,20 @@ document.getElementById('logSessionBtn').onclick=function(){
 /* ── DAILY PLAN ── */
 function renderPlan(){
  const today=todayStr();const done=P.planDone[today]||{};
- ['anki','kana','pronunciation','input'].forEach(task=>{
-  const item=document.querySelector('[data-task="'+task+'"]');
-  const chk=document.getElementById('pc-'+task);
-  if(item&&chk){
-   item.classList.toggle('done',!!done[task]);
-   chk.textContent=done[task]?'✓':'';
-  }
+ const tasks=['anki','kana','pronunciation','input'];
+ let doneCount=0;
+ tasks.forEach(task=>{
+  if(done[task])doneCount++;
+  ['','Hero'].forEach(suffix=>{
+   const id='pc-'+task+(suffix==='Hero'?'-hero':'');
+   const item=document.querySelector('[data-task="'+task+'"'+(suffix===''?']':']'));
+   const chk=document.getElementById('pc-'+task+(suffix===''?'':'-hero'));
+   if(item)item.classList.toggle('done',!!done[task]);
+   if(chk)chk.textContent=done[task]?'✓':'';
+  });
  });
+ const xpDisplay=document.getElementById('planXpDisplay');
+ if(xpDisplay)xpDisplay.textContent='+'+doneCount*15+' XP';
 }
 
 document.querySelectorAll('.plan-item').forEach(item=>{
@@ -1241,27 +1445,6 @@ function renderYT(){
 
 function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}
 
-document.getElementById('ytSearchBtn').onclick=function(){
- const q=document.getElementById('ytSearchInput').value.trim();
- if(q)openYT(q);
-};
-document.getElementById('ytSearchInput').addEventListener('keypress',e=>{
- if(e.key==='Enter'){const q=e.target.value.trim();if(q)openYT(q);}
-});
-
-/* ── VOCAB TABS ── */
-document.querySelectorAll('.tab-btn').forEach(btn=>{
- btn.addEventListener('click',function(){
-  const tab=this.dataset.tab;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  this.classList.add('active');
-  const panel=document.getElementById(tab);if(panel)panel.classList.add('active');
- });
-});
-
-/* ── SEARCH ── */
-document.getElementById('globalSearch').addEventListener('input',()=>renderVocabList());
 
 /* ── TOAST ── */
 function toast(msg,type='success'){
