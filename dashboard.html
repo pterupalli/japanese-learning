@@ -642,7 +642,8 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
   <div class="nav-right">
     <div class="topbar-streak">🔥 <span id="streakDisplay">0</span> day streak</div>
     <input type="text" class="topbar-search" placeholder="Search vocab, kanji…" id="globalSearch">
-    <div class="nav-avatar" id="navAvatar">P</div>
+    <button onclick="toggleVoicePanel()" id="voiceBtn" title="Voice settings" style="width:30px;height:30px;border-radius:8px;background:rgba(26,21,16,.07);border:1px solid rgba(26,21,16,.1);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;">🔊</button>
+<div class="nav-avatar" id="navAvatar" onclick="toggleAuthPanel()" title="Sign in / out" style="cursor:pointer">P</div>
   </div>
 </nav>
 
