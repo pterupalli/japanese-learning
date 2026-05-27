@@ -7,10 +7,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#f4f0e8;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;--red:#c0392b;--red-lt:rgba(192,57,43,.10);--gold:#7a5a00;--gold-lt:rgba(184,146,42,.10);--moss:#4a7c3f;--moss-lt:rgba(74,124,63,.10);--teal:#1a7f6e;--teal-lt:rgba(26,127,110,.10);--border:rgba(26,21,16,.09);--border2:rgba(26,21,16,.16);--ac:#4a7c3f;--ac-lt:rgba(74,124,63,.10);--font-jp:'Noto Serif JP',serif;--font-ui:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;--ease:cubic-bezier(.25,.46,.45,.94);}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:15px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}body{font-family:var(--font-ui);background:var(--cream);color:var(--ink);overflow-x:hidden}a{text-decoration:none;color:inherit}button{font-family:var(--font-ui);cursor:pointer}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(26,21,16,.12);border-radius:3px}
+:root{--cream:#f4f0e8;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;--red:#c0392b;--red-h:#a93226;--red-lt:rgba(192,57,43,.10);--gold:#7a5a00;--gold-lt:rgba(184,146,42,.10);--moss:#4a7c3f;--moss-lt:rgba(74,124,63,.10);--teal:#1a7f6e;--teal-lt:rgba(26,127,110,.10);--border:rgba(26,21,16,.09);--border2:rgba(26,21,16,.16);--ac:#4a7c3f;--ac-lt:rgba(74,124,63,.10);--font-jp:'Noto Serif JP',serif;--font-ui:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;--ease:cubic-bezier(.25,.46,.45,.94);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:var(--font-ui);background:var(--cream);color:var(--ink);overflow-x:hidden}
+a{text-decoration:none;color:inherit}button{font-family:var(--font-ui);cursor:pointer}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(26,21,16,.12);border-radius:3px}
 .nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(244,240,232,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.nav-brand{display:flex;align-items:center;gap:11px}.nav-logo{width:36px;height:36px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--font-jp);font-size:18px;font-weight:700;color:#fff}.nav-brand-name{font-size:14px;font-weight:600;color:var(--ink)}.nav-brand-sub{font-size:9px;color:var(--ink4);letter-spacing:.14em;font-family:var(--font-mono)}.nav-back{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink3);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:white}.nav-back:hover{border-color:var(--border2)}
+.nav-brand{display:flex;align-items:center;gap:11px}
+.nav-logo{width:36px;height:36px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--font-jp);font-size:18px;font-weight:700;color:#fff}
+.nav-brand-name{font-size:14px;font-weight:600;color:var(--ink)}.nav-brand-sub{font-size:9px;color:var(--ink4);letter-spacing:.14em;font-family:var(--font-mono)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-back{font-size:13px;color:var(--ink3);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:white}.nav-back:hover{border-color:var(--border2)}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;cursor:pointer;border:2px solid transparent;transition:border-color .15s}
+.nav-avatar:hover{border-color:var(--red-h)}
 .lesson-hero{background:linear-gradient(135deg,#0e1f10 0%,#1a3420 100%);padding:60px 56px 56px;position:relative;overflow:hidden;}
 .lesson-hero::before{content:'語';font-family:var(--font-jp);font-size:280px;font-weight:700;position:absolute;right:-20px;top:-40px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;}
 .hero-eyebrow{font-size:10px;letter-spacing:.22em;color:#5fa854;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:12px}
@@ -22,51 +32,121 @@
 .be{font-size:9px;letter-spacing:.2em;color:#5fa854;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}.be::before{content:'';width:14px;height:1px;background:#5fa854}
 .bt{font-family:var(--font-jp);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:12px}
 .bb{font-size:14px;color:var(--ink3);line-height:1.9}.bb strong{color:var(--ink);font-weight:600}
-.search-bar{display:flex;gap:10px;margin-bottom:16px}
-.search-input{flex:1;background:white;border:1.5px solid var(--border2);color:var(--ink);font-size:13px;padding:10px 14px;border-radius:10px;outline:none;transition:border-color .2s}.search-input:focus{border-color:var(--ac)}.search-input::placeholder{color:var(--ink4)}
-.filter-tabs{display:flex;gap:4px;margin-bottom:16px}
-.filter-tab{font-size:11px;letter-spacing:.1em;color:var(--ink4);background:white;border:1px solid var(--border);padding:6px 14px;border-radius:8px;cursor:pointer;font-family:var(--font-mono);transition:all .15s}
-.filter-tab.active{color:var(--ac);background:var(--ac-lt);border-color:rgba(74,124,63,.3)}
-.vocab-row{display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;cursor:pointer;transition:border-color .15s}
-.vocab-row:hover{border-color:var(--border2)}
-.vocab-row.vr-known{background:var(--moss-lt);border-color:rgba(74,124,63,.3)}
-.vocab-row.vr-learning{background:var(--gold-lt);border-color:rgba(184,146,42,.3)}
-.vr-jp{font-family:var(--font-jp);font-size:20px;font-weight:600;color:var(--ac);width:64px;flex-shrink:0}
-.vr-rom{font-size:11px;color:var(--ink4);font-family:var(--font-mono);width:90px;flex-shrink:0}
-.vr-en{font-size:13px;color:var(--ink2);flex:1}
-.vr-badge{font-size:9px;letter-spacing:.1em;padding:2px 8px;border-radius:4px;font-family:var(--font-mono);flex-shrink:0}
-.vb-new{background:var(--cream);color:var(--ink4)}.vb-learning{background:var(--gold-lt);color:var(--gold)}.vb-known{background:var(--moss-lt);color:var(--moss)}
-.vr-play{background:var(--teal-lt);border:1px solid rgba(26,127,110,.2);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--teal);cursor:pointer;flex-shrink:0;font-family:var(--font-mono)}
-.vr-cycle{background:var(--cream);border:1px solid var(--border2);border-radius:6px;padding:5px 10px;font-size:9px;color:var(--ink3);cursor:pointer;flex-shrink:0;font-family:var(--font-mono);letter-spacing:.08em}
-.vr-cycle:hover{border-color:var(--ac);color:var(--ac)}
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
 .stat-card{background:white;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
 .stat-val{font-family:var(--font-mono);font-size:28px;font-weight:600;line-height:1;margin-bottom:4px}
 .stat-lbl{font-size:11px;color:var(--ink3);letter-spacing:.08em}
+.search-bar{margin-bottom:12px}
+.search-input{width:100%;background:white;border:1.5px solid var(--border2);color:var(--ink);font-size:13px;padding:10px 14px;border-radius:10px;outline:none;transition:border-color .2s;font-family:var(--font-ui)}.search-input:focus{border-color:var(--ac)}.search-input::placeholder{color:var(--ink4)}
+.filter-tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.filter-tab{font-size:11px;letter-spacing:.1em;color:var(--ink4);background:white;border:1px solid var(--border);padding:6px 14px;border-radius:8px;cursor:pointer;font-family:var(--font-mono);transition:all .15s}
+.filter-tab.active{color:var(--ac);background:var(--ac-lt);border-color:rgba(74,124,63,.3)}
+.vocab-row{display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;transition:border-color .15s}
+.vocab-row:hover{border-color:var(--border2)}
+.vocab-row.vr-known{background:var(--moss-lt);border-color:rgba(74,124,63,.3)}
+.vocab-row.vr-learning{background:var(--gold-lt);border-color:rgba(184,146,42,.3)}
+.vr-jp{font-family:var(--font-jp);font-size:20px;font-weight:600;color:var(--ac);width:68px;flex-shrink:0}
+.vr-rom{font-size:11px;color:var(--ink4);font-family:var(--font-mono);width:96px;flex-shrink:0;letter-spacing:.04em}
+.vr-en{font-size:13px;color:var(--ink2);flex:1}
+.vr-badge{font-size:9px;letter-spacing:.1em;padding:2px 8px;border-radius:4px;font-family:var(--font-mono);flex-shrink:0}
+.vb-new{background:var(--cream);color:var(--ink4)}.vb-learning{background:var(--gold-lt);color:var(--gold)}.vb-known{background:var(--moss-lt);color:var(--moss)}
+.vr-play{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--teal-lt);border:1px solid rgba(26,127,110,.25);
+  border-radius:7px;padding:6px 12px;font-size:11px;color:var(--teal);
+  cursor:pointer;flex-shrink:0;font-family:var(--font-mono);font-weight:500;
+  transition:background .15s;min-width:70px;justify-content:center;
+}
+.vr-play:hover{background:rgba(26,127,110,.18)}
+.vr-play:disabled{opacity:.5;cursor:not-allowed}
+.vr-cycle{background:var(--cream);border:1px solid var(--border2);border-radius:7px;padding:6px 10px;font-size:9px;color:var(--ink3);cursor:pointer;flex-shrink:0;font-family:var(--font-mono);letter-spacing:.08em;transition:border-color .15s}
+.vr-cycle:hover{border-color:var(--ac);color:var(--ac)}
+.audio-tip{background:white;border:1px solid rgba(26,127,110,.2);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--ink3);display:flex;align-items:center;gap:10px}
+.audio-tip-icon{font-size:18px;flex-shrink:0}
+/* AUTH PANEL */
+.auth-panel{display:none;position:fixed;top:72px;right:16px;z-index:400;background:white;border:1px solid var(--border2);border-radius:16px;width:288px;box-shadow:0 12px 40px rgba(26,21,16,.18);overflow:hidden;}
+.ap-hero{background:linear-gradient(135deg,#1a1510,#2c1e10);padding:18px;text-align:center}
+.ap-avatar{width:40px;height:40px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;margin:0 auto 8px}
+.ap-body{padding:14px}
+.ap-input{width:100%;padding:9px 12px;border:1.5px solid rgba(26,21,16,.15);border-radius:8px;font-size:13px;outline:none;margin-bottom:8px;font-family:var(--font-ui);color:var(--ink)}
+.ap-input:focus{border-color:var(--red)}
+.ap-btn-google{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:white;border:1.5px solid rgba(26,21,16,.15);border-radius:9px;padding:10px;font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;margin-bottom:10px}
+.ap-divider{text-align:center;font-size:10px;color:var(--ink4);font-family:var(--font-mono);margin-bottom:10px}
+.ap-btn-row{display:flex;gap:8px}
+.ap-btn-primary{flex:1;padding:9px;background:var(--red);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}
+.ap-btn-secondary{flex:1;padding:9px;background:white;color:var(--ink3);border:1px solid var(--border2);border-radius:8px;font-size:12px;cursor:pointer}
+.ap-msg{font-size:11px;padding:8px 10px;border-radius:6px;margin-top:8px;display:none}
+.ap-signout{width:100%;padding:9px;background:var(--cream);border:1px solid var(--border2);border-radius:9px;font-size:13px;color:var(--ink3);cursor:pointer}
 .yt-btn{display:inline-flex;align-items:center;gap:10px;background:var(--ac-lt);border:1px solid rgba(74,124,63,.25);color:var(--ac);padding:11px 20px;border-radius:10px;font-size:12px;font-weight:600;letter-spacing:.06em;font-family:var(--font-mono);transition:background .15s;margin-top:14px;margin-right:8px}.yt-btn:hover{background:rgba(74,124,63,.2)}
 .cta{background:linear-gradient(135deg,#0e1f10,#1a3420);border-radius:18px;padding:32px;text-align:center;margin-top:48px;}
-.cta-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:8px}.cta-body{font-size:13px;color:rgba(244,240,232,.5);margin-bottom:22px;line-height:1.7}.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--moss);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:13px;font-weight:600}
+.cta-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:8px}.cta-body{font-size:13px;color:rgba(244,240,232,.5);margin-bottom:22px;line-height:1.7}.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--moss);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer}
 .toast-container{position:fixed;bottom:1.25rem;right:1.25rem;z-index:9999;display:flex;flex-direction:column;gap:7px}
-.toast{background:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 14px;font-size:12px;color:#f4f0e8;max-width:280px;animation:toastIn .3s ease forwards}
+.toast{background:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 14px;font-size:12px;color:#f4f0e8;max-width:280px;pointer-events:none;animation:toastIn .3s ease forwards}
 .toast.success{border-color:rgba(74,124,63,.5)}.toast.error{border-color:rgba(192,57,43,.5)}
 @keyframes toastIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
 @keyframes toastOut{from{opacity:1}to{transform:translateX(110%);opacity:0}}
-@media(max-width:700px){.lesson-hero{padding:40px 24px 36px}.content{padding:32px 20px}.stats-row{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.lesson-hero{padding:40px 24px 36px}.content{padding:32px 20px}.stats-row{grid-template-columns:1fr 1fr}.vr-rom{display:none}}
 </style>
 </head>
 <body>
 <div class="toast-container" id="toastContainer"></div>
+
+<!-- AUTH PANEL -->
+<div class="auth-panel" id="authPanel">
+  <div id="apSignedOut">
+    <div class="ap-hero">
+      <div style="font-family:var(--font-jp);font-size:16px;font-weight:700;color:#f4f0e8;margin-bottom:2px">日本語道</div>
+      <div style="font-size:10px;color:rgba(244,240,232,.4);font-family:var(--font-mono)">SIGN IN TO SYNC PROGRESS</div>
+    </div>
+    <div class="ap-body">
+      <button class="ap-btn-google" onclick="signInGoogle()">
+        <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-21 0-1.3-.2-2.7-.5-4z"/></svg>
+        Continue with Google
+      </button>
+      <div class="ap-divider">— OR EMAIL —</div>
+      <input class="ap-input" id="apEmail" type="email" placeholder="Email address">
+      <input class="ap-input" id="apPassword" type="password" placeholder="Password">
+      <div class="ap-btn-row">
+        <button class="ap-btn-primary" onclick="signInEmail()">Sign in</button>
+        <button class="ap-btn-secondary" onclick="registerEmail()">Register</button>
+      </div>
+      <div class="ap-msg" id="apMsg"></div>
+    </div>
+  </div>
+  <div id="apSignedIn" style="display:none">
+    <div class="ap-hero">
+      <div class="ap-avatar" id="apAvatar">?</div>
+      <div style="font-size:14px;font-weight:600;color:#f4f0e8;margin-bottom:2px" id="apName"></div>
+      <div style="font-size:10px;color:rgba(244,240,232,.4);font-family:var(--font-mono)" id="apEmail2"></div>
+    </div>
+    <div class="ap-body">
+      <button class="ap-signout" onclick="signOutUser()">Sign out</button>
+    </div>
+  </div>
+</div>
+
 <nav class="nav">
-  <a href="index.html" class="nav-brand"><div class="nav-logo">道</div><div><div class="nav-brand-name">日本語道</div><div class="nav-brand-sub">LESSON</div></div></a>
-  <a href="dashboard.html" class="nav-back">← Back to Dashboard</a>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo">道</div>
+    <div><div class="nav-brand-name">日本語道</div><div class="nav-brand-sub">LESSON</div></div>
+  </a>
+  <div class="nav-right">
+    <a href="dashboard.html" class="nav-back">← Dashboard</a>
+    <div class="nav-avatar" id="navAvatar" onclick="toggleAuth()" title="Sign in / Sign out">人</div>
+  </div>
 </nav>
+
 <div class="lesson-hero">
   <div class="hero-eyebrow">Stage 1 · Lesson 5 of 6</div>
   <div class="hero-title">Vocabulary<br>語彙</div>
-  <div class="hero-sub">25 core N5 words. Click ▶ Play to hear each one. CYCLE to move through New → Learning → Known for +10 XP.</div>
-  <span class="hero-pill">25 N5 words</span><span class="hero-pill">+10 XP each</span><span class="hero-pill">Stage 1 — Active</span>
+  <div class="hero-sub">25 core N5 words. Click ▶ Play to hear each one spoken in Japanese. CYCLE to move through New → Learning → Known for +10 XP.</div>
+  <span class="hero-pill">25 N5 words</span>
+  <span class="hero-pill">+10 XP each</span>
+  <span class="hero-pill">Stage 1 — Active</span>
 </div>
+
 <div class="content">
+
   <div class="lb">
     <div class="be">Your progress</div>
     <div class="stats-row">
@@ -74,106 +154,342 @@
       <div class="stat-card"><div class="stat-val" style="color:var(--gold)" id="statLearning">0</div><div class="stat-lbl">Learning</div></div>
       <div class="stat-card"><div class="stat-val" style="color:var(--ink4)" id="statNew">25</div><div class="stat-lbl">New</div></div>
     </div>
+
     <div class="be">Vocabulary list</div>
-    <div class="bt">Click ▶ Play to hear · CYCLE to change status</div>
-    <div class="search-bar"><input class="search-input" id="searchInput" placeholder="Search Japanese, romaji, or English…" oninput="renderList()"></div>
+    <div class="bt">▶ Play to hear · CYCLE to change status</div>
+
+    <div class="audio-tip">
+      <div class="audio-tip-icon">🔊</div>
+      <div>Click <strong>▶ Play</strong> on any word to hear native Japanese pronunciation. If audio doesn't work, make sure your browser allows speech synthesis (Chrome on desktop works best).</div>
+    </div>
+
+    <div class="search-bar">
+      <input class="search-input" id="searchInput" placeholder="Search Japanese, romaji, or English…" oninput="renderList()">
+    </div>
     <div class="filter-tabs">
-      <button class="filter-tab active" data-filter="all" onclick="setFilter('all',this)">All (25)</button>
-      <button class="filter-tab" data-filter="known" onclick="setFilter('known',this)">Known</button>
-      <button class="filter-tab" data-filter="learning" onclick="setFilter('learning',this)">Learning</button>
-      <button class="filter-tab" data-filter="new" onclick="setFilter('new',this)">New</button>
+      <button class="filter-tab active" onclick="setFilter('all',this)">All (25)</button>
+      <button class="filter-tab" onclick="setFilter('known',this)">Known</button>
+      <button class="filter-tab" onclick="setFilter('learning',this)">Learning</button>
+      <button class="filter-tab" onclick="setFilter('new',this)">New</button>
     </div>
     <div id="vocabList"></div>
   </div>
+
   <div class="lb">
     <div class="be">Resources</div>
     <div class="bt">Recommended YouTube</div>
-    <button class="yt-btn" onclick="openYT('JLPT N5 vocabulary 100 words Japanese')">▶ N5 Vocabulary 100 Words</button>
-    <button class="yt-btn" onclick="openYT('japanese vocabulary beginners daily life N5')">▶ Daily Life Vocabulary</button>
+    <button class="yt-btn" onclick="openYT('JLPT N5 vocabulary 100 words Japanese beginners')">▶ N5 Vocabulary 100 Words</button>
+    <button class="yt-btn" onclick="openYT('japanese vocabulary N5 daily life pronunciation')">▶ Daily Life Vocab</button>
   </div>
+
   <div class="cta">
     <div class="cta-title">XP syncs to your dashboard</div>
-    <div class="cta-body">Each word marked Known adds +10 XP to your profile and dashboard stats.</div>
+    <div class="cta-body">Sign in using the avatar button (top right) to sync progress across devices. Each word marked Known adds +10 XP.</div>
     <button class="cta-btn" onclick="location.href='dashboard.html'">View Dashboard →</button>
   </div>
+
 </div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="js/firebase-config.js"></script>
 <script>
-const VOCAB=[
- {jp:'日本語',r:'nihongo',en:'Japanese language'},{jp:'ありがとう',r:'arigatou',en:'Thank you'},
- {jp:'はい',r:'hai',en:'Yes'},{jp:'いいえ',r:'iie',en:'No'},
- {jp:'すみません',r:'sumimasen',en:'Excuse me / Sorry'},{jp:'わかります',r:'wakarimasu',en:'I understand'},
- {jp:'わかりません',r:'wakarimasen',en:"I don't understand"},{jp:'おねがいします',r:'onegaishimasu',en:'Please (requesting)'},
- {jp:'どうぞ',r:'douzo',en:'Here you go / Please go ahead'},{jp:'今日',r:'kyou',en:'Today'},
- {jp:'明日',r:'ashita',en:'Tomorrow'},{jp:'昨日',r:'kinou',en:'Yesterday'},
- {jp:'水',r:'mizu',en:'Water'},{jp:'電車',r:'densha',en:'Train'},
- {jp:'学校',r:'gakkou',en:'School'},{jp:'先生',r:'sensei',en:'Teacher'},
- {jp:'友達',r:'tomodachi',en:'Friend'},{jp:'家',r:'ie',en:'House / Home'},
- {jp:'仕事',r:'shigoto',en:'Work / Job'},{jp:'時間',r:'jikan',en:'Time'},
- {jp:'何',r:'nani',en:'What'},{jp:'どこ',r:'doko',en:'Where'},
- {jp:'いつ',r:'itsu',en:'When'},{jp:'どうして',r:'doushite',en:'Why'},
- {jp:'食べ物',r:'tabemono',en:'Food'},
-];
-let progress={},currentFilter='all';
-function loadProgress(){try{progress=JSON.parse(localStorage.getItem('jpProgress_vocab')||'{}');}catch(e){progress={};}}
-function saveProgress(){
-  localStorage.setItem('jpProgress_vocab',JSON.stringify(progress));
-  try{const main=JSON.parse(localStorage.getItem('jpProgress')||'{}');if(!main.vocab)main.vocab={};Object.assign(main.vocab,progress);localStorage.setItem('jpProgress',JSON.stringify(main));}catch(e){}
+/* ══════════════════════════════════════════
+   AUDIO ENGINE — Chrome-safe
+══════════════════════════════════════════ */
+let _jpVoice = null;
+
+function initVoices() {
+  const synth = window.speechSynthesis;
+  if (!synth) return;
+  function pick() {
+    const all = synth.getVoices();
+    const jp = all.filter(v => v.lang && v.lang.startsWith('ja'))
+                  .sort((a,b) => a.localService === b.localService ? 0 : a.localService ? -1 : 1);
+    _jpVoice = jp[0] || null;
+  }
+  if (synth.getVoices().length > 0) pick();
+  else synth.addEventListener('voiceschanged', pick);
 }
-function setFilter(f,el){
-  currentFilter=f;
-  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+initVoices();
+
+function speakJapanese(text, btn) {
+  const synth = window.speechSynthesis;
+  if (!synth) { toast('Web Speech not supported in this browser', 'error'); return; }
+  /* Chrome quirk: must cancel then wait a tick */
+  synth.cancel();
+  const orig = btn ? btn.textContent : '';
+  if (btn) { btn.textContent = '▶ …'; btn.disabled = true; }
+  setTimeout(() => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP';
+    u.rate = 0.78;
+    u.volume = 1.0;
+    if (_jpVoice) u.voice = _jpVoice;
+    u.onend  = () => { if (btn) { btn.textContent = orig; btn.disabled = false; } };
+    u.onerror = () => {
+      if (btn) { btn.textContent = orig; btn.disabled = false; }
+      toast('Audio unavailable — try Chrome on desktop', 'error');
+    };
+    synth.speak(u);
+  }, 100);
+}
+
+/* ══════════════════════════════════════════
+   VOCAB DATA
+══════════════════════════════════════════ */
+const VOCAB = [
+  {jp:'日本語', r:'nihongo',       en:'Japanese language'},
+  {jp:'ありがとう', r:'arigatou',  en:'Thank you'},
+  {jp:'はい',   r:'hai',           en:'Yes'},
+  {jp:'いいえ', r:'iie',           en:'No'},
+  {jp:'すみません', r:'sumimasen', en:'Excuse me / Sorry'},
+  {jp:'わかります', r:'wakarimasu',en:'I understand'},
+  {jp:'わかりません',r:'wakarimasen',en:"I don't understand"},
+  {jp:'おねがいします',r:'onegaishimasu',en:'Please (requesting)'},
+  {jp:'どうぞ', r:'douzo',         en:'Here you go / Please go ahead'},
+  {jp:'今日',   r:'kyou',          en:'Today'},
+  {jp:'明日',   r:'ashita',        en:'Tomorrow'},
+  {jp:'昨日',   r:'kinou',         en:'Yesterday'},
+  {jp:'水',     r:'mizu',          en:'Water'},
+  {jp:'電車',   r:'densha',        en:'Train'},
+  {jp:'学校',   r:'gakkou',        en:'School'},
+  {jp:'先生',   r:'sensei',        en:'Teacher'},
+  {jp:'友達',   r:'tomodachi',     en:'Friend'},
+  {jp:'家',     r:'ie',            en:'House / Home'},
+  {jp:'仕事',   r:'shigoto',       en:'Work / Job'},
+  {jp:'時間',   r:'jikan',         en:'Time'},
+  {jp:'何',     r:'nani',          en:'What'},
+  {jp:'どこ',   r:'doko',          en:'Where'},
+  {jp:'いつ',   r:'itsu',          en:'When'},
+  {jp:'どうして',r:'doushite',     en:'Why'},
+  {jp:'食べ物', r:'tabemono',      en:'Food'},
+];
+
+/* ══════════════════════════════════════════
+   PROGRESS
+══════════════════════════════════════════ */
+let progress = {};
+let currentFilter = 'all';
+
+function loadProgress() {
+  try { progress = JSON.parse(localStorage.getItem('jpProgress_vocab') || '{}'); } catch(e) { progress = {}; }
+}
+function saveProgress() {
+  localStorage.setItem('jpProgress_vocab', JSON.stringify(progress));
+  /* sync into main jpProgress for dashboard */
+  try {
+    const main = JSON.parse(localStorage.getItem('jpProgress') || '{}');
+    if (!main.vocab) main.vocab = {};
+    Object.assign(main.vocab, progress);
+    const known = Object.values(main.vocab).filter(v=>v==='known').length;
+    main.xp = (main.xp || 0);
+    localStorage.setItem('jpProgress', JSON.stringify(main));
+  } catch(e) {}
+}
+
+/* ══════════════════════════════════════════
+   RENDER
+══════════════════════════════════════════ */
+function setFilter(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   renderList();
 }
-function renderList(){
-  const filter=document.getElementById('searchInput').value.toLowerCase();
-  const list=document.getElementById('vocabList');list.innerHTML='';
-  VOCAB.forEach(v=>{
-    const st=progress[v.jp]||'new';
-    if(currentFilter!=='all'&&st!==currentFilter)return;
-    if(filter&&!v.jp.includes(filter)&&!v.r.includes(filter)&&!v.en.toLowerCase().includes(filter))return;
-    const row=document.createElement('div');
-    row.className='vocab-row'+(st==='known'?' vr-known':st==='learning'?' vr-learning':'');
-    const bdg=st==='known'?'vb-known':st==='learning'?'vb-learning':'vb-new';
-    row.innerHTML=`<div class="vr-jp">${v.jp}</div><div class="vr-rom">${v.r}</div><div class="vr-en">${v.en}</div><span class="vr-badge ${bdg}">${st.toUpperCase()}</span>`;
-    const play=document.createElement('button');play.className='vr-play';play.textContent='▶ Play';
-    play.addEventListener('click',e=>{e.stopPropagation();speakWord(v.jp,play);});
-    const cycle=document.createElement('button');cycle.className='vr-cycle';cycle.textContent='CYCLE';
-    cycle.addEventListener('click',e=>{e.stopPropagation();cycleVocab(v.jp);});
-    row.appendChild(play);row.appendChild(cycle);
+
+function renderList() {
+  const filter = document.getElementById('searchInput').value.toLowerCase();
+  const list = document.getElementById('vocabList');
+  list.innerHTML = '';
+
+  VOCAB.forEach(v => {
+    const st = progress[v.jp] || 'new';
+    if (currentFilter !== 'all' && st !== currentFilter) return;
+    if (filter && !v.jp.includes(filter) && !v.r.includes(filter) && !v.en.toLowerCase().includes(filter)) return;
+
+    const row = document.createElement('div');
+    const rowClass = st === 'known' ? ' vr-known' : st === 'learning' ? ' vr-learning' : '';
+    row.className = 'vocab-row' + rowClass;
+
+    const bdgClass = st === 'known' ? 'vb-known' : st === 'learning' ? 'vb-learning' : 'vb-new';
+
+    row.innerHTML = `
+      <div class="vr-jp">${v.jp}</div>
+      <div class="vr-rom">${v.r}</div>
+      <div class="vr-en">${v.en}</div>
+      <span class="vr-badge ${bdgClass}">${st.toUpperCase()}</span>
+    `;
+
+    /* Play button — attached via addEventListener to keep 'this' reference */
+    const play = document.createElement('button');
+    play.className = 'vr-play';
+    play.textContent = '▶ Play';
+    play.addEventListener('click', function(e) {
+      e.stopPropagation();
+      speakJapanese(v.jp, this);
+    });
+
+    /* Cycle button */
+    const cycle = document.createElement('button');
+    cycle.className = 'vr-cycle';
+    cycle.textContent = 'CYCLE';
+    cycle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      cycleVocab(v.jp);
+    });
+
+    row.appendChild(play);
+    row.appendChild(cycle);
     list.appendChild(row);
   });
+
   updateStats();
 }
-function updateStats(){
-  const known=Object.values(progress).filter(v=>v==='known').length;
-  const learning=Object.values(progress).filter(v=>v==='learning').length;
-  document.getElementById('statKnown').textContent=known;
-  document.getElementById('statLearning').textContent=learning;
-  document.getElementById('statNew').textContent=25-known-learning;
+
+function updateStats() {
+  const known    = Object.values(progress).filter(v=>v==='known').length;
+  const learning = Object.values(progress).filter(v=>v==='learning').length;
+  document.getElementById('statKnown').textContent    = known;
+  document.getElementById('statLearning').textContent = learning;
+  document.getElementById('statNew').textContent      = Math.max(0, 25 - known - learning);
 }
-function cycleVocab(jp){
-  const prev=progress[jp]||'new';
-  const next=prev==='new'?'learning':prev==='learning'?'known':'new';
-  progress[jp]=next;
-  if(next==='known'&&prev!=='known'){
-    toast('✓ +10 XP — '+jp+' known!','success');
-    try{const main=JSON.parse(localStorage.getItem('jpProgress')||'{}');main.xp=(main.xp||0)+10;if(main.xp>=500&&main.stage<2)main.stage=2;localStorage.setItem('jpProgress',JSON.stringify(main));}catch(e){}
+
+function cycleVocab(jp) {
+  const prev = progress[jp] || 'new';
+  const next = prev === 'new' ? 'learning' : prev === 'learning' ? 'known' : 'new';
+  progress[jp] = next;
+  if (next === 'known' && prev !== 'known') {
+    toast('✓ +10 XP — ' + jp + ' known!', 'success');
+    try {
+      const main = JSON.parse(localStorage.getItem('jpProgress') || '{}');
+      main.xp = (main.xp || 0) + 10;
+      if (main.xp >= 500 && (main.stage||1) < 2) main.stage = 2;
+      localStorage.setItem('jpProgress', JSON.stringify(main));
+    } catch(e) {}
   }
-  saveProgress();renderList();
+  saveProgress();
+  renderList();
 }
-function speakWord(jp,btn){
-  const synth=window.speechSynthesis;if(!synth){toast('Audio not supported','error');return;}
-  synth.cancel();
-  const u=new SpeechSynthesisUtterance(jp);u.lang='ja-JP';u.rate=0.8;
-  const voices=synth.getVoices();const jpVoice=voices.find(v=>v.lang&&v.lang.startsWith('ja'));if(jpVoice)u.voice=jpVoice;
-  if(btn){btn.textContent='▶ …';u.onend=()=>{btn.textContent='▶ Play';};}
-  synth.speak(u);
+
+/* ══════════════════════════════════════════
+   AUTH — inline panel on this page
+══════════════════════════════════════════ */
+let authPanelOpen = false;
+
+function toggleAuth() {
+  authPanelOpen = !authPanelOpen;
+  document.getElementById('authPanel').style.display = authPanelOpen ? 'block' : 'none';
 }
-document.addEventListener('click',()=>{if(window.speechSynthesis)window.speechSynthesis.getVoices();},{once:true});
-function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}
-function toast(msg,type='success'){const t=document.createElement('div');t.className='toast '+(type||'');t.textContent=msg;document.getElementById('toastContainer').appendChild(t);setTimeout(()=>{t.style.animation='toastOut .3s ease forwards';setTimeout(()=>t.remove(),300);},3000);}
-loadProgress();renderList();
+
+document.addEventListener('click', e => {
+  if (!document.getElementById('authPanel').contains(e.target) &&
+      e.target !== document.getElementById('navAvatar')) {
+    document.getElementById('authPanel').style.display = 'none';
+    authPanelOpen = false;
+  }
+});
+
+function showMsg(msg, ok) {
+  const el = document.getElementById('apMsg');
+  el.style.display = 'block';
+  el.style.background = ok ? 'rgba(74,124,63,.1)' : 'rgba(192,57,43,.1)';
+  el.style.color = ok ? '#4a7c3f' : '#c0392b';
+  el.textContent = msg;
+}
+
+function signInGoogle() {
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+      .then(() => { document.getElementById('authPanel').style.display='none'; })
+      .catch(e => showMsg(e.message, false));
+  } catch(e) { showMsg('Firebase not available', false); }
+}
+
+function signInEmail() {
+  const email = document.getElementById('apEmail').value.trim();
+  const pass  = document.getElementById('apPassword').value;
+  if (!email || !pass) { showMsg('Enter email and password', false); return; }
+  try {
+    firebase.auth().signInWithEmailAndPassword(email, pass)
+      .then(() => { document.getElementById('authPanel').style.display='none'; })
+      .catch(e => showMsg(friendlyError(e), false));
+  } catch(e) { showMsg('Firebase not available', false); }
+}
+
+function registerEmail() {
+  const email = document.getElementById('apEmail').value.trim();
+  const pass  = document.getElementById('apPassword').value;
+  if (!email || !pass) { showMsg('Enter email and password', false); return; }
+  if (pass.length < 6) { showMsg('Password needs 6+ characters', false); return; }
+  try {
+    firebase.auth().createUserWithEmailAndPassword(email, pass)
+      .then(() => { document.getElementById('authPanel').style.display='none'; })
+      .catch(e => showMsg(friendlyError(e), false));
+  } catch(e) { showMsg('Firebase not available', false); }
+}
+
+function signOutUser() {
+  try { firebase.auth().signOut(); } catch(e) {}
+  document.getElementById('authPanel').style.display = 'none';
+  toast('Signed out', 'success');
+}
+
+function friendlyError(e) {
+  const map = {
+    'auth/user-not-found': 'No account with this email.',
+    'auth/wrong-password': 'Incorrect password.',
+    'auth/email-already-in-use': 'Email already registered.',
+    'auth/weak-password': 'Password needs 6+ characters.',
+    'auth/invalid-email': 'Invalid email address.',
+    'auth/invalid-credential': 'Invalid email or password.',
+  };
+  return map[e.code] || e.message;
+}
+
+/* Watch auth state */
+try {
+  firebase.auth().onAuthStateChanged(user => {
+    const avatar = document.getElementById('navAvatar');
+    const signedin = document.getElementById('apSignedIn');
+    const signedout = document.getElementById('apSignedOut');
+    if (user) {
+      const name = user.displayName || user.email.split('@')[0];
+      avatar.textContent = name[0].toUpperCase();
+      avatar.title = 'Signed in as ' + user.email;
+      document.getElementById('apAvatar').textContent = name[0].toUpperCase();
+      document.getElementById('apName').textContent = name;
+      document.getElementById('apEmail2').textContent = user.email;
+      signedin.style.display = 'block';
+      signedout.style.display = 'none';
+    } else {
+      avatar.textContent = '人';
+      avatar.title = 'Click to sign in';
+      signedin.style.display = 'none';
+      signedout.style.display = 'block';
+    }
+  });
+} catch(e) {}
+
+/* ══════════════════════════════════════════
+   UTILS
+══════════════════════════════════════════ */
+function openYT(q) { window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank'); }
+
+function toast(msg, type='success') {
+  const t = document.createElement('div');
+  t.className = 'toast ' + (type||'');
+  t.textContent = msg;
+  document.getElementById('toastContainer').appendChild(t);
+  setTimeout(() => { t.style.animation='toastOut .3s ease forwards'; setTimeout(()=>t.remove(),300); }, 3000);
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+loadProgress();
+renderList();
 </script>
 </body>
 </html>
