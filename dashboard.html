@@ -642,10 +642,89 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
   <div class="nav-right">
     <div class="topbar-streak">🔥 <span id="streakDisplay">0</span> day streak</div>
     <input type="text" class="topbar-search" placeholder="Search vocab, kanji…" id="globalSearch">
-    <button onclick="toggleVoicePanel()" id="voiceBtn" title="Voice settings" style="width:30px;height:30px;border-radius:8px;background:rgba(26,21,16,.07);border:1px solid rgba(26,21,16,.1);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;">🔊</button>
-<div class="nav-avatar" id="navAvatar" onclick="toggleAuthPanel()" title="Sign in / out" style="cursor:pointer">P</div>
+    <button onclick="toggleVoicePanel()" id="voiceBtn" title="Voice settings" style="width:30px;height:30px;border-radius:8px;background:rgba(26,21,16,.07);border:1px solid rgba(26,21,16,.1);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;flex-shrink:0;">🔊</button>
+    <div class="nav-avatar" id="navAvatar" onclick="toggleAuthPanel()" title="Sign in / Sign out" style="cursor:pointer">人</div>
   </div>
 </nav>
+
+
+<!-- ══ VOICE SETTINGS PANEL ══ -->
+<div id="voicePanel" style="display:none;position:fixed;top:68px;right:16px;z-index:500;background:white;border:1px solid rgba(26,21,16,.16);border-radius:16px;width:320px;box-shadow:0 12px 40px rgba(26,21,16,.18);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,#1a1510,#2c1e10);padding:16px 20px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font-size:12px;font-weight:600;color:#f4f0e8;margin-bottom:2px">🔊 Voice Settings</div>
+      <div style="font-size:9px;color:rgba(244,240,232,.4);font-family:var(--font-mono);letter-spacing:.1em">JAPANESE PRONUNCIATION</div>
+    </div>
+    <button onclick="closeVoicePanel()" style="background:rgba(255,255,255,.1);border:none;color:rgba(244,240,232,.6);width:28px;height:28px;border-radius:50%;font-size:14px;cursor:pointer">✕</button>
+  </div>
+  <div style="padding:16px 20px">
+    <div style="margin-bottom:14px">
+      <div style="font-size:9px;letter-spacing:.16em;color:var(--ink4);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:6px">Japanese Voice</div>
+      <select id="voiceSelect" onchange="applyVoiceSettings()" style="width:100%;padding:9px 12px;border:1.5px solid rgba(26,21,16,.15);border-radius:8px;font-size:13px;color:var(--ink);background:white;font-family:var(--font-ui);outline:none;cursor:pointer;"></select>
+      <div style="font-size:10px;color:var(--ink4);margin-top:5px" id="voiceNote"></div>
+    </div>
+    <div style="margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <div style="font-size:9px;letter-spacing:.16em;color:var(--ink4);font-family:var(--font-mono);text-transform:uppercase">Speed</div>
+        <div style="font-size:11px;font-family:var(--font-mono);color:var(--red)" id="rateLabel">0.82×</div>
+      </div>
+      <input type="range" id="rateSlider" min="0.5" max="1.5" step="0.05" value="0.82" oninput="applyVoiceSettings()" style="width:100%;accent-color:var(--red);cursor:pointer">
+      <div style="display:flex;justify-content:space-between;margin-top:3px">
+        <span style="font-size:9px;color:var(--ink4);font-family:var(--font-mono)">SLOW</span>
+        <span style="font-size:9px;color:var(--ink4);font-family:var(--font-mono)">FAST</span>
+      </div>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <div style="font-size:9px;letter-spacing:.16em;color:var(--ink4);font-family:var(--font-mono);text-transform:uppercase">Pitch</div>
+        <div style="font-size:11px;font-family:var(--font-mono);color:var(--red)" id="pitchLabel">1.0</div>
+      </div>
+      <input type="range" id="pitchSlider" min="0.5" max="2.0" step="0.1" value="1.0" oninput="applyVoiceSettings()" style="width:100%;accent-color:var(--red);cursor:pointer">
+      <div style="display:flex;justify-content:space-between;margin-top:3px">
+        <span style="font-size:9px;color:var(--ink4);font-family:var(--font-mono)">LOW</span>
+        <span style="font-size:9px;color:var(--ink4);font-family:var(--font-mono)">HIGH</span>
+      </div>
+    </div>
+    <button onclick="testVoice()" style="width:100%;padding:10px;background:var(--red-lt);border:1px solid rgba(192,57,43,.25);color:var(--red);border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-mono);letter-spacing:.08em;margin-bottom:10px;">▶ Test — こんにちは！</button>
+    <div style="font-size:10px;color:var(--ink4);line-height:1.6;padding-top:10px;border-top:1px solid rgba(26,21,16,.07)">💡 <strong>No Japanese voice?</strong> Install a Japanese language pack in your OS settings. Chrome on macOS/Windows usually has one built in.</div>
+  </div>
+</div>
+
+<!-- ══ AUTH PANEL ══ -->
+<div id="authPanel" style="display:none;position:fixed;top:68px;right:16px;z-index:500;background:white;border:1px solid rgba(26,21,16,.16);border-radius:16px;width:300px;box-shadow:0 12px 40px rgba(26,21,16,.18);overflow:hidden;">
+  <div id="authSignedOut">
+    <div style="background:linear-gradient(135deg,#1a1510,#2c1e10);padding:20px;text-align:center">
+      <div style="font-family:var(--font-jp);font-size:18px;font-weight:700;color:#f4f0e8;margin-bottom:3px">日本語道</div>
+      <div style="font-size:9px;color:rgba(244,240,232,.4);font-family:var(--font-mono);letter-spacing:.12em">SIGN IN TO SYNC PROGRESS</div>
+    </div>
+    <div style="padding:16px">
+      <button onclick="authGoogleSignIn()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;background:white;border:1.5px solid rgba(26,21,16,.15);border-radius:9px;padding:11px;font-size:13px;font-weight:500;color:#1a1510;cursor:pointer;margin-bottom:12px;">
+        <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-21 0-1.3-.2-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15 16.1 19.2 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 16.3 2 9.7 6.4 6.3 14.7z"/><path fill="#FBBC05" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.7-5.5C29.8 36.7 27 37.5 24 37.5c-6.1 0-10.7-3.9-11.9-9.3l-7 5.3C8.3 41 15.6 46 24 46z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.9 2.8-2.8 5.1-5.3 6.6l6.7 5.5C42 37.2 45 31.2 45 24c0-1.3-.2-2.7-.5-4z"/></svg>
+        Continue with Google
+      </button>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><div style="flex:1;height:1px;background:rgba(26,21,16,.09)"></div><span style="font-size:10px;color:var(--ink4);font-family:var(--font-mono)">OR</span><div style="flex:1;height:1px;background:rgba(26,21,16,.09)"></div></div>
+      <input id="authEmail" type="email" placeholder="Email address" style="width:100%;padding:9px 12px;border:1.5px solid rgba(26,21,16,.15);border-radius:8px;font-size:13px;outline:none;margin-bottom:8px;font-family:var(--font-ui);color:var(--ink);">
+      <input id="authPassword" type="password" placeholder="Password" style="width:100%;padding:9px 12px;border:1.5px solid rgba(26,21,16,.15);border-radius:8px;font-size:13px;outline:none;margin-bottom:10px;font-family:var(--font-ui);color:var(--ink);">
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <button onclick="authEmailSignIn()" style="flex:1;padding:9px;background:var(--red);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer">Sign in</button>
+        <button onclick="authEmailRegister()" style="flex:1;padding:9px;background:white;color:var(--ink3);border:1px solid var(--border2);border-radius:8px;font-size:12px;cursor:pointer">Register</button>
+      </div>
+      <button onclick="authForgotPassword()" style="width:100%;background:none;border:none;font-size:11px;color:var(--ink4);cursor:pointer;text-decoration:underline;padding:4px">Forgot password?</button>
+      <div id="authMsg" style="display:none;margin-top:8px;font-size:11px;padding:8px 10px;border-radius:6px;line-height:1.5"></div>
+    </div>
+  </div>
+  <div id="authSignedIn" style="display:none">
+    <div style="background:linear-gradient(135deg,#1a1510,#2c1e10);padding:20px;text-align:center">
+      <div id="authAvatarBig" style="width:44px;height:44px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;margin:0 auto 10px">P</div>
+      <div id="authUserName" style="font-size:14px;font-weight:600;color:#f4f0e8;margin-bottom:2px"></div>
+      <div id="authUserEmail" style="font-size:10px;color:rgba(244,240,232,.4);font-family:var(--font-mono)"></div>
+    </div>
+    <div style="padding:16px">
+      <div style="background:rgba(74,124,63,.1);border:1px solid rgba(74,124,63,.2);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:11px;color:#4a7c3f;font-family:var(--font-mono)">✓ Progress syncing to Firestore</div>
+      <button onclick="authSignOut()" style="width:100%;padding:10px;background:var(--cream);border:1.5px solid rgba(26,21,16,.15);border-radius:9px;font-size:13px;color:var(--ink3);cursor:pointer;">Sign out</button>
+    </div>
+  </div>
+</div>
 
 <!-- CONTENT -->
 <div class="content">
@@ -960,45 +1039,82 @@ footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-i
 const AP=(()=>{
   const synth=window.speechSynthesis;
   let _voice=null,_rate=0.82,_pitch=1.0,_volume=1.0;
+  let _allVoices=[];
 
-  function _pickVoice(){
-    const all=synth.getVoices();
-    const jp=all.filter(v=>v.lang&&v.lang.startsWith('ja')).sort((a,b)=>a.localService===b.localService?0:a.localService?-1:1);
-    _voice=jp[0]||all[0]||null;
+  function _loadVoices(){
+    _allVoices=synth.getVoices();
+    const jp=_allVoices.filter(v=>v.lang&&v.lang.startsWith('ja'))
+                       .sort((a,b)=>a.localService===b.localService?0:a.localService?-1:1);
+    if(!_voice)_voice=jp[0]||_allVoices[0]||null;
+    _populateVoiceDropdown();
+  }
+
+  function _populateVoiceDropdown(){
+    const sel=document.getElementById('voiceSelect');
+    if(!sel)return;
+    sel.innerHTML='';
+    const jp=_allVoices.filter(v=>v.lang&&v.lang.startsWith('ja'));
+    const other=_allVoices.filter(v=>!v.lang||!v.lang.startsWith('ja'));
+    if(jp.length===0){
+      sel.innerHTML='<option value="">No Japanese voices found</option>';
+      const note=document.getElementById('voiceNote');
+      if(note)note.textContent='⚠ No Japanese voice installed. Audio will use system default.';
+    }else{
+      const grp1=document.createElement('optgroup');grp1.label='Japanese voices ('+jp.length+')';
+      jp.forEach(v=>{
+        const opt=document.createElement('option');
+        opt.value=v.name;
+        opt.textContent=v.name+(v.localService?' ★':' (online)');
+        if(_voice&&v.name===_voice.name)opt.selected=true;
+        grp1.appendChild(opt);
+      });
+      sel.appendChild(grp1);
+      if(other.length>0){
+        const grp2=document.createElement('optgroup');grp2.label='Other voices';
+        other.slice(0,8).forEach(v=>{
+          const opt=document.createElement('option');
+          opt.value=v.name;
+          opt.textContent=v.name+' ('+v.lang+')';
+          grp2.appendChild(opt);
+        });
+        sel.appendChild(grp2);
+      }
+      const note=document.getElementById('voiceNote');
+      if(note)note.textContent='★ = local (better quality) · '+jp.length+' Japanese voice'+(jp.length>1?'s':'')+' available';
+    }
   }
 
   if(typeof speechSynthesis!=='undefined'){
-    if(synth.getVoices().length>0)_pickVoice();
-    else synth.addEventListener('voiceschanged',_pickVoice,{once:true});
+    if(synth.getVoices().length>0)_loadVoices();
+    synth.addEventListener('voiceschanged',_loadVoices);
   }
 
   function speak(text,opts={}){
     if(typeof speechSynthesis==='undefined'||!text||!text.trim())return;
     synth.cancel();
-    const u=new SpeechSynthesisUtterance(text.trim());
-    u.voice=_voice;u.lang='ja-JP';
-    u.rate=opts.rate!==undefined?opts.rate:_rate;
-    u.pitch=opts.pitch!==undefined?opts.pitch:_pitch;
-    u.volume=opts.volume!==undefined?opts.volume:_volume;
-    if(opts.onStart)u.onstart=opts.onStart;
-    if(opts.onEnd)u.onend=opts.onEnd;
-    if(opts.onError)u.onerror=opts.onError;
-    synth.speak(u);
+    setTimeout(()=>{
+      const u=new SpeechSynthesisUtterance(text.trim());
+      u.voice=_voice;u.lang='ja-JP';
+      u.rate=opts.rate!==undefined?opts.rate:_rate;
+      u.pitch=opts.pitch!==undefined?opts.pitch:_pitch;
+      u.volume=opts.volume!==undefined?opts.volume:_volume;
+      if(opts.onStart)u.onstart=opts.onStart;
+      if(opts.onEnd)u.onend=opts.onEnd;
+      if(opts.onError)u.onerror=opts.onError;
+      synth.speak(u);
+    },80);
   }
 
-  /* Speak kana slowly, repeated once for learner clarity */
   function speakKana(char,btn){
     if(btn){btn.classList.add('ap-playing');setTimeout(()=>btn.classList.remove('ap-playing'),1400);}
     speak(char,{rate:0.7,onEnd:()=>setTimeout(()=>speak(char,{rate:0.7}),500)});
   }
 
-  /* Speak vocab word with visual feedback on button */
   function speakVocab(jp,btn){
     if(btn){btn.classList.add('ap-playing');setTimeout(()=>btn.classList.remove('ap-playing'),1200);}
     speak(jp,{rate:_rate});
   }
 
-  /* Speak kanji reading */
   function speakKanji(char,btn){
     if(btn){btn.classList.add('ap-playing');setTimeout(()=>btn.classList.remove('ap-playing'),1000);}
     speak(char,{rate:0.8});
@@ -1007,13 +1123,21 @@ const AP=(()=>{
   const PHRASES={sessionEnd:'お疲れ様でした',mastered:'よくできました',stageUp:'おめでとうございます',correct:'せいかい'};
   function praise(key='mastered'){speak(PHRASES[key]||PHRASES.mastered,{rate:0.9});}
 
+  function setVoiceByName(name){
+    const found=_allVoices.find(v=>v.name===name);
+    if(found){_voice=found;return true;}
+    return false;
+  }
+
   function status(){
-    return{supported:typeof speechSynthesis!=='undefined',voice:_voice?_voice.name:null,lang:_voice?_voice.lang:null,rate:_rate};
+    return{supported:typeof speechSynthesis!=='undefined',voice:_voice?_voice.name:null,lang:_voice?_voice.lang:null,rate:_rate,voices:_allVoices.length};
   }
 
   return{speak,speakKana,speakVocab,speakKanji,praise,status,
-    setRate:r=>_rate=Math.max(0.5,Math.min(1.5,r)),
-    setPitch:p=>_pitch=Math.max(0.5,Math.min(2,p))};
+    setRate:r=>{_rate=Math.max(0.5,Math.min(1.5,r));},
+    setPitch:p=>{_pitch=Math.max(0.5,Math.min(2,p));},
+    setVoiceByName,
+    reloadVoices:_loadVoices};
 })();
 </script>
 <script>
@@ -1193,15 +1317,168 @@ function addXP(n){P.xp+=n;while(P.stage<6&&P.xp>=STAGE_XP[P.stage+1]){P.stage++;
 function stagePct(){if(P.stage>=6)return 100;const s=P.stage;const base=STAGE_XP[s-1]||0;return Math.max(0,Math.min(100,Math.round((P.xp-base)/(STAGE_XP[s]-base)*100)));}
 function todayStr(){return new Date().toISOString().slice(0,10);}
 
-/* ── Firebase ── */
+/* ── Firebase + Auth ── */
 async function initFirebase(){
  try{
   db=firebase.firestore();
   firebase.auth().onAuthStateChanged(async u=>{
-   if(u){currentUser=u;await loadP(u.uid);}else{loadLocal();}
+   updateAuthUI(u);
+   if(u){currentUser=u;await loadP(u.uid);}
+   else{currentUser=null;loadLocal();}
    renderAll();hideLoading();
   });
  }catch(e){loadLocal();renderAll();hideLoading();}
+}
+
+/* ── Auth UI update ── */
+function updateAuthUI(user){
+ const avatar=document.getElementById('navAvatar');
+ const si=document.getElementById('authSignedIn');
+ const so=document.getElementById('authSignedOut');
+ if(user){
+  const name=user.displayName||user.email.split('@')[0];
+  if(avatar){avatar.textContent=name[0].toUpperCase();avatar.title=user.email;}
+  const ab=document.getElementById('authAvatarBig');if(ab)ab.textContent=name[0].toUpperCase();
+  const an=document.getElementById('authUserName');if(an)an.textContent=name;
+  const ae=document.getElementById('authUserEmail');if(ae)ae.textContent=user.email;
+  if(si)si.style.display='block';
+  if(so)so.style.display='none';
+ }else{
+  if(avatar){avatar.textContent='人';avatar.title='Sign in';}
+  if(si)si.style.display='none';
+  if(so)so.style.display='block';
+ }
+}
+
+/* ── Voice Panel ── */
+let _voicePanelOpen=false,_authPanelOpen=false;
+
+function toggleVoicePanel(){
+ _authPanelOpen=false;
+ document.getElementById('authPanel').style.display='none';
+ _voicePanelOpen=!_voicePanelOpen;
+ const vp=document.getElementById('voicePanel');
+ vp.style.display=_voicePanelOpen?'block':'none';
+ if(_voicePanelOpen)AP.reloadVoices();
+}
+
+function closeVoicePanel(){
+ _voicePanelOpen=false;
+ document.getElementById('voicePanel').style.display='none';
+}
+
+function applyVoiceSettings(){
+ const sel=document.getElementById('voiceSelect');
+ const rate=parseFloat(document.getElementById('rateSlider').value);
+ const pitch=parseFloat(document.getElementById('pitchSlider').value);
+ if(sel&&sel.value)AP.setVoiceByName(sel.value);
+ AP.setRate(rate);AP.setPitch(pitch);
+ document.getElementById('rateLabel').textContent=rate.toFixed(2)+'×';
+ document.getElementById('pitchLabel').textContent=pitch.toFixed(1);
+ localStorage.setItem('voiceSettings',JSON.stringify({voice:sel?sel.value:'',rate,pitch}));
+}
+
+function testVoice(){
+ applyVoiceSettings();
+ AP.speak('こんにちは！日本語道へようこそ。よくできました！');
+}
+
+function loadVoiceSettings(){
+ try{
+  const s=JSON.parse(localStorage.getItem('voiceSettings')||'{}');
+  if(s.rate){document.getElementById('rateSlider').value=s.rate;document.getElementById('rateLabel').textContent=parseFloat(s.rate).toFixed(2)+'×';AP.setRate(s.rate);}
+  if(s.pitch){document.getElementById('pitchSlider').value=s.pitch;document.getElementById('pitchLabel').textContent=parseFloat(s.pitch).toFixed(1);AP.setPitch(s.pitch);}
+  if(s.voice)AP.setVoiceByName(s.voice);
+ }catch(e){}
+}
+
+/* ── Auth Panel ── */
+function toggleAuthPanel(){
+ _voicePanelOpen=false;
+ document.getElementById('voicePanel').style.display='none';
+ _authPanelOpen=!_authPanelOpen;
+ document.getElementById('authPanel').style.display=_authPanelOpen?'block':'none';
+}
+
+document.addEventListener('click',e=>{
+ const vp=document.getElementById('voicePanel');
+ const ap=document.getElementById('authPanel');
+ const vb=document.getElementById('voiceBtn');
+ const av=document.getElementById('navAvatar');
+ if(vp&&!vp.contains(e.target)&&e.target!==vb){vp.style.display='none';_voicePanelOpen=false;}
+ if(ap&&!ap.contains(e.target)&&e.target!==av){ap.style.display='none';_authPanelOpen=false;}
+});
+
+function showAuthMsg(msg,ok){
+ const el=document.getElementById('authMsg');
+ el.style.display='block';
+ el.style.background=ok?'rgba(74,124,63,.1)':'rgba(192,57,43,.1)';
+ el.style.color=ok?'#4a7c3f':'#c0392b';
+ el.style.border=ok?'1px solid rgba(74,124,63,.25)':'1px solid rgba(192,57,43,.25)';
+ el.textContent=msg;
+}
+
+function authGoogleSignIn(){
+ document.getElementById('authMsg').style.display='none';
+ try{
+  const provider=new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+   .then(()=>{document.getElementById('authPanel').style.display='none';_authPanelOpen=false;toast('✓ Signed in with Google','success');})
+   .catch(e=>showAuthMsg(friendlyAuthError(e),false));
+ }catch(e){showAuthMsg('Firebase not loaded',false);}
+}
+
+function authEmailSignIn(){
+ document.getElementById('authMsg').style.display='none';
+ const email=document.getElementById('authEmail').value.trim();
+ const pass=document.getElementById('authPassword').value;
+ if(!email||!pass){showAuthMsg('Enter email and password',false);return;}
+ firebase.auth().signInWithEmailAndPassword(email,pass)
+  .then(()=>{document.getElementById('authPanel').style.display='none';_authPanelOpen=false;toast('✓ Signed in','success');})
+  .catch(e=>showAuthMsg(friendlyAuthError(e),false));
+}
+
+function authEmailRegister(){
+ document.getElementById('authMsg').style.display='none';
+ const email=document.getElementById('authEmail').value.trim();
+ const pass=document.getElementById('authPassword').value;
+ if(!email||!pass){showAuthMsg('Enter email and password',false);return;}
+ if(pass.length<6){showAuthMsg('Password needs 6+ characters',false);return;}
+ firebase.auth().createUserWithEmailAndPassword(email,pass)
+  .then(()=>{document.getElementById('authPanel').style.display='none';_authPanelOpen=false;toast('✓ Account created','success');})
+  .catch(e=>showAuthMsg(friendlyAuthError(e),false));
+}
+
+function authForgotPassword(){
+ const email=document.getElementById('authEmail').value.trim();
+ if(!email){showAuthMsg('Enter your email above first',false);return;}
+ firebase.auth().sendPasswordResetEmail(email)
+  .then(()=>showAuthMsg('Reset email sent — check your inbox',true))
+  .catch(e=>showAuthMsg(friendlyAuthError(e),false));
+}
+
+function authSignOut(){
+ firebase.auth().signOut().then(()=>{
+  document.getElementById('authPanel').style.display='none';
+  _authPanelOpen=false;
+  toast('Signed out','success');
+  loadLocal();renderAll();
+ });
+}
+
+function friendlyAuthError(e){
+ const m={
+  'auth/user-not-found':'No account with this email.',
+  'auth/wrong-password':'Incorrect password.',
+  'auth/email-already-in-use':'Email already registered — sign in instead.',
+  'auth/weak-password':'Password needs 6+ characters.',
+  'auth/invalid-email':'Invalid email address.',
+  'auth/invalid-credential':'Invalid email or password.',
+  'auth/popup-closed-by-user':'Sign-in popup was closed.',
+  'auth/network-request-failed':'Network error — check connection.',
+  'auth/too-many-requests':'Too many attempts — wait a moment.',
+ };
+ return m[e.code]||e.message;
 }
 async function loadP(uid){
  try{const d=await db.collection('users').doc(uid).collection('progress').doc('main').get();
@@ -1696,8 +1973,8 @@ function setEl(id,val){const el=document.getElementById(id);if(el)el.textContent
 /* ── INIT ── */
 document.addEventListener('DOMContentLoaded',()=>{
  try{initFirebase();}catch(e){loadLocal();renderAll();hideLoading();}
+ setTimeout(loadVoiceSettings,600);
 });
 </script>
-  <script src="js/auth.js"></script>
 </body>
 </html>
