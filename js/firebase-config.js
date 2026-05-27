@@ -1,6 +1,4 @@
 // firebase-config.js — v9 compat
-// Works with firebase-*-compat.js CDN scripts loaded in HTML
-
 const firebaseConfig = {
   apiKey: "AIzaSyDXEAfZGX_x06lOwtqVEOreNNeeOvjzR7o",
   authDomain: "japanese-learning-app-b2edb.firebaseapp.com",
