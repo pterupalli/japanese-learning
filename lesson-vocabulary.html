@@ -7,109 +7,173 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#f4f0e8;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;--red:#c0392b;--red-lt:rgba(192,57,43,.10);--border:rgba(26,21,16,.09);--border2:rgba(26,21,16,.16);--moss:#4a7c3f;--moss-lt:rgba(74,124,63,.10);--font-jp:'Noto Serif JP',serif;--font-ui:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:15px;-webkit-font-smoothing:antialiased}body{font-family:var(--font-ui);background:var(--cream);color:var(--ink);overflow-x:hidden}a{text-decoration:none;color:inherit}button{font-family:var(--font-ui);cursor:pointer}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(26,21,16,.12);border-radius:3px}
+:root{--cream:#f4f0e8;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;--red:#c0392b;--red-lt:rgba(192,57,43,.10);--gold:#7a5a00;--gold-lt:rgba(184,146,42,.10);--moss:#4a7c3f;--moss-lt:rgba(74,124,63,.10);--teal:#1a7f6e;--teal-lt:rgba(26,127,110,.10);--border:rgba(26,21,16,.09);--border2:rgba(26,21,16,.16);--ac:#4a7c3f;--ac-lt:rgba(74,124,63,.10);--font-jp:'Noto Serif JP',serif;--font-ui:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;--ease:cubic-bezier(.25,.46,.45,.94);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:15px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}body{font-family:var(--font-ui);background:var(--cream);color:var(--ink);overflow-x:hidden}a{text-decoration:none;color:inherit}button{font-family:var(--font-ui);cursor:pointer}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(26,21,16,.12);border-radius:3px}
 .nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(244,240,232,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:11px}.nav-logo{width:36px;height:36px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--font-jp);font-size:18px;font-weight:700;color:#fff}.nav-brand-name{font-size:14px;font-weight:600;color:var(--ink)}.nav-brand-sub{font-size:9px;color:var(--ink4);letter-spacing:.14em;font-family:var(--font-mono)}.nav-back{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink3);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:white}.nav-back:hover{border-color:var(--border2)}
 .lesson-hero{background:linear-gradient(135deg,#0e1f10 0%,#1a3420 100%);padding:60px 56px 56px;position:relative;overflow:hidden;}
-.lesson-hero::before{content:'語';font-family:var(--font-jp);font-size:280px;font-weight:700;position:absolute;right:-20px;top:-40px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;user-select:none;}
+.lesson-hero::before{content:'語';font-family:var(--font-jp);font-size:280px;font-weight:700;position:absolute;right:-20px;top:-40px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;}
 .hero-eyebrow{font-size:10px;letter-spacing:.22em;color:#5fa854;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:12px}
 .hero-title{font-family:var(--font-jp);font-size:clamp(32px,5vw,52px);font-weight:700;color:#f4f0e8;line-height:1.15;margin-bottom:10px}
 .hero-sub{font-size:14px;color:rgba(244,240,232,.5);line-height:1.8;max-width:560px;margin-bottom:28px}
-.hero-pill{font-size:10px;letter-spacing:.12em;padding:5px 14px;border-radius:20px;font-family:var(--font-mono);border:1px solid;display:inline-block;margin-right:8px;margin-bottom:4px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7)}
-.content{max-width:900px;margin:0 auto;padding:48px 40px}
+.hero-pill{font-size:10px;letter-spacing:.12em;padding:5px 14px;border-radius:20px;font-family:var(--font-mono);border:1px solid;display:inline-block;margin-right:8px;margin-bottom:4px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.75)}
+.content{max-width:960px;margin:0 auto;padding:48px 40px}
 .lb{margin-bottom:48px}
-.be{font-size:9px;letter-spacing:.2em;color:#5fa854;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.be::before{content:'';width:14px;height:1px;background:#5fa854}
+.be{font-size:9px;letter-spacing:.2em;color:#5fa854;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}.be::before{content:'';width:14px;height:1px;background:#5fa854}
 .bt{font-family:var(--font-jp);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:12px}
 .bb{font-size:14px;color:var(--ink3);line-height:1.9}.bb strong{color:var(--ink);font-weight:600}
-.vocab-table{width:100%;border-collapse:collapse;background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:16px}
-.vocab-table th{font-size:9px;letter-spacing:.12em;color:var(--ink4);font-family:var(--font-mono);text-align:left;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--cream);text-transform:uppercase}
-.vocab-table td{padding:10px 16px;border-bottom:1px solid rgba(26,21,16,.04);font-size:13px;color:var(--ink2);vertical-align:middle}
-.vocab-table tr:last-child td{border-bottom:none}.vocab-table tr:hover td{background:var(--cream)}
-.vocab-jp{font-family:var(--font-jp);font-size:18px;color:#5fa854;font-weight:600}
-.vocab-rom{font-size:11px;font-family:var(--font-mono);color:var(--ink4)}
-.step-list{display:flex;flex-direction:column;gap:14px;margin-top:20px}
-.step{display:flex;gap:16px;background:white;border:1px solid var(--border);border-radius:14px;padding:18px 20px}
-.step-num{width:32px;height:32px;border-radius:8px;background:var(--moss-lt);color:var(--moss);font-family:var(--font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}.step-text{font-size:12px;color:var(--ink3);line-height:1.75}
-.yt-btn{display:inline-flex;align-items:center;gap:10px;background:var(--moss-lt);border:1px solid rgba(74,124,63,.25);color:var(--moss);padding:11px 20px;border-radius:10px;font-size:12px;font-weight:600;letter-spacing:.06em;font-family:var(--font-mono);transition:background .15s;margin-top:14px;margin-right:8px}
-.yt-btn:hover{background:rgba(74,124,63,.2)}
+.search-bar{display:flex;gap:10px;margin-bottom:16px}
+.search-input{flex:1;background:white;border:1.5px solid var(--border2);color:var(--ink);font-size:13px;padding:10px 14px;border-radius:10px;outline:none;transition:border-color .2s}.search-input:focus{border-color:var(--ac)}.search-input::placeholder{color:var(--ink4)}
+.filter-tabs{display:flex;gap:4px;margin-bottom:16px}
+.filter-tab{font-size:11px;letter-spacing:.1em;color:var(--ink4);background:white;border:1px solid var(--border);padding:6px 14px;border-radius:8px;cursor:pointer;font-family:var(--font-mono);transition:all .15s}
+.filter-tab.active{color:var(--ac);background:var(--ac-lt);border-color:rgba(74,124,63,.3)}
+.vocab-row{display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;cursor:pointer;transition:border-color .15s}
+.vocab-row:hover{border-color:var(--border2)}
+.vocab-row.vr-known{background:var(--moss-lt);border-color:rgba(74,124,63,.3)}
+.vocab-row.vr-learning{background:var(--gold-lt);border-color:rgba(184,146,42,.3)}
+.vr-jp{font-family:var(--font-jp);font-size:20px;font-weight:600;color:var(--ac);width:64px;flex-shrink:0}
+.vr-rom{font-size:11px;color:var(--ink4);font-family:var(--font-mono);width:90px;flex-shrink:0}
+.vr-en{font-size:13px;color:var(--ink2);flex:1}
+.vr-badge{font-size:9px;letter-spacing:.1em;padding:2px 8px;border-radius:4px;font-family:var(--font-mono);flex-shrink:0}
+.vb-new{background:var(--cream);color:var(--ink4)}.vb-learning{background:var(--gold-lt);color:var(--gold)}.vb-known{background:var(--moss-lt);color:var(--moss)}
+.vr-play{background:var(--teal-lt);border:1px solid rgba(26,127,110,.2);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--teal);cursor:pointer;flex-shrink:0;font-family:var(--font-mono)}
+.vr-cycle{background:var(--cream);border:1px solid var(--border2);border-radius:6px;padding:5px 10px;font-size:9px;color:var(--ink3);cursor:pointer;flex-shrink:0;font-family:var(--font-mono);letter-spacing:.08em}
+.vr-cycle:hover{border-color:var(--ac);color:var(--ac)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.stat-card{background:white;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-val{font-family:var(--font-mono);font-size:28px;font-weight:600;line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:11px;color:var(--ink3);letter-spacing:.08em}
+.yt-btn{display:inline-flex;align-items:center;gap:10px;background:var(--ac-lt);border:1px solid rgba(74,124,63,.25);color:var(--ac);padding:11px 20px;border-radius:10px;font-size:12px;font-weight:600;letter-spacing:.06em;font-family:var(--font-mono);transition:background .15s;margin-top:14px;margin-right:8px}.yt-btn:hover{background:rgba(74,124,63,.2)}
 .cta{background:linear-gradient(135deg,#0e1f10,#1a3420);border-radius:18px;padding:32px;text-align:center;margin-top:48px;}
-.cta-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:8px}
-.cta-body{font-size:13px;color:rgba(244,240,232,.5);margin-bottom:22px;line-height:1.7}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--moss);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:13px;font-weight:600}
-@media(max-width:700px){.lesson-hero{padding:40px 24px 36px}.content{padding:32px 20px}}
+.cta-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:8px}.cta-body{font-size:13px;color:rgba(244,240,232,.5);margin-bottom:22px;line-height:1.7}.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--moss);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:13px;font-weight:600}
+.toast-container{position:fixed;bottom:1.25rem;right:1.25rem;z-index:9999;display:flex;flex-direction:column;gap:7px}
+.toast{background:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 14px;font-size:12px;color:#f4f0e8;max-width:280px;animation:toastIn .3s ease forwards}
+.toast.success{border-color:rgba(74,124,63,.5)}.toast.error{border-color:rgba(192,57,43,.5)}
+@keyframes toastIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes toastOut{from{opacity:1}to{transform:translateX(110%);opacity:0}}
+@media(max-width:700px){.lesson-hero{padding:40px 24px 36px}.content{padding:32px 20px}.stats-row{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
+<div class="toast-container" id="toastContainer"></div>
 <nav class="nav">
-  <a href="index.html" class="nav-brand">
-    <div class="nav-logo">道</div>
-    <div><div class="nav-brand-name">日本語道</div><div class="nav-brand-sub">LESSON</div></div>
-  </a>
+  <a href="index.html" class="nav-brand"><div class="nav-logo">道</div><div><div class="nav-brand-name">日本語道</div><div class="nav-brand-sub">LESSON</div></div></a>
   <a href="dashboard.html" class="nav-back">← Back to Dashboard</a>
 </nav>
 <div class="lesson-hero">
   <div class="hero-eyebrow">Stage 1 · Lesson 5 of 6</div>
   <div class="hero-title">Vocabulary<br>語彙</div>
-  <div class="hero-sub">25 core N5 words with audio and YouTube per word. Build a foundation you can use in real conversation from day one.</div>
-  <span class="hero-pill">25 N5 words</span>
-  <span class="hero-pill">+10 XP each</span>
-  <span class="hero-pill">Stage 1 — Active</span>
+  <div class="hero-sub">25 core N5 words. Click ▶ Play to hear each one. CYCLE to move through New → Learning → Known for +10 XP.</div>
+  <span class="hero-pill">25 N5 words</span><span class="hero-pill">+10 XP each</span><span class="hero-pill">Stage 1 — Active</span>
 </div>
 <div class="content">
-
   <div class="lb">
-    <div class="be">Method</div>
-    <div class="bt">How to build vocabulary that sticks</div>
-    <div class="step-list">
-      <div class="step"><div class="step-num">01</div><div><div class="step-title">Use the Vocabulary section in the dashboard</div><div class="step-text">Each word has a ▶ Play button for native audio, a YouTube link for pronunciation context, and a CYCLE button to move it through New → Learning → Known.</div></div></div>
-      <div class="step"><div class="step-num">02</div><div><div class="step-title">Learn words in sentence context, not isolation</div><div class="step-text">Don't memorize 水 = water. Memorize 水を飲みます (I drink water). Context locks words into long-term memory faster.</div></div></div>
-      <div class="step"><div class="step-num">03</div><div><div class="step-title">Mark "Known" only when you can recall instantly</div><div class="step-text">+10 XP is earned the first time you mark a word known. Don't rush — honest tracking beats inflated stats.</div></div></div>
-      <div class="step"><div class="step-num">04</div><div><div class="step-title">Add to Anki for spaced repetition</div><div class="step-text">The dashboard vocab list tells you what to study. Use Anki (free) to review daily. 10 new words per day = 800 words in 80 days.</div></div></div>
+    <div class="be">Your progress</div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-val" style="color:var(--moss)" id="statKnown">0</div><div class="stat-lbl">Known</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--gold)" id="statLearning">0</div><div class="stat-lbl">Learning</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--ink4)" id="statNew">25</div><div class="stat-lbl">New</div></div>
     </div>
+    <div class="be">Vocabulary list</div>
+    <div class="bt">Click ▶ Play to hear · CYCLE to change status</div>
+    <div class="search-bar"><input class="search-input" id="searchInput" placeholder="Search Japanese, romaji, or English…" oninput="renderList()"></div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all" onclick="setFilter('all',this)">All (25)</button>
+      <button class="filter-tab" data-filter="known" onclick="setFilter('known',this)">Known</button>
+      <button class="filter-tab" data-filter="learning" onclick="setFilter('learning',this)">Learning</button>
+      <button class="filter-tab" data-filter="new" onclick="setFilter('new',this)">New</button>
+    </div>
+    <div id="vocabList"></div>
   </div>
-
-  <div class="lb">
-    <div class="be">Preview</div>
-    <div class="bt">25 N5 words in the dashboard</div>
-    <div class="bb">These are the first 25 words in the dashboard Vocabulary section. Click ▶ Play to hear each one. CYCLE to track your status.</div>
-    <table class="vocab-table">
-      <thead><tr><th>Japanese</th><th>Reading</th><th>English</th><th>Type</th></tr></thead>
-      <tbody>
-        <tr><td><div class="vocab-jp">日本語</div></td><td><div class="vocab-rom">nihongo</div></td><td>Japanese language</td><td>Noun</td></tr>
-        <tr><td><div class="vocab-jp">水</div></td><td><div class="vocab-rom">mizu</div></td><td>water</td><td>Noun</td></tr>
-        <tr><td><div class="vocab-jp">食べる</div></td><td><div class="vocab-rom">taberu</div></td><td>to eat</td><td>Verb</td></tr>
-        <tr><td><div class="vocab-jp">飲む</div></td><td><div class="vocab-rom">nomu</div></td><td>to drink</td><td>Verb</td></tr>
-        <tr><td><div class="vocab-jp">見る</div></td><td><div class="vocab-rom">miru</div></td><td>to see / watch</td><td>Verb</td></tr>
-        <tr><td><div class="vocab-jp">行く</div></td><td><div class="vocab-rom">iku</div></td><td>to go</td><td>Verb</td></tr>
-        <tr><td><div class="vocab-jp">来る</div></td><td><div class="vocab-rom">kuru</div></td><td>to come</td><td>Verb</td></tr>
-        <tr><td><div class="vocab-jp">大きい</div></td><td><div class="vocab-rom">ookii</div></td><td>big / large</td><td>Adjective</td></tr>
-        <tr><td><div class="vocab-jp">小さい</div></td><td><div class="vocab-rom">chiisai</div></td><td>small / little</td><td>Adjective</td></tr>
-        <tr><td><div class="vocab-jp">ありがとう</div></td><td><div class="vocab-rom">arigatou</div></td><td>thank you</td><td>Expression</td></tr>
-      </tbody>
-    </table>
-    <p style="font-size:12px;color:var(--ink4);margin-top:10px;font-family:var(--font-mono)">+ 15 more words in the dashboard Vocabulary section</p>
-  </div>
-
   <div class="lb">
     <div class="be">Resources</div>
     <div class="bt">Recommended YouTube</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
-      <button class="yt-btn" onclick="openYT('JLPT N5 vocabulary 100 words Japanese')">▶ N5 Vocabulary 100 Words</button>
-      <button class="yt-btn" onclick="openYT('japanese vocabulary beginners daily life')">▶ Daily Life Vocabulary</button>
-      <button class="yt-btn" onclick="openYT('japanese pronunciation vocabulary N5')">▶ N5 Pronunciation Guide</button>
-    </div>
+    <button class="yt-btn" onclick="openYT('JLPT N5 vocabulary 100 words Japanese')">▶ N5 Vocabulary 100 Words</button>
+    <button class="yt-btn" onclick="openYT('japanese vocabulary beginners daily life N5')">▶ Daily Life Vocabulary</button>
   </div>
-
   <div class="cta">
-    <div class="cta-title">Practice in the Vocabulary section</div>
-    <div class="cta-body">Open the dashboard, go to Vocabulary, and cycle through all 25 words. Use ▶ Play for audio on each one.</div>
-    <button class="cta-btn" onclick="location.href='dashboard.html#vocab'">Open Vocabulary →</button>
+    <div class="cta-title">XP syncs to your dashboard</div>
+    <div class="cta-body">Each word marked Known adds +10 XP to your profile and dashboard stats.</div>
+    <button class="cta-btn" onclick="location.href='dashboard.html'">View Dashboard →</button>
   </div>
-
 </div>
-<script>function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}</script>
+<script>
+const VOCAB=[
+ {jp:'日本語',r:'nihongo',en:'Japanese language'},{jp:'ありがとう',r:'arigatou',en:'Thank you'},
+ {jp:'はい',r:'hai',en:'Yes'},{jp:'いいえ',r:'iie',en:'No'},
+ {jp:'すみません',r:'sumimasen',en:'Excuse me / Sorry'},{jp:'わかります',r:'wakarimasu',en:'I understand'},
+ {jp:'わかりません',r:'wakarimasen',en:"I don't understand"},{jp:'おねがいします',r:'onegaishimasu',en:'Please (requesting)'},
+ {jp:'どうぞ',r:'douzo',en:'Here you go / Please go ahead'},{jp:'今日',r:'kyou',en:'Today'},
+ {jp:'明日',r:'ashita',en:'Tomorrow'},{jp:'昨日',r:'kinou',en:'Yesterday'},
+ {jp:'水',r:'mizu',en:'Water'},{jp:'電車',r:'densha',en:'Train'},
+ {jp:'学校',r:'gakkou',en:'School'},{jp:'先生',r:'sensei',en:'Teacher'},
+ {jp:'友達',r:'tomodachi',en:'Friend'},{jp:'家',r:'ie',en:'House / Home'},
+ {jp:'仕事',r:'shigoto',en:'Work / Job'},{jp:'時間',r:'jikan',en:'Time'},
+ {jp:'何',r:'nani',en:'What'},{jp:'どこ',r:'doko',en:'Where'},
+ {jp:'いつ',r:'itsu',en:'When'},{jp:'どうして',r:'doushite',en:'Why'},
+ {jp:'食べ物',r:'tabemono',en:'Food'},
+];
+let progress={},currentFilter='all';
+function loadProgress(){try{progress=JSON.parse(localStorage.getItem('jpProgress_vocab')||'{}');}catch(e){progress={};}}
+function saveProgress(){
+  localStorage.setItem('jpProgress_vocab',JSON.stringify(progress));
+  try{const main=JSON.parse(localStorage.getItem('jpProgress')||'{}');if(!main.vocab)main.vocab={};Object.assign(main.vocab,progress);localStorage.setItem('jpProgress',JSON.stringify(main));}catch(e){}
+}
+function setFilter(f,el){
+  currentFilter=f;
+  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderList();
+}
+function renderList(){
+  const filter=document.getElementById('searchInput').value.toLowerCase();
+  const list=document.getElementById('vocabList');list.innerHTML='';
+  VOCAB.forEach(v=>{
+    const st=progress[v.jp]||'new';
+    if(currentFilter!=='all'&&st!==currentFilter)return;
+    if(filter&&!v.jp.includes(filter)&&!v.r.includes(filter)&&!v.en.toLowerCase().includes(filter))return;
+    const row=document.createElement('div');
+    row.className='vocab-row'+(st==='known'?' vr-known':st==='learning'?' vr-learning':'');
+    const bdg=st==='known'?'vb-known':st==='learning'?'vb-learning':'vb-new';
+    row.innerHTML=`<div class="vr-jp">${v.jp}</div><div class="vr-rom">${v.r}</div><div class="vr-en">${v.en}</div><span class="vr-badge ${bdg}">${st.toUpperCase()}</span>`;
+    const play=document.createElement('button');play.className='vr-play';play.textContent='▶ Play';
+    play.addEventListener('click',e=>{e.stopPropagation();speakWord(v.jp,play);});
+    const cycle=document.createElement('button');cycle.className='vr-cycle';cycle.textContent='CYCLE';
+    cycle.addEventListener('click',e=>{e.stopPropagation();cycleVocab(v.jp);});
+    row.appendChild(play);row.appendChild(cycle);
+    list.appendChild(row);
+  });
+  updateStats();
+}
+function updateStats(){
+  const known=Object.values(progress).filter(v=>v==='known').length;
+  const learning=Object.values(progress).filter(v=>v==='learning').length;
+  document.getElementById('statKnown').textContent=known;
+  document.getElementById('statLearning').textContent=learning;
+  document.getElementById('statNew').textContent=25-known-learning;
+}
+function cycleVocab(jp){
+  const prev=progress[jp]||'new';
+  const next=prev==='new'?'learning':prev==='learning'?'known':'new';
+  progress[jp]=next;
+  if(next==='known'&&prev!=='known'){
+    toast('✓ +10 XP — '+jp+' known!','success');
+    try{const main=JSON.parse(localStorage.getItem('jpProgress')||'{}');main.xp=(main.xp||0)+10;if(main.xp>=500&&main.stage<2)main.stage=2;localStorage.setItem('jpProgress',JSON.stringify(main));}catch(e){}
+  }
+  saveProgress();renderList();
+}
+function speakWord(jp,btn){
+  const synth=window.speechSynthesis;if(!synth){toast('Audio not supported','error');return;}
+  synth.cancel();
+  const u=new SpeechSynthesisUtterance(jp);u.lang='ja-JP';u.rate=0.8;
+  const voices=synth.getVoices();const jpVoice=voices.find(v=>v.lang&&v.lang.startsWith('ja'));if(jpVoice)u.voice=jpVoice;
+  if(btn){btn.textContent='▶ …';u.onend=()=>{btn.textContent='▶ Play';};}
+  synth.speak(u);
+}
+document.addEventListener('click',()=>{if(window.speechSynthesis)window.speechSynthesis.getVoices();},{once:true});
+function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}
+function toast(msg,type='success'){const t=document.createElement('div');t.className='toast '+(type||'');t.textContent=msg;document.getElementById('toastContainer').appendChild(t);setTimeout(()=>{t.style.animation='toastOut .3s ease forwards';setTimeout(()=>t.remove(),300);},3000);}
+loadProgress();renderList();
+</script>
 </body>
 </html>
