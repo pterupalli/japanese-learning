@@ -74,6 +74,9 @@ button{font-family:var(--font-ui);cursor:pointer}
   transition:background .15s,transform .15s;
 }
 .nav-cta:hover{background:var(--red-h);transform:translateY(-1px)}
+.nav-avatar{width:34px;height:34px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;cursor:pointer;border:2px solid transparent;transition:border-color .15s;flex-shrink:0}
+.nav-avatar:hover{border-color:rgba(192,57,43,.5)}
+.auth-panel{display:none;position:fixed;top:72px;right:16px;z-index:500;background:#fff;border:1px solid rgba(26,21,16,.16);border-radius:16px;width:300px;box-shadow:0 12px 40px rgba(26,21,16,.18);overflow:hidden;}
 
 /* ── HERO ── */
 .hero{
@@ -363,9 +366,47 @@ button{font-family:var(--font-ui);cursor:pointer}
   </ul>
   <div class="nav-right">
     <div class="streak-badge" id="navStreak" style="display:none">🔥 <span id="streakNav">0</span> day streak</div>
-    <button class="nav-cta" onclick="location.href='dashboard.html'">Begin Stage 1 →</button>
+    <div class="nav-avatar" id="navAvatar" onclick="toggleAuthPanel()" title="Sign in / Sign out">人</div>
+    <button class="nav-cta" id="navCta" onclick="location.href='dashboard.html'">Begin Stage 1 →</button>
   </div>
 </nav>
+
+<!-- AUTH PANEL -->
+<div class="auth-panel" id="authPanel">
+  <div id="authSignedOut">
+    <div style="background:linear-gradient(135deg,#1a1510,#2c1e10);padding:20px;text-align:center">
+      <div style="font-family:var(--font-jp);font-size:18px;font-weight:700;color:#f4f0e8;margin-bottom:3px">日本語道</div>
+      <div style="font-size:9px;color:rgba(244,240,232,.4);font-family:var(--font-mono);letter-spacing:.12em">SIGN IN TO SYNC PROGRESS</div>
+    </div>
+    <div style="padding:16px">
+      <button onclick="authGoogleSignIn()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;background:white;border:1.5px solid rgba(26,21,16,.15);border-radius:9px;padding:11px;font-size:13px;font-weight:500;color:#1a1510;cursor:pointer;margin-bottom:12px;">
+        <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-21 0-1.3-.2-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15 16.1 19.2 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 16.3 2 9.7 6.4 6.3 14.7z"/><path fill="#FBBC05" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.7-5.5C29.8 36.7 27 37.5 24 37.5c-6.1 0-10.7-3.9-11.9-9.3l-7 5.3C8.3 41 15.6 46 24 46z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.9 2.8-2.8 5.1-5.3 6.6l6.7 5.5C42 37.2 45 31.2 45 24c0-1.3-.2-2.7-.5-4z"/></svg>
+        Continue with Google
+      </button>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><div style="flex:1;height:1px;background:rgba(26,21,16,.09)"></div><span style="font-size:10px;color:#665848;font-family:var(--font-mono)">OR</span><div style="flex:1;height:1px;background:rgba(26,21,16,.09)"></div></div>
+      <input id="authEmail" type="email" placeholder="Email address" style="width:100%;padding:9px 12px;border:1.5px solid rgba(26,21,16,.15);border-radius:8px;font-size:13px;outline:none;margin-bottom:8px;font-family:var(--font-ui);color:#1a1510;">
+      <input id="authPassword" type="password" placeholder="Password" style="width:100%;padding:9px 12px;border:1.5px solid rgba(26,21,16,.15);border-radius:8px;font-size:13px;outline:none;margin-bottom:10px;font-family:var(--font-ui);color:#1a1510;">
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <button onclick="authEmailSignIn()" style="flex:1;padding:9px;background:#c0392b;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-ui)">Sign in</button>
+        <button onclick="authEmailRegister()" style="flex:1;padding:9px;background:white;color:#5a5048;border:1px solid rgba(26,21,16,.16);border-radius:8px;font-size:12px;cursor:pointer;font-family:var(--font-ui)">Register</button>
+      </div>
+      <button onclick="authForgotPassword()" style="width:100%;background:none;border:none;font-size:11px;color:#665848;cursor:pointer;text-decoration:underline;padding:4px;font-family:var(--font-ui)">Forgot password?</button>
+      <div id="authMsg" style="display:none;margin-top:8px;font-size:11px;padding:8px 10px;border-radius:6px;line-height:1.5"></div>
+    </div>
+  </div>
+  <div id="authSignedIn" style="display:none">
+    <div style="background:linear-gradient(135deg,#1a1510,#2c1e10);padding:20px;text-align:center">
+      <div id="authAvatarBig" style="width:44px;height:44px;border-radius:50%;background:#c0392b;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;margin:0 auto 10px">P</div>
+      <div id="authUserName" style="font-size:14px;font-weight:600;color:#f4f0e8;margin-bottom:2px"></div>
+      <div id="authUserEmail" style="font-size:10px;color:rgba(244,240,232,.4);font-family:var(--font-mono)"></div>
+    </div>
+    <div style="padding:16px">
+      <div style="background:rgba(74,124,63,.1);border:1px solid rgba(74,124,63,.2);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:11px;color:#4a7c3f;font-family:var(--font-mono)">✓ Progress syncing across devices</div>
+      <button onclick="location.href='dashboard.html'" style="width:100%;padding:10px;background:#c0392b;color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:8px;font-family:var(--font-ui)">Go to Dashboard →</button>
+      <button onclick="authSignOut()" style="width:100%;padding:10px;background:#f4f0e8;border:1.5px solid rgba(26,21,16,.15);border-radius:9px;font-size:13px;color:#5a5048;cursor:pointer;font-family:var(--font-ui)">Sign out</button>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════════
    SECTION 1 — HERO
@@ -601,8 +642,11 @@ button{font-family:var(--font-ui);cursor:pointer}
   <div class="footer-copy">© 2026 Pradeep Terupalli · Japanese Learning Platform</div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="js/firebase-config.js"></script>
 <script>
-/* ── Load progress — only show hero card when user has XP ── */
+/* ── Load progress from localStorage ── */
 function loadProgress(){
   try{
     const P=JSON.parse(localStorage.getItem('jpProgress')||'{}');
@@ -614,8 +658,6 @@ function loadProgress(){
     const hira=Object.values(P.hiragana||{}).filter(v=>v==='mastered').length;
     const kata=Object.values(P.katakana||{}).filter(v=>v==='mastered').length;
     const vocab=Object.values(P.vocab||{}).filter(v=>v==='known').length;
-
-    /* Only reveal hero card and streak badge if user has started */
     if(xp>0){
       document.getElementById('heroCard').classList.remove('empty');
       document.getElementById('heroStage').textContent=stage+' / 6';
@@ -626,14 +668,137 @@ function loadProgress(){
       document.getElementById('heroPct').textContent=pct+'%';
       document.getElementById('heroBar').style.width=pct+'%';
       if(streak>0){
-      const nb=document.getElementById('navStreak');
-      const sn=document.getElementById('streakNav');
-      if(nb){nb.style.display='flex';}
-      if(sn)sn.textContent=streak;
-    }
+        const nb=document.getElementById('navStreak');
+        const sn=document.getElementById('streakNav');
+        if(nb)nb.style.display='flex';
+        if(sn)sn.textContent=streak;
+      }
     }
   }catch(e){}
 }
+
+/* ── Auth panel ── */
+let _authPanelOpen=false;
+
+function toggleAuthPanel(){
+  _authPanelOpen=!_authPanelOpen;
+  document.getElementById('authPanel').style.display=_authPanelOpen?'block':'none';
+}
+
+document.addEventListener('click',e=>{
+  const ap=document.getElementById('authPanel');
+  const av=document.getElementById('navAvatar');
+  if(ap&&!ap.contains(e.target)&&e.target!==av){
+    ap.style.display='none';_authPanelOpen=false;
+  }
+});
+
+function showAuthMsg(msg,ok){
+  const el=document.getElementById('authMsg');
+  el.style.display='block';
+  el.style.background=ok?'rgba(74,124,63,.1)':'rgba(192,57,43,.1)';
+  el.style.color=ok?'#4a7c3f':'#c0392b';
+  el.style.border=ok?'1px solid rgba(74,124,63,.25)':'1px solid rgba(192,57,43,.25)';
+  el.textContent=msg;
+}
+
+function updateAuthUI(user){
+  const avatar=document.getElementById('navAvatar');
+  const si=document.getElementById('authSignedIn');
+  const so=document.getElementById('authSignedOut');
+  const cta=document.getElementById('navCta');
+  if(user){
+    const name=user.displayName||user.email.split('@')[0];
+    if(avatar){avatar.textContent=name[0].toUpperCase();avatar.title='Signed in as '+user.email;}
+    const ab=document.getElementById('authAvatarBig');if(ab)ab.textContent=name[0].toUpperCase();
+    const an=document.getElementById('authUserName');if(an)an.textContent=name;
+    const ae=document.getElementById('authUserEmail');if(ae)ae.textContent=user.email;
+    if(si)si.style.display='block';
+    if(so)so.style.display='none';
+    if(cta)cta.textContent='Go to Dashboard →';
+  }else{
+    if(avatar){avatar.textContent='人';avatar.title='Sign in';}
+    if(si)si.style.display='none';
+    if(so)so.style.display='block';
+    if(cta)cta.textContent='Begin Stage 1 →';
+  }
+}
+
+function authGoogleSignIn(){
+  document.getElementById('authMsg').style.display='none';
+  try{
+    const provider=new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+      .then(()=>{document.getElementById('authPanel').style.display='none';_authPanelOpen=false;})
+      .catch(e=>showAuthMsg(friendlyAuthError(e),false));
+  }catch(e){showAuthMsg('Firebase not loaded',false);}
+}
+
+function authEmailSignIn(){
+  document.getElementById('authMsg').style.display='none';
+  const email=document.getElementById('authEmail').value.trim();
+  const pass=document.getElementById('authPassword').value;
+  if(!email||!pass){showAuthMsg('Enter email and password',false);return;}
+  try{
+    firebase.auth().signInWithEmailAndPassword(email,pass)
+      .then(()=>{document.getElementById('authPanel').style.display='none';_authPanelOpen=false;})
+      .catch(e=>showAuthMsg(friendlyAuthError(e),false));
+  }catch(e){showAuthMsg('Firebase not available',false);}
+}
+
+function authEmailRegister(){
+  document.getElementById('authMsg').style.display='none';
+  const email=document.getElementById('authEmail').value.trim();
+  const pass=document.getElementById('authPassword').value;
+  if(!email||!pass){showAuthMsg('Enter email and password',false);return;}
+  if(pass.length<6){showAuthMsg('Password needs 6+ characters',false);return;}
+  try{
+    firebase.auth().createUserWithEmailAndPassword(email,pass)
+      .then(()=>{document.getElementById('authPanel').style.display='none';_authPanelOpen=false;})
+      .catch(e=>showAuthMsg(friendlyAuthError(e),false));
+  }catch(e){showAuthMsg('Firebase not available',false);}
+}
+
+function authForgotPassword(){
+  const email=document.getElementById('authEmail').value.trim();
+  if(!email){showAuthMsg('Enter your email above first',false);return;}
+  try{
+    firebase.auth().sendPasswordResetEmail(email)
+      .then(()=>showAuthMsg('Reset email sent — check your inbox',true))
+      .catch(e=>showAuthMsg(friendlyAuthError(e),false));
+  }catch(e){showAuthMsg('Firebase not available',false);}
+}
+
+function authSignOut(){
+  try{
+    firebase.auth().signOut().then(()=>{
+      document.getElementById('authPanel').style.display='none';
+      _authPanelOpen=false;
+    });
+  }catch(e){}
+}
+
+function friendlyAuthError(e){
+  const m={
+    'auth/user-not-found':'No account with this email.',
+    'auth/wrong-password':'Incorrect password.',
+    'auth/email-already-in-use':'Email already registered — sign in instead.',
+    'auth/weak-password':'Password needs 6+ characters.',
+    'auth/invalid-email':'Invalid email address.',
+    'auth/invalid-credential':'Invalid email or password.',
+    'auth/popup-closed-by-user':'Sign-in popup was closed.',
+    'auth/network-request-failed':'Network error — check connection.',
+    'auth/too-many-requests':'Too many attempts — wait a moment.',
+  };
+  return m[e.code]||e.message;
+}
+
+/* Watch Firebase auth state */
+try{
+  firebase.auth().onAuthStateChanged(user=>{
+    updateAuthUI(user);
+  });
+}catch(e){}
 
 /* ── Scroll reveal ── */
 const obs=new IntersectionObserver(entries=>{
@@ -655,6 +820,5 @@ window.addEventListener('scroll',()=>{
 
 loadProgress();
 </script>
-   <script src="js/auth.js"></script>
 </body>
 </html>
