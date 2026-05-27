@@ -6,195 +6,310 @@
 <title>Katakana Lesson | 日本語道</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="lesson-hiragana.html" onerror="this.remove()">
 <style>
-:root{--cream:#f4f0e8;--white:#fff;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;--red:#c0392b;--red-h:#a93226;--red-lt:rgba(192,57,43,.10);--red-glow:rgba(192,57,43,.22);--gold:#7a5a00;--gold-lt:rgba(184,146,42,.10);--teal:#1a7f6e;--teal-lt:rgba(26,127,110,.10);--border:rgba(26,21,16,.09);--border2:rgba(26,21,16,.16);--font-jp:'Noto Serif JP',serif;--font-ui:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;--ease:cubic-bezier(.25,.46,.45,.94);}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:15px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}body{font-family:var(--font-ui);background:var(--cream);color:var(--ink);overflow-x:hidden}a{text-decoration:none;color:inherit}button{font-family:var(--font-ui);cursor:pointer}::selection{background:var(--red-lt);color:var(--red-h)}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(26,21,16,.12);border-radius:3px}
+:root{--cream:#f4f0e8;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;--red:#c0392b;--red-h:#a93226;--red-lt:rgba(192,57,43,.10);--red-glow:rgba(192,57,43,.22);--gold:#7a5a00;--gold-lt:rgba(184,146,42,.10);--teal:#1a7f6e;--teal-lt:rgba(26,127,110,.10);--border:rgba(26,21,16,.09);--border2:rgba(26,21,16,.16);--ac:#4a9fd4;--ac-lt:rgba(74,159,212,.12);--font-jp:'Noto Serif JP',serif;--font-ui:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;--ease:cubic-bezier(.25,.46,.45,.94);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:15px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}body{font-family:var(--font-ui);background:var(--cream);color:var(--ink);overflow-x:hidden}a{text-decoration:none;color:inherit}button{font-family:var(--font-ui);cursor:pointer}::selection{background:var(--ac-lt)}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(26,21,16,.12);border-radius:3px}
 .nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(244,240,232,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.nav-brand{display:flex;align-items:center;gap:11px}.nav-logo{width:36px;height:36px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--font-jp);font-size:18px;font-weight:700;color:#fff;box-shadow:0 4px 12px var(--red-glow)}.nav-brand-name{font-size:14px;font-weight:600;color:var(--ink)}.nav-brand-sub{font-size:9px;color:var(--ink4);letter-spacing:.14em;font-family:var(--font-mono)}.nav-back{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink3);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:white;transition:border-color .15s}.nav-back:hover{border-color:var(--border2);color:var(--ink)}
+.nav-brand{display:flex;align-items:center;gap:11px}.nav-logo{width:36px;height:36px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--font-jp);font-size:18px;font-weight:700;color:#fff}.nav-brand-name{font-size:14px;font-weight:600;color:var(--ink)}.nav-brand-sub{font-size:9px;color:var(--ink4);letter-spacing:.14em;font-family:var(--font-mono)}.nav-back{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink3);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:white;transition:border-color .15s}.nav-back:hover{border-color:var(--border2);color:var(--ink)}
 .lesson-hero{background:linear-gradient(135deg,#0d1f2d 0%,#1a3448 100%);padding:60px 56px 56px;position:relative;overflow:hidden;}
 .lesson-hero::before{content:'ア';font-family:var(--font-jp);font-size:280px;font-weight:700;position:absolute;right:-20px;top:-40px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;user-select:none;}
-.lesson-hero-eyebrow{font-size:10px;letter-spacing:.22em;color:#4a9fd4;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:12px}
-.lesson-hero-title{font-family:var(--font-jp);font-size:clamp(32px,5vw,52px);font-weight:700;color:#f4f0e8;line-height:1.15;margin-bottom:10px}
-.lesson-hero-sub{font-size:14px;color:rgba(244,240,232,.5);line-height:1.8;max-width:560px;margin-bottom:28px}
-.hero-pill{font-size:10px;letter-spacing:.12em;padding:5px 14px;border-radius:20px;font-family:var(--font-mono);border:1px solid;display:inline-block;margin-right:8px;margin-bottom:4px}
-.pill-blue{background:rgba(74,159,212,.15);border-color:rgba(74,159,212,.3);color:#4a9fd4}
-.pill-gold{background:rgba(184,146,42,.12);border-color:rgba(184,146,42,.28);color:#b8922a}
-.lesson-content{max-width:900px;margin:0 auto;padding:48px 40px}
-.lesson-block{margin-bottom:48px}
-.block-eyebrow{font-size:9px;letter-spacing:.2em;color:#4a9fd4;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.block-eyebrow::before{content:'';width:14px;height:1px;background:#4a9fd4}
-.block-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:12px}
-.block-body{font-size:14px;color:var(--ink3);line-height:1.9}
-.block-body strong{color:var(--ink);font-weight:600}
-.kana-chart{background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:20px}
-.chart-hdr{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.chart-hdr-title{font-size:13px;font-weight:600;color:var(--ink)}.chart-hdr-count{font-size:11px;font-family:var(--font-mono);color:#4a9fd4}
-.kana-chart-grid{display:flex;flex-wrap:wrap;gap:8px;padding:20px}
+.hero-eyebrow{font-size:10px;letter-spacing:.22em;color:var(--ac);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:12px}
+.hero-title{font-family:var(--font-jp);font-size:clamp(32px,5vw,52px);font-weight:700;color:#f4f0e8;line-height:1.15;margin-bottom:10px}
+.hero-sub{font-size:14px;color:rgba(244,240,232,.5);line-height:1.8;max-width:560px;margin-bottom:28px}
+.hero-pill{font-size:10px;letter-spacing:.12em;padding:5px 14px;border-radius:20px;font-family:var(--font-mono);border:1px solid;display:inline-block;margin-right:8px;margin-bottom:4px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.75)}
+.content{max-width:960px;margin:0 auto;padding:48px 40px}
+.lb{margin-bottom:48px}
+.be{font-size:9px;letter-spacing:.2em;color:var(--ac);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}.be::before{content:'';width:14px;height:1px;background:var(--ac)}
+.bt{font-family:var(--font-jp);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.bb{font-size:14px;color:var(--ink3);line-height:1.9}.bb strong{color:var(--ink);font-weight:600}
+.kana-section{background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:20px}
+.kana-section-hdr{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.kana-section-title{font-size:13px;font-weight:600;color:var(--ink)}.kana-section-hint{font-size:11px;color:var(--ac);font-family:var(--font-mono)}
+.kana-legend{display:flex;gap:16px;padding:10px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.kana-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink3)}.kl-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.kana-group{padding:16px 20px 8px}
+.kana-group-lbl{font-size:10px;letter-spacing:.14em;color:var(--ink4);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}.kana-group-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
+.kana-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 .kc{width:72px;height:72px;border-radius:10px;border:1.5px solid var(--border);background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:border-color .15s,background .15s,transform .15s,box-shadow .15s;}
-.kc:hover{border-color:rgba(74,159,212,.5);background:rgba(74,159,212,.08);transform:translateY(-3px) scale(1.05);box-shadow:0 8px 20px rgba(74,159,212,.18)}
+.kc:hover{border-color:rgba(74,159,212,.5);background:var(--ac-lt);transform:translateY(-3px) scale(1.05);box-shadow:0 8px 20px rgba(74,159,212,.18)}
+.kc.mastered{background:var(--ac-lt);border-color:rgba(74,159,212,.5);border-width:2px}
+.kc.learning{background:var(--gold-lt);border-color:rgba(184,146,42,.4);border-width:2px}
 .kc .ch{font-family:var(--font-jp);font-size:28px;color:var(--ink);line-height:1}.kc .ro{font-size:10px;color:var(--ink3);font-family:var(--font-mono);font-weight:500}
-.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
-.info-card{background:white;border:1px solid var(--border);border-radius:14px;padding:20px}
-.info-card-icon{font-family:var(--font-jp);font-size:32px;margin-bottom:10px;line-height:1}.info-card-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}.info-card-body{font-size:12px;color:var(--ink3);line-height:1.75}
-.step-list{display:flex;flex-direction:column;gap:16px;margin-top:20px}
+.kc.mastered .ch{color:var(--ac)}.kc.mastered .ro{color:var(--ac);font-weight:600}
+.kc.learning .ch{color:#8f6e1a}.kc.learning .ro{color:#8f6e1a;font-weight:600}
+.kana-progress-row{display:flex;gap:12px;padding:12px 20px 16px;flex-wrap:wrap;border-top:1px solid var(--border)}
+.kp-item{flex:1;min-width:120px;background:var(--cream);border-radius:10px;padding:10px 14px;border:1px solid var(--border)}
+.kp-lbl{font-size:11px;color:var(--ink3);margin-bottom:6px}.kp-bar{height:5px;background:rgba(26,21,16,.08);border-radius:3px;overflow:hidden;margin-bottom:5px}.kp-fill{height:100%;border-radius:3px;transition:width .8s var(--ease)}.kp-count{font-size:12px;font-family:var(--font-mono);font-weight:600}
+.loanword-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:16px}
+.lw{background:white;border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}.lw-kata{font-family:var(--font-jp);font-size:20px;color:var(--ac);margin-bottom:4px}.lw-rom{font-size:10px;font-family:var(--font-mono);color:var(--ink4);margin-bottom:2px}.lw-en{font-size:12px;color:var(--ink2)}
+.modal-overlay{position:fixed;inset:0;z-index:9000;background:rgba(26,21,16,.65);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity .25s;pointer-events:none}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:white;border:1px solid var(--border2);border-radius:22px;width:100%;max-width:580px;max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 24px 64px rgba(26,21,16,.18);transform:translateY(16px) scale(.97);transition:transform .25s}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+.modal-close-btn{position:absolute;top:14px;right:14px;background:var(--cream);border:1px solid var(--border);color:var(--ink3);width:32px;height:32px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:2;cursor:pointer}.modal-close-btn:hover{color:var(--ac);background:var(--ac-lt)}
+.modal-hero{background:linear-gradient(135deg,#0d1f2d,#1a3448);padding:2rem 2rem 1.5rem;text-align:center;border-radius:20px 20px 0 0}
+.modal-kana-big{font-family:var(--font-jp);font-size:90px;font-weight:700;line-height:1;display:block;margin-bottom:.25rem;color:#f4f0e8}
+.modal-romaji{font-family:var(--font-mono);font-size:22px;letter-spacing:4px;margin-bottom:.5rem;color:var(--ac)}
+.modal-type-badge{font-size:9px;letter-spacing:.2em;padding:3px 13px;border-radius:20px;font-family:var(--font-mono);display:inline-block;background:var(--ac-lt);color:var(--ac);border:1px solid rgba(74,159,212,.3)}
+.modal-body{padding:1.25rem 1.75rem}
+.modal-audio-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--ac-lt);border:1px solid rgba(74,159,212,.25);border-radius:10px;padding:.75rem 1rem;cursor:pointer;transition:background .2s;margin-bottom:1rem}
+.modal-audio-btn:hover,.modal-audio-btn.playing{background:rgba(74,159,212,.22)}
+.modal-audio-icon{width:28px;height:28px;background:var(--ac);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;color:#fff}
+.modal-audio-label{font-size:12px;font-weight:600;color:var(--ink)}.modal-audio-sub{font-size:9px;color:var(--ac);letter-spacing:.1em;font-family:var(--font-mono);margin-top:2px}
+.modal-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1rem}
+.modal-sec-title{font-size:9px;letter-spacing:.2em;color:var(--ink4);font-family:var(--font-mono);margin-bottom:.5rem;text-transform:uppercase}
+.modal-sec-body{font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:.75rem}
+.modal-mnemonic{color:var(--gold);font-style:italic}
+.stroke-box{background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:120px;margin-bottom:.75rem}
+.stroke-kana{font-family:var(--font-jp);font-size:60px;line-height:1;color:var(--ink)}.stroke-hint{font-size:9px;color:var(--ink4);font-family:var(--font-mono);letter-spacing:.1em}
+.modal-examples{display:flex;flex-direction:column;gap:5px;margin-bottom:.75rem}
+.modal-ex-row{background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-family:var(--font-jp);font-size:13px;color:var(--ink2)}
+.modal-yt-btn{display:flex;align-items:center;gap:8px;background:var(--ac-lt);border:1px solid rgba(74,159,212,.2);border-radius:10px;padding:.6rem 1rem;cursor:pointer;width:100%;margin-bottom:.75rem}
+.modal-yt-btn:hover{background:rgba(74,159,212,.2)}
+.modal-yt-icon{width:24px;height:24px;background:var(--ac);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;flex-shrink:0}
+.modal-yt-label{font-size:11px;font-weight:600;color:var(--ink)}
+.modal-status-row{display:flex;gap:8px;margin-top:.5rem}
+.mstatus-btn{flex:1;padding:9px;border-radius:8px;font-size:10px;letter-spacing:.12em;border:1px solid;cursor:pointer;font-family:var(--font-mono);transition:background .15s}
+.s-learning{border-color:rgba(184,146,42,.3);color:var(--gold);background:var(--gold-lt)}
+.s-mastered{border-color:var(--ac);color:#fff;background:var(--ac)}.s-mastered:hover{background:#3a8fc4}
+.s-reset{border-color:var(--border2);color:var(--ink3);background:var(--cream)}
+.step-list{display:flex;flex-direction:column;gap:14px;margin-top:20px}
 .step{display:flex;gap:16px;background:white;border:1px solid var(--border);border-radius:14px;padding:18px 20px}
-.step-num{width:32px;height:32px;border-radius:8px;background:rgba(74,159,212,.12);color:#4a9fd4;font-family:var(--font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-body-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}.step-body-text{font-size:12px;color:var(--ink3);line-height:1.75}
-.loanword-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:16px}
-.lw{background:white;border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
-.lw-kata{font-family:var(--font-jp);font-size:22px;color:#4a9fd4;margin-bottom:4px}
-.lw-rom{font-size:11px;font-family:var(--font-mono);color:var(--ink3);margin-bottom:2px}
-.lw-en{font-size:12px;color:var(--ink2)}
-.yt-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(74,159,212,.1);border:1px solid rgba(74,159,212,.25);color:#4a9fd4;padding:11px 20px;border-radius:10px;font-size:12px;font-weight:600;letter-spacing:.06em;font-family:var(--font-mono);transition:background .15s;margin-top:14px;margin-right:8px}
+.step-num{width:32px;height:32px;border-radius:8px;background:var(--ac-lt);color:var(--ac);font-family:var(--font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}.step-text{font-size:12px;color:var(--ink3);line-height:1.75}
+.yt-btn{display:inline-flex;align-items:center;gap:10px;background:var(--ac-lt);border:1px solid rgba(74,159,212,.25);color:var(--ac);padding:11px 20px;border-radius:10px;font-size:12px;font-weight:600;letter-spacing:.06em;font-family:var(--font-mono);transition:background .15s;margin-top:14px;margin-right:8px}
 .yt-btn:hover{background:rgba(74,159,212,.2)}
-.dashboard-cta{background:linear-gradient(135deg,#0d1f2d,#1a3448);border-radius:18px;padding:32px;text-align:center;margin-top:48px;}
-.dashboard-cta-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:8px}
-.dashboard-cta-body{font-size:13px;color:rgba(244,240,232,.5);margin-bottom:22px;line-height:1.7}
-.dashboard-cta-btn{display:inline-flex;align-items:center;gap:8px;background:#4a9fd4;color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:13px;font-weight:600;transition:background .15s}
-.dashboard-cta-btn:hover{background:#3a8fc4}
-@media(max-width:700px){.lesson-hero{padding:40px 24px 36px}.lesson-content{padding:32px 20px}}
+.cta{background:linear-gradient(135deg,#0d1f2d,#1a3448);border-radius:18px;padding:32px;text-align:center;margin-top:48px;}
+.cta-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:8px}
+.cta-body{font-size:13px;color:rgba(244,240,232,.5);margin-bottom:22px;line-height:1.7}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--ac);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:13px;font-weight:600}
+.toast-container{position:fixed;bottom:1.25rem;right:1.25rem;z-index:9999;display:flex;flex-direction:column;gap:7px}
+.toast{background:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 14px;font-size:12px;color:#f4f0e8;max-width:280px;animation:toastIn .3s ease forwards}
+.toast.success{border-color:rgba(74,124,63,.5)}.toast.error{border-color:rgba(192,57,43,.5)}
+@keyframes toastIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes toastOut{from{opacity:1}to{transform:translateX(110%);opacity:0}}
+@media(max-width:700px){.lesson-hero{padding:40px 24px 36px}.content{padding:32px 20px}.modal-cols{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<div class="toast-container" id="toastContainer"></div>
+<div class="modal-overlay" id="kanaModal">
+  <div class="modal-box">
+    <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    <div class="modal-hero">
+      <span class="modal-kana-big" id="mk-char">ア</span>
+      <div class="modal-romaji" id="mk-rom">A</div>
+      <span class="modal-type-badge">KATAKANA</span>
+    </div>
+    <div class="modal-body">
+      <button class="modal-audio-btn" id="mk-audio-btn" onclick="playAudio()">
+        <div class="modal-audio-icon">▶</div>
+        <div><div class="modal-audio-label" id="mk-audio-label">Play pronunciation</div><div class="modal-audio-sub">CLICK TO HEAR · JAPANESE TTS</div></div>
+      </button>
+      <div class="modal-cols">
+        <div>
+          <div class="modal-sec-title">How to pronounce</div><div class="modal-sec-body" id="mk-pronunciation"></div>
+          <div class="modal-sec-title">Mouth position</div><div class="modal-sec-body" id="mk-mouth"></div>
+          <div class="modal-sec-title">💡 Memory tip</div><div class="modal-sec-body modal-mnemonic" id="mk-mnemonic"></div>
+          <div class="modal-sec-title">Example words</div><div class="modal-examples" id="mk-examples"></div>
+        </div>
+        <div>
+          <div class="modal-sec-title">Stroke order</div>
+          <div class="stroke-box"><div class="stroke-kana" id="mk-stroke"></div><div class="stroke-hint" id="mk-strokes"></div></div>
+          <button class="modal-yt-btn" id="mk-yt"><div class="modal-yt-icon">▶</div><div><div class="modal-yt-label">Stroke order &amp; pronunciation</div><div style="font-size:9px;color:var(--ac);font-family:var(--font-mono)">OPEN YOUTUBE ↗</div></div></button>
+        </div>
+      </div>
+      <div class="modal-status-row">
+        <button class="mstatus-btn s-learning" onclick="setStatus('learning')">Mark learning</button>
+        <button class="mstatus-btn s-mastered" onclick="setStatus('mastered')">✓ Mastered +5XP</button>
+        <button class="mstatus-btn s-reset" onclick="setStatus('none')">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
 <nav class="nav">
-  <a href="index.html" class="nav-brand">
-    <div class="nav-logo">道</div>
-    <div><div class="nav-brand-name">日本語道</div><div class="nav-brand-sub">LESSON</div></div>
-  </a>
+  <a href="index.html" class="nav-brand"><div class="nav-logo">道</div><div><div class="nav-brand-name">日本語道</div><div class="nav-brand-sub">LESSON</div></div></a>
   <a href="dashboard.html" class="nav-back">← Back to Dashboard</a>
 </nav>
-
 <div class="lesson-hero">
-  <div class="lesson-hero-eyebrow">Stage 1 · Lesson 2 of 6</div>
-  <div class="lesson-hero-title">Katakana<br>カタカナ</div>
-  <div class="lesson-hero-sub">46 characters for foreign words, loanwords, and onomatopoeia. If you know hiragana, katakana takes half the time — the sounds are identical.</div>
-  <span class="hero-pill pill-blue">46 characters</span>
-  <span class="hero-pill pill-gold">+5 XP each</span>
-  <span class="hero-pill" style="background:rgba(26,127,110,.12);border:1px solid rgba(26,127,110,.3);color:var(--teal)">Stage 1 — Active</span>
+  <div class="hero-eyebrow">Stage 1 · Lesson 2 of 6</div>
+  <div class="hero-title">Katakana<br>カタカナ</div>
+  <div class="hero-sub">46 characters for foreign words and loanwords. Same sounds as hiragana — new shapes. Click any character to study it inline.</div>
+  <span class="hero-pill">46 characters</span><span class="hero-pill">+5 XP each</span><span class="hero-pill">Stage 1 — Active</span>
 </div>
-
-<div class="lesson-content">
-
-  <div class="lesson-block">
-    <div class="block-eyebrow">What is it</div>
-    <div class="block-title">What is Katakana?</div>
-    <div class="block-body">
-      Katakana is the second of Japan's phonetic alphabets. It has the <strong>exact same 46 sounds as hiragana</strong> — only the shapes differ. Think of hiragana as cursive and katakana as print.<br><br>
-      Katakana is used for <strong>foreign loanwords</strong> (コーヒー = coffee), foreign names, scientific terms, onomatopoeia, and for emphasis (like italics in English).<br><br>
-      Once you know hiragana, katakana is much faster to learn because your brain already knows all the sounds — you just need new shapes.
-    </div>
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="info-card-icon">ア</div>
-        <div class="info-card-title">Same sounds, new shapes</div>
-        <div class="info-card-body">ア = "ah" (same as あ). Every sound is identical to hiragana — only the visual form changes. Angular vs. rounded.</div>
+<div class="content">
+  <div class="lb">
+    <div class="be">Practice</div>
+    <div class="bt">All 46 katakana — click any character</div>
+    <div class="bb">Your progress saves automatically. Blue = mastered, gold = learning.</div>
+    <div class="kana-section">
+      <div class="kana-section-hdr"><span class="kana-section-title">Katakana tracker</span><span class="kana-section-hint" id="masterCount">0 / 46 mastered</span></div>
+      <div class="kana-legend">
+        <div class="kana-legend-item"><div class="kl-dot" style="background:var(--ac-lt);border:2px solid rgba(74,159,212,.4)"></div>Mastered +5 XP</div>
+        <div class="kana-legend-item"><div class="kl-dot" style="background:var(--gold-lt);border:2px solid rgba(184,146,42,.4)"></div>Learning</div>
+        <div class="kana-legend-item"><div class="kl-dot" style="background:white;border:1.5px solid var(--border)"></div>Not started</div>
       </div>
-      <div class="info-card">
-        <div class="info-card-icon">コ</div>
-        <div class="info-card-title">Read foreign words</div>
-        <div class="info-card-body">コーヒー (koohii) = coffee. マクドナルド = McDonald's. Katakana unlocks an entire layer of Japanese vocabulary instantly.</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-icon">ン</div>
-        <div class="info-card-title">Menus and signage</div>
-        <div class="info-card-body">Most Japanese menus, product labels, and brand names use katakana. Mastering it means you can read real-world Japanese immediately.</div>
+      <div id="kanaGridWrap"></div>
+      <div class="kana-progress-row">
+        <div class="kp-item"><div class="kp-lbl">Mastered</div><div class="kp-bar"><div class="kp-fill" id="masterBar" style="width:0%;background:var(--ac)"></div></div><div class="kp-count" style="color:var(--ac)" id="masterCountBar">0 / 46</div></div>
+        <div class="kp-item"><div class="kp-lbl">Learning</div><div class="kp-bar"><div class="kp-fill" id="learningBar" style="width:0%;background:var(--gold)"></div></div><div class="kp-count" style="color:var(--gold)" id="learningCountBar">0 / 46</div></div>
       </div>
     </div>
   </div>
-
-  <div class="lesson-block">
-    <div class="block-eyebrow">Examples</div>
-    <div class="block-title">Loanwords you already know</div>
-    <div class="block-body">These are real Japanese words written in katakana. If you know the English, you already know the Japanese — you just need to read the characters.</div>
+  <div class="lb">
+    <div class="be">Loanwords you already know</div>
+    <div class="bt">Read these right now</div>
+    <div class="bb">Once you know katakana, you can read hundreds of English loanwords in Japanese instantly.</div>
     <div class="loanword-grid">
       <div class="lw"><div class="lw-kata">コーヒー</div><div class="lw-rom">koohii</div><div class="lw-en">coffee</div></div>
-      <div class="lw"><div class="lw-kata">テレビ</div><div class="lw-rom">terebi</div><div class="lw-en">television</div></div>
-      <div class="lw"><div class="lw-kata">パソコン</div><div class="lw-rom">pasokon</div><div class="lw-en">PC / computer</div></div>
+      <div class="lw"><div class="lw-kata">テレビ</div><div class="lw-rom">terebi</div><div class="lw-en">TV</div></div>
       <div class="lw"><div class="lw-kata">スマホ</div><div class="lw-rom">sumaho</div><div class="lw-en">smartphone</div></div>
-      <div class="lw"><div class="lw-kata">アイスクリーム</div><div class="lw-rom">aisu kuriimu</div><div class="lw-en">ice cream</div></div>
+      <div class="lw"><div class="lw-kata">パソコン</div><div class="lw-rom">pasokon</div><div class="lw-en">PC</div></div>
       <div class="lw"><div class="lw-kata">レストラン</div><div class="lw-rom">resutoran</div><div class="lw-en">restaurant</div></div>
-      <div class="lw"><div class="lw-kata">バス</div><div class="lw-rom">basu</div><div class="lw-en">bus</div></div>
       <div class="lw"><div class="lw-kata">ホテル</div><div class="lw-rom">hoteru</div><div class="lw-en">hotel</div></div>
+      <div class="lw"><div class="lw-kata">アイスクリーム</div><div class="lw-rom">aisu kuriimu</div><div class="lw-en">ice cream</div></div>
+      <div class="lw"><div class="lw-kata">バス</div><div class="lw-rom">basu</div><div class="lw-en">bus</div></div>
     </div>
   </div>
-
-  <div class="lesson-block">
-    <div class="block-eyebrow">Practice</div>
-    <div class="block-title">All 46 katakana</div>
-    <div class="kana-chart">
-      <div class="chart-hdr">
-        <span class="chart-hdr-title">Katakana — all 46 base characters</span>
-        <span class="chart-hdr-count">Study in dashboard Kana Tracker →</span>
-      </div>
-      <div class="kana-chart-grid">
-        <div class="kc"><div class="ch">ア</div><div class="ro">a</div></div>
-        <div class="kc"><div class="ch">イ</div><div class="ro">i</div></div>
-        <div class="kc"><div class="ch">ウ</div><div class="ro">u</div></div>
-        <div class="kc"><div class="ch">エ</div><div class="ro">e</div></div>
-        <div class="kc"><div class="ch">オ</div><div class="ro">o</div></div>
-        <div class="kc"><div class="ch">カ</div><div class="ro">ka</div></div>
-        <div class="kc"><div class="ch">キ</div><div class="ro">ki</div></div>
-        <div class="kc"><div class="ch">ク</div><div class="ro">ku</div></div>
-        <div class="kc"><div class="ch">ケ</div><div class="ro">ke</div></div>
-        <div class="kc"><div class="ch">コ</div><div class="ro">ko</div></div>
-        <div class="kc"><div class="ch">サ</div><div class="ro">sa</div></div>
-        <div class="kc"><div class="ch">シ</div><div class="ro">shi</div></div>
-        <div class="kc"><div class="ch">ス</div><div class="ro">su</div></div>
-        <div class="kc"><div class="ch">セ</div><div class="ro">se</div></div>
-        <div class="kc"><div class="ch">ソ</div><div class="ro">so</div></div>
-        <div class="kc"><div class="ch">タ</div><div class="ro">ta</div></div>
-        <div class="kc"><div class="ch">チ</div><div class="ro">chi</div></div>
-        <div class="kc"><div class="ch">ツ</div><div class="ro">tsu</div></div>
-        <div class="kc"><div class="ch">テ</div><div class="ro">te</div></div>
-        <div class="kc"><div class="ch">ト</div><div class="ro">to</div></div>
-        <div class="kc"><div class="ch">ナ</div><div class="ro">na</div></div>
-        <div class="kc"><div class="ch">ニ</div><div class="ro">ni</div></div>
-        <div class="kc"><div class="ch">ヌ</div><div class="ro">nu</div></div>
-        <div class="kc"><div class="ch">ネ</div><div class="ro">ne</div></div>
-        <div class="kc"><div class="ch">ノ</div><div class="ro">no</div></div>
-        <div class="kc"><div class="ch">ハ</div><div class="ro">ha</div></div>
-        <div class="kc"><div class="ch">ヒ</div><div class="ro">hi</div></div>
-        <div class="kc"><div class="ch">フ</div><div class="ro">fu</div></div>
-        <div class="kc"><div class="ch">ヘ</div><div class="ro">he</div></div>
-        <div class="kc"><div class="ch">ホ</div><div class="ro">ho</div></div>
-        <div class="kc"><div class="ch">マ</div><div class="ro">ma</div></div>
-        <div class="kc"><div class="ch">ミ</div><div class="ro">mi</div></div>
-        <div class="kc"><div class="ch">ム</div><div class="ro">mu</div></div>
-        <div class="kc"><div class="ch">メ</div><div class="ro">me</div></div>
-        <div class="kc"><div class="ch">モ</div><div class="ro">mo</div></div>
-        <div class="kc"><div class="ch">ヤ</div><div class="ro">ya</div></div>
-        <div class="kc"><div class="ch">ユ</div><div class="ro">yu</div></div>
-        <div class="kc"><div class="ch">ヨ</div><div class="ro">yo</div></div>
-        <div class="kc"><div class="ch">ラ</div><div class="ro">ra</div></div>
-        <div class="kc"><div class="ch">リ</div><div class="ro">ri</div></div>
-        <div class="kc"><div class="ch">ル</div><div class="ro">ru</div></div>
-        <div class="kc"><div class="ch">レ</div><div class="ro">re</div></div>
-        <div class="kc"><div class="ch">ロ</div><div class="ro">ro</div></div>
-        <div class="kc"><div class="ch">ワ</div><div class="ro">wa</div></div>
-        <div class="kc"><div class="ch">ヲ</div><div class="ro">wo</div></div>
-        <div class="kc"><div class="ch">ン</div><div class="ro">n</div></div>
-      </div>
-    </div>
+  <div class="lb">
+    <div class="be">Resources</div>
+    <div class="bt">Recommended YouTube</div>
+    <button class="yt-btn" onclick="openYT('learn all katakana 1 hour complete guide')">▶ All Katakana in 1 Hour</button>
+    <button class="yt-btn" onclick="openYT('katakana stroke order all characters')">▶ Stroke Order Guide</button>
+    <button class="yt-btn" onclick="openYT('katakana loanwords practice Japanese')">▶ Loanword Practice</button>
   </div>
-
-  <div class="lesson-block">
-    <div class="block-eyebrow">Resources</div>
-    <div class="block-title">Recommended YouTube lessons</div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px">
-      <button class="yt-btn" onclick="openYT('learn all katakana 1 hour complete guide')">▶ All Katakana in 1 Hour</button>
-      <button class="yt-btn" onclick="openYT('katakana stroke order all characters')">▶ Stroke Order Guide</button>
-      <button class="yt-btn" onclick="openYT('katakana loanwords practice Japanese')">▶ Loanword Practice</button>
-    </div>
+  <div class="cta">
+    <div class="cta-title">XP syncs to your dashboard</div>
+    <div class="cta-body">Every mastered character adds +5 XP. Sign in to sync across devices.</div>
+    <button class="cta-btn" onclick="location.href='dashboard.html'">View Dashboard →</button>
   </div>
-
-  <div class="dashboard-cta">
-    <div class="dashboard-cta-title">Practice in the Kana Tracker</div>
-    <div class="dashboard-cta-body">Switch to the Katakana tab in the dashboard. Click any character to study it with audio, stroke order, and mnemonic. +5 XP for each mastered.</div>
-    <button class="dashboard-cta-btn" onclick="location.href='dashboard.html#kana'">Open Kana Tracker →</button>
-  </div>
-
 </div>
-<script>function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}</script>
+<script>
+const KATAKANA=[
+ {char:'ア',rom:'a',strokes:2,group:'VOWELS',pronunciation:'Same as hiragana あ — open "ah".',mouth:'Open wide, jaw dropped.',mnemonic:'Looks like the top of あ, or an A-frame.',examples:['アイス (aisu) — ice cream','アメリカ (Amerika) — America','アニメ (anime) — anime']},
+ {char:'イ',rom:'i',strokes:2,group:'VOWELS',pronunciation:'Same as hiragana い — "ee".',mouth:'Spread lips wide.',mnemonic:'Two diagonal strokes like two leaning I\'s.',examples:['イギリス (Igirisu) — England','イタリア (Italia) — Italy','イヤホン (iyahon) — earphones']},
+ {char:'ウ',rom:'u',strokes:3,group:'VOWELS',pronunciation:'Same as hiragana う — soft "oo".',mouth:'Nearly flat lips.',mnemonic:'Looks like a U with a hat.',examples:['ウイルス (uirusu) — virus','ウール (uuru) — wool','ウェブ (webu) — web']},
+ {char:'エ',rom:'e',strokes:3,group:'VOWELS',pronunciation:'Same as hiragana え — "eh".',mouth:'Half-open jaw.',mnemonic:'I-beam shape like the letter E rotated.',examples:['エアコン (eakon) — air conditioner','エレベーター (erebeetaa) — elevator','エネルギー (enerugii) — energy']},
+ {char:'オ',rom:'o',strokes:3,group:'VOWELS',pronunciation:'Same as hiragana お — "oh".',mouth:'Rounded lips.',mnemonic:'Plus sign with a tail — Oh!',examples:['オレンジ (orenji) — orange','オーストラリア (Oosutoraria) — Australia','オフィス (ofisu) — office']},
+ {char:'カ',rom:'ka',strokes:2,group:'K-ROW',pronunciation:'"ka" — hard K + "ah".',mouth:'Back of tongue, then open.',mnemonic:'Looks like a karate chop — KArate!',examples:['カメラ (kamera) — camera','カフェ (kafe) — cafe','カレー (karee) — curry']},
+ {char:'キ',rom:'ki',strokes:3,group:'K-ROW',pronunciation:'"ki" — hard K + "ee".',mouth:'Tongue back, spread lips.',mnemonic:'Three lines like a KEY rack.',examples:['キッチン (kicchin) — kitchen','キログラム (kiroguramu) — kilogram','キャンプ (kyanpu) — camping']},
+ {char:'ク',rom:'ku',strokes:2,group:'K-ROW',pronunciation:'"ku" — hard K + "oo".',mouth:'Tongue back, brief rounded.',mnemonic:'Looks like an angle bracket — KUick!',examples:['クラス (kurasu) — class','クリーム (kuriimu) — cream','クリスマス (kurisumasu) — Christmas']},
+ {char:'ケ',rom:'ke',strokes:3,group:'K-ROW',pronunciation:'"ke" — hard K + "eh".',mouth:'Tongue back, half-open.',mnemonic:'KEttle handle shape.',examples:['ケーキ (keeki) — cake','ケース (keesu) — case','ケータイ (keetai) — mobile phone']},
+ {char:'コ',rom:'ko',strokes:2,group:'K-ROW',pronunciation:'"ko" — hard K + "oh".',mouth:'Tongue back, rounded lips.',mnemonic:'Two horizontal lines like a COuch.',examples:['コーヒー (koohii) — coffee','コンピューター (konpyuutaa) — computer','コート (kooto) — coat']},
+ {char:'サ',rom:'sa',strokes:3,group:'S-ROW',pronunciation:'"sa" — S + "ah".',mouth:'Front tongue, then open.',mnemonic:'Person running — SAy!',examples:['サービス (saabisu) — service','サッカー (sakkaa) — soccer','サンドウィッチ (sandoicchi) — sandwich']},
+ {char:'シ',rom:'shi',strokes:3,group:'S-ROW',pronunciation:'"shi" — soft SH + "ee".',mouth:'Tongue slightly curved.',mnemonic:'Three dots and a line — SHEep dots.',examples:['シャツ (shatsu) — shirt','シネマ (shinema) — cinema','シーズン (shiizun) — season']},
+ {char:'ス',rom:'su',strokes:2,group:'S-ROW',pronunciation:'"su" — S + brief "oo".',mouth:'Teeth close, brief protrusion.',mnemonic:'A straw going down — SUck!',examples:['スポーツ (supootsu) — sports','スマホ (sumaho) — smartphone','スーパー (suupaa) — supermarket']},
+ {char:'セ',rom:'se',strokes:3,group:'S-ROW',pronunciation:'"se" — S + "eh".',mouth:'Front tongue, half-open.',mnemonic:'A dollar SEction sign.',examples:['セーター (seetaa) — sweater','センター (sentaa) — center','セール (seeru) — sale']},
+ {char:'ソ',rom:'so',strokes:2,group:'S-ROW',pronunciation:'"so" — S + "oh".',mouth:'Front tongue, rounded.',mnemonic:'Two diagonal strokes like a wave — SOnic!',examples:['ソファ (sofa) — sofa','ソース (soosu) — sauce','ソーダ (sooda) — soda']},
+ {char:'タ',rom:'ta',strokes:3,group:'T-ROW',pronunciation:'"ta" — T + "ah".',mouth:'Tongue tip at ridge, then open.',mnemonic:'TAble top with a leg.',examples:['タクシー (takushii) — taxi','タオル (taoru) — towel','タイム (taimu) — time']},
+ {char:'チ',rom:'chi',strokes:3,group:'T-ROW',pronunciation:'"chi" — soft CH + "ee".',mouth:'Tongue forward, gentle affricate.',mnemonic:'CHI-p cutting tool shape.',examples:['チーズ (chiizu) — cheese','チョコレート (chokoreeto) — chocolate','チャンネル (channeru) — channel']},
+ {char:'ツ',rom:'tsu',strokes:3,group:'T-ROW',pronunciation:'"tsu" — TS cluster + brief "oo".',mouth:'Tongue tip at teeth.',mnemonic:'Three dots and curve — TSUnami with dots.',examples:['ツアー (tsuaa) — tour','ツール (tsuuru) — tool','ツナ (tsuna) — tuna']},
+ {char:'テ',rom:'te',strokes:3,group:'T-ROW',pronunciation:'"te" — T + "eh".',mouth:'Tongue tip at ridge.',mnemonic:'TElevision antenna.',examples:['テレビ (terebi) — TV','テーブル (teburu) — table','テスト (tesuto) — test']},
+ {char:'ト',rom:'to',strokes:2,group:'T-ROW',pronunciation:'"to" — T + "oh".',mouth:'Tongue tip, rounded lips.',mnemonic:'TOtem pole with a base.',examples:['トイレ (toire) — toilet','トマト (tomato) — tomato','トレーニング (toreeningu) — training']},
+ {char:'ナ',rom:'na',strokes:2,group:'N-ROW',pronunciation:'"na" — nasal N + "ah".',mouth:'Nasal, tongue tip at ridge.',mnemonic:'NArrow cross shape.',examples:['ナイフ (naifu) — knife','ナンバー (nanbaa) — number','ナチュラル (nachuraru) — natural']},
+ {char:'ニ',rom:'ni',strokes:2,group:'N-ROW',pronunciation:'"ni" — nasal N + "ee".',mouth:'Nasal, tongue tip.',mnemonic:'Two horizontal lines — NI is twice.',examples:['ニュース (nyuusu) — news','ニックネーム (nikkuneemu) — nickname','ニンニク (ninniku) — garlic']},
+ {char:'ヌ',rom:'nu',strokes:2,group:'N-ROW',pronunciation:'"nu" — nasal N + "oo".',mouth:'Nasal, then rounded.',mnemonic:'NUdging an X shape.',examples:['ヌードル (nuudoru) — noodle','ヌード (nuudo) — nude/noodle']},
+ {char:'ネ',rom:'ne',strokes:4,group:'N-ROW',pronunciation:'"ne" — nasal N + "eh".',mouth:'Nasal, half-open.',mnemonic:'A NEstling shape with a cross.',examples:['ネクタイ (nekutai) — necktie','ネット (netto) — internet','ネーム (neemu) — name']},
+ {char:'ノ',rom:'no',strokes:1,group:'N-ROW',pronunciation:'"no" — nasal N + "oh".',mouth:'Nasal, rounded.',mnemonic:'One diagonal stroke — a NOse pointing.',examples:['ノート (nooto) — notebook','ノック (nokku) — knock','ノルウェー (noruwee) — Norway']},
+ {char:'ハ',rom:'ha',strokes:2,group:'H-ROW',pronunciation:'"ha" — breathy H + "ah".',mouth:'Open, breath from throat.',mnemonic:'Two strokes like HAving an argument.',examples:['ハンバーガー (hanbaagaa) — hamburger','ハーフ (haafu) — half','ハート (haato) — heart']},
+ {char:'ヒ',rom:'hi',strokes:2,group:'H-ROW',pronunciation:'"hi" — H + "ee".',mouth:'Soft breath, spread lips.',mnemonic:'A HIll with a small bump.',examples:['ヒーター (hiitaa) — heater','ヒント (hinto) — hint','ヒーロー (hiiroo) — hero']},
+ {char:'フ',rom:'fu',strokes:1,group:'H-ROW',pronunciation:'"fu" — bilabial, air between lips.',mouth:'Nearly closed lips, no teeth.',mnemonic:'One hooked stroke — FUji peak!',examples:['フランス (Furansu) — France','フィルム (firumu) — film','フード (fuudo) — food/hood']},
+ {char:'ヘ',rom:'he',strokes:1,group:'H-ROW',pronunciation:'"he" — H + "eh".',mouth:'Open, breathy.',mnemonic:'One peak — a HEadband.',examples:['ヘルメット (herumetto) — helmet','ヘア (hea) — hair','ヘルプ (herupu) — help']},
+ {char:'ホ',rom:'ho',strokes:4,group:'H-ROW',pronunciation:'"ho" — H + "oh".',mouth:'Open, rounded.',mnemonic:'HOly cross shape!',examples:['ホテル (hoteru) — hotel','ホーム (hoomu) — home/platform','ホース (hoosu) — hose']},
+ {char:'マ',rom:'ma',strokes:2,group:'M-ROW',pronunciation:'"ma" — M + "ah".',mouth:'Lips together, then open.',mnemonic:'MArket stall frame.',examples:['マクドナルド (Makudonarudo) — McDonald\'s','マスク (masuku) — mask','マンション (manshon) — apartment']},
+ {char:'ミ',rom:'mi',strokes:3,group:'M-ROW',pronunciation:'"mi" — M + "ee".',mouth:'Lips together, then spread.',mnemonic:'Three lines like MIrror steps.',examples:['ミルク (miruku) — milk','ミュージック (myuujikku) — music','ミリ (miri) — millimeter']},
+ {char:'ム',rom:'mu',strokes:2,group:'M-ROW',pronunciation:'"mu" — M + "oo".',mouth:'Lips together, then round.',mnemonic:'MUd house roof.',examples:['ムード (muudo) — mood','ムービー (muubii) — movie','ボリューム (boryuumu) — volume']},
+ {char:'メ',rom:'me',strokes:2,group:'M-ROW',pronunciation:'"me" — M + "eh".',mouth:'Lips together, half-open.',mnemonic:'MEtal X cut.',examples:['メニュー (menyuu) — menu','メール (meeru) — email','メディア (media) — media']},
+ {char:'モ',rom:'mo',strokes:3,group:'M-ROW',pronunciation:'"mo" — M + "oh".',mouth:'Lips together, rounded.',mnemonic:'Three lines like a MOoring post.',examples:['モデル (moderu) — model','モーター (mootaa) — motor','モノレール (monoreeru) — monorail']},
+ {char:'ヤ',rom:'ya',strokes:3,group:'Y-ROW',pronunciation:'"ya" — Y glide + "ah".',mouth:'Start "ee", glide open.',mnemonic:'YArd fence gate.',examples:['ヤード (yaado) — yard','ヤング (yangu) — young']},
+ {char:'ユ',rom:'yu',strokes:2,group:'Y-ROW',pronunciation:'"yu" — Y glide + "oo".',mouth:'Start "ee", glide rounded.',mnemonic:'U shape in a box — YUkon.',examples:['ユニフォーム (yunifoomu) — uniform','ユーモア (yuumoa) — humor','ユーザー (yuuzaa) — user']},
+ {char:'ヨ',rom:'yo',strokes:3,group:'Y-ROW',pronunciation:'"yo" — Y glide + "oh".',mouth:'Start "ee", glide rounded.',mnemonic:'Three lines — YOga blocks.',examples:['ヨーグルト (yooguruto) — yogurt','ヨーロッパ (Yooroppa) — Europe','ヨット (yotto) — yacht']},
+ {char:'ラ',rom:'ra',strokes:2,group:'R-ROW',pronunciation:'"ra" — flap R + "ah".',mouth:'Quick tongue flap, then open.',mnemonic:'RA-cket handle.',examples:['ラジオ (rajio) — radio','ラーメン (raamen) — ramen','ランチ (ranchi) — lunch']},
+ {char:'リ',rom:'ri',strokes:2,group:'R-ROW',pronunciation:'"ri" — flap R + "ee".',mouth:'Quick flap, then spread.',mnemonic:'Two strokes like a RIver.',examples:['リスト (risuto) — list','リモコン (rimokon) — remote control','リサイクル (risaikuru) — recycle']},
+ {char:'ル',rom:'ru',strokes:2,group:'R-ROW',pronunciation:'"ru" — flap R + "oo".',mouth:'Quick flap, then rounded.',mnemonic:'RU-nning legs.',examples:['ルール (ruuru) — rule','ルーム (ruumu) — room','ルーツ (ruutsu) — roots']},
+ {char:'レ',rom:'re',strokes:1,group:'R-ROW',pronunciation:'"re" — flap R + "eh".',mouth:'Quick flap, half-open.',mnemonic:'One diagonal — REflection.',examples:['レストラン (resutoran) — restaurant','レポート (repooto) — report','レベル (reberu) — level']},
+ {char:'ロ',rom:'ro',strokes:3,group:'R-ROW',pronunciation:'"ro" — flap R + "oh".',mouth:'Quick flap, rounded.',mnemonic:'ROund square box.',examples:['ロボット (robotto) — robot','ロック (rokku) — lock/rock','ローマ (Rooma) — Rome']},
+ {char:'ワ',rom:'wa',strokes:2,group:'W+N',pronunciation:'"wa" — W glide + "ah".',mouth:'Start rounded, then open.',mnemonic:'WAvy two strokes.',examples:['ワイン (wain) — wine','ワイファイ (waifai) — WiFi','ワクチン (wakuchin) — vaccine']},
+ {char:'ヲ',rom:'wo',strokes:3,group:'W+N',pronunciation:'"wo/o" — object particle.',mouth:'Brief W, then open.',mnemonic:'WO — object particle in katakana.',examples:['ヲタク (wotaku) — otaku (stylistic use)']},
+ {char:'ン',rom:'n',strokes:1,group:'W+N',pronunciation:'Syllabic N — nasal sound.',mouth:'Nasal, varies by context.',mnemonic:'One diagonal — reversed "so".',examples:['パン (pan) — bread','ライン (rain) — line','ナンバー (nanbaa) — number']},
+];
+let progress={},currentKana=null;
+function loadProgress(){try{progress=JSON.parse(localStorage.getItem('jpProgress_kata')||'{}');}catch(e){progress={};}}
+function saveProgress(){
+  localStorage.setItem('jpProgress_kata',JSON.stringify(progress));
+  try{const main=JSON.parse(localStorage.getItem('jpProgress')||'{}');if(!main.katakana)main.katakana={};Object.assign(main.katakana,progress);const hM=Object.values(main.hiragana||{}).filter(v=>v==='mastered').length;const kM=Object.values(main.katakana||{}).filter(v=>v==='mastered').length;main.xp=(hM+kM)*5+Object.values(main.vocab||{}).filter(v=>v==='known').length*10;if(main.xp>=500&&main.stage<2)main.stage=2;localStorage.setItem('jpProgress',JSON.stringify(main));}catch(e){}
+}
+function buildGrid(){
+  const wrap=document.getElementById('kanaGridWrap');wrap.innerHTML='';
+  const groups=[...new Set(KATAKANA.map(k=>k.group))];
+  groups.forEach(g=>{
+    const items=KATAKANA.filter(k=>k.group===g);
+    const div=document.createElement('div');div.className='kana-group';
+    div.innerHTML='<div class="kana-group-lbl">'+g+'</div><div class="kana-grid"></div>';
+    wrap.appendChild(div);
+    const grid=div.querySelector('.kana-grid');
+    items.forEach(k=>{
+      const st=progress[k.rom]||'none';
+      const cell=document.createElement('div');
+      cell.className='kc'+(st==='mastered'?' mastered':st==='learning'?' learning':'');
+      cell.innerHTML='<div class="ch">'+k.char+'</div><div class="ro">'+k.rom+'</div>';
+      cell.onclick=()=>openModal(k);
+      grid.appendChild(cell);
+    });
+  });
+  updateCounts();
+}
+function updateCounts(){
+  const m=Object.values(progress).filter(v=>v==='mastered').length;
+  const l=Object.values(progress).filter(v=>v==='learning').length;
+  document.getElementById('masterCount').textContent=m+' / 46 mastered';
+  document.getElementById('masterBar').style.width=Math.round(m/46*100)+'%';
+  document.getElementById('masterCountBar').textContent=m+' / 46';
+  document.getElementById('learningBar').style.width=Math.round(l/46*100)+'%';
+  document.getElementById('learningCountBar').textContent=l+' / 46';
+}
+function openModal(k){
+  currentKana=k;
+  document.getElementById('mk-char').textContent=k.char;
+  document.getElementById('mk-rom').textContent=k.rom.toUpperCase();
+  document.getElementById('mk-audio-label').textContent='Play: '+k.char+' ('+k.rom+')';
+  document.getElementById('mk-pronunciation').textContent=k.pronunciation;
+  document.getElementById('mk-mouth').textContent=k.mouth;
+  document.getElementById('mk-mnemonic').textContent=k.mnemonic;
+  document.getElementById('mk-stroke').textContent=k.char;
+  document.getElementById('mk-strokes').textContent=k.strokes+' stroke'+(k.strokes>1?'s':'');
+  const ex=document.getElementById('mk-examples');ex.innerHTML='';
+  k.examples.forEach(e=>{const d=document.createElement('div');d.className='modal-ex-row';d.textContent=e;ex.appendChild(d);});
+  document.getElementById('mk-yt').onclick=()=>openYT(k.char+' '+k.rom+' katakana stroke order pronunciation');
+  document.getElementById('kanaModal').classList.add('open');
+}
+function closeModal(){document.getElementById('kanaModal').classList.remove('open');currentKana=null;}
+document.getElementById('kanaModal').addEventListener('click',e=>{if(e.target===document.getElementById('kanaModal'))closeModal();});
+function playAudio(){
+  if(!currentKana)return;
+  const synth=window.speechSynthesis;
+  if(!synth){toast('Web Speech not supported','error');return;}
+  synth.cancel();
+  const u=new SpeechSynthesisUtterance(currentKana.char);u.lang='ja-JP';u.rate=0.7;
+  const voices=synth.getVoices();const jpVoice=voices.find(v=>v.lang&&v.lang.startsWith('ja'));
+  if(jpVoice)u.voice=jpVoice;
+  const btn=document.getElementById('mk-audio-btn');btn.classList.add('playing');
+  u.onend=()=>btn.classList.remove('playing');
+  u.onerror=()=>{btn.classList.remove('playing');toast('Audio unavailable — try Chrome on desktop','error');};
+  synth.speak(u);
+  setTimeout(()=>{if(currentKana){const u2=new SpeechSynthesisUtterance(currentKana.char);u2.lang='ja-JP';u2.rate=0.7;if(jpVoice)u2.voice=jpVoice;synth.speak(u2);}},900);
+}
+document.addEventListener('click',()=>{if(window.speechSynthesis)window.speechSynthesis.getVoices();},{once:true});
+function setStatus(status){
+  if(!currentKana)return;
+  const prev=progress[currentKana.rom]||'none';
+  progress[currentKana.rom]=status;
+  if(status==='mastered'&&prev!=='mastered')toast('✓ +5 XP — '+currentKana.rom+' mastered!','success');
+  saveProgress();buildGrid();closeModal();
+}
+function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}
+function toast(msg,type='success'){const t=document.createElement('div');t.className='toast '+(type||'');t.textContent=msg;document.getElementById('toastContainer').appendChild(t);setTimeout(()=>{t.style.animation='toastOut .3s ease forwards';setTimeout(()=>t.remove(),300);},3000);}
+loadProgress();buildGrid();
+</script>
 </body>
 </html>
