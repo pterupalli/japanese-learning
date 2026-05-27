@@ -7,110 +7,245 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#f4f0e8;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;--red:#c0392b;--red-lt:rgba(192,57,43,.10);--red-glow:rgba(192,57,43,.22);--gold:#7a5a00;--gold-lt:rgba(184,146,42,.10);--teal:#1a7f6e;--teal-lt:rgba(26,127,110,.10);--border:rgba(26,21,16,.09);--border2:rgba(26,21,16,.16);--ac:#3d52b0;--ac-lt:rgba(0,0,0,.06);--font-jp:'Noto Serif JP',serif;--font-ui:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:15px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}body{font-family:var(--font-ui);background:var(--cream);color:var(--ink);overflow-x:hidden}a{text-decoration:none;color:inherit}button{font-family:var(--font-ui);cursor:pointer}::selection{background:var(--red-lt)}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(26,21,16,.12);border-radius:3px}
+:root{--cream:#f4f0e8;--ink:#1a1510;--ink2:#3d3528;--ink3:#5a5048;--ink4:#665848;--red:#c0392b;--red-lt:rgba(192,57,43,.10);--gold:#7a5a00;--gold-lt:rgba(184,146,42,.10);--indigo:#3d52b0;--indigo-lt:rgba(61,82,176,.10);--moss:#4a7c3f;--moss-lt:rgba(74,124,63,.10);--border:rgba(26,21,16,.09);--border2:rgba(26,21,16,.16);--font-jp:'Noto Serif JP',serif;--font-ui:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;--ease:cubic-bezier(.25,.46,.45,.94);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:15px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}body{font-family:var(--font-ui);background:var(--cream);color:var(--ink);overflow-x:hidden}a{text-decoration:none;color:inherit}button{font-family:var(--font-ui);cursor:pointer}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(26,21,16,.12);border-radius:3px}
 .nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(244,240,232,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.nav-brand{display:flex;align-items:center;gap:11px}.nav-logo{width:36px;height:36px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--font-jp);font-size:18px;font-weight:700;color:#fff}.nav-brand-name{font-size:14px;font-weight:600;color:var(--ink)}.nav-brand-sub{font-size:9px;color:var(--ink4);letter-spacing:.14em;font-family:var(--font-mono)}.nav-back{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink3);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:white;transition:border-color .15s}.nav-back:hover{border-color:var(--border2);color:var(--ink)}
+.nav-brand{display:flex;align-items:center;gap:11px}.nav-logo{width:36px;height:36px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--font-jp);font-size:18px;font-weight:700;color:#fff}.nav-brand-name{font-size:14px;font-weight:600;color:var(--ink)}.nav-brand-sub{font-size:9px;color:var(--ink4);letter-spacing:.14em;font-family:var(--font-mono)}.nav-back{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink3);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:white}.nav-back:hover{border-color:var(--border2)}
 .lesson-hero{background:linear-gradient(135deg,#0e1124 0%,#1a2040 100%);padding:60px 56px 56px;position:relative;overflow:hidden;}
 .lesson-hero::before{content:'漢';font-family:var(--font-jp);font-size:280px;font-weight:700;position:absolute;right:-20px;top:-40px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;user-select:none;}
-.lesson-hero-eyebrow{font-size:10px;letter-spacing:.22em;color:#3d52b0;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:12px}
-.lesson-hero-title{font-family:var(--font-jp);font-size:clamp(32px,5vw,52px);font-weight:700;color:#f4f0e8;line-height:1.15;margin-bottom:10px}
-.lesson-hero-sub{font-size:14px;color:rgba(244,240,232,.5);line-height:1.8;max-width:560px;margin-bottom:28px}
-.hero-pill{font-size:10px;letter-spacing:.12em;padding:5px 14px;border-radius:20px;font-family:var(--font-mono);border:1px solid;display:inline-block;margin-right:8px;margin-bottom:4px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7)}
-.lesson-content{max-width:900px;margin:0 auto;padding:48px 40px}
-.lesson-block{margin-bottom:48px}
-.block-eyebrow{font-size:9px;letter-spacing:.2em;color:#3d52b0;font-family:var(--font-mono);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.block-eyebrow::before{content:'';width:14px;height:1px;background:#3d52b0}
-.block-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:12px}
-.block-body{font-size:14px;color:var(--ink3);line-height:1.9}.block-body strong{color:var(--ink);font-weight:600}
-.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
-.info-card{background:white;border:1px solid var(--border);border-radius:14px;padding:20px}
-.info-card-icon{font-family:var(--font-jp);font-size:32px;margin-bottom:10px;line-height:1}.info-card-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}.info-card-body{font-size:12px;color:var(--ink3);line-height:1.75}
-.step-list{display:flex;flex-direction:column;gap:14px;margin-top:20px}
-.step{display:flex;gap:16px;background:white;border:1px solid var(--border);border-radius:14px;padding:18px 20px}
-.step-num{width:32px;height:32px;border-radius:8px;background:rgba(0,0,0,.05);color:#3d52b0;font-family:var(--font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-body-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}.step-body-text{font-size:12px;color:var(--ink3);line-height:1.75}
-.locked-notice{background:linear-gradient(135deg,#0e1124,#1a2040);border-radius:16px;padding:32px;margin-top:20px;text-align:center}
-.locked-icon{font-size:40px;margin-bottom:12px}
-.locked-title{font-family:var(--font-jp);font-size:20px;font-weight:700;color:#f4f0e8;margin-bottom:8px}
-.locked-body{font-size:13px;color:rgba(244,240,232,.55);line-height:1.75;max-width:420px;margin:0 auto 20px}
-.locked-xp{font-size:11px;font-family:var(--font-mono);background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);padding:6px 18px;border-radius:20px;display:inline-block}
-.yt-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(26,21,16,.06);border:1px solid var(--border2);color:var(--ink3);padding:11px 20px;border-radius:10px;font-size:12px;font-weight:600;letter-spacing:.06em;font-family:var(--font-mono);transition:background .15s;margin-top:14px;margin-right:8px}
-.yt-btn:hover{background:rgba(26,21,16,.1);color:var(--ink)}
-.dashboard-cta{background:linear-gradient(135deg,#0e1124,#1a2040);border-radius:18px;padding:32px;text-align:center;margin-top:48px;}
-.dashboard-cta-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:8px}
-.dashboard-cta-body{font-size:13px;color:rgba(244,240,232,.5);margin-bottom:22px;line-height:1.7}
-.dashboard-cta-btn{display:inline-flex;align-items:center;gap:8px;background:#3d52b0;color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:13px;font-weight:600;transition:opacity .15s}
-.dashboard-cta-btn:hover{opacity:.85}
-@media(max-width:700px){.lesson-hero{padding:40px 24px 36px}.lesson-content{padding:32px 20px}}
+.hero-eyebrow{font-size:10px;letter-spacing:.22em;color:var(--indigo);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:12px}
+.hero-title{font-family:var(--font-jp);font-size:clamp(32px,5vw,52px);font-weight:700;color:#f4f0e8;line-height:1.15;margin-bottom:10px}
+.hero-sub{font-size:14px;color:rgba(244,240,232,.5);line-height:1.8;max-width:560px;margin-bottom:28px}
+.hero-pill{font-size:10px;letter-spacing:.12em;padding:5px 14px;border-radius:20px;font-family:var(--font-mono);border:1px solid;display:inline-block;margin-right:8px;margin-bottom:4px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.75)}
+.content{max-width:960px;margin:0 auto;padding:48px 40px}
+.lb{margin-bottom:48px}
+.be{font-size:9px;letter-spacing:.2em;color:var(--indigo);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}.be::before{content:'';width:14px;height:1px;background:var(--indigo)}
+.bt{font-family:var(--font-jp);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.bb{font-size:14px;color:var(--ink3);line-height:1.9}.bb strong{color:var(--ink);font-weight:600}
+/* KANJI TABLE */
+.kanji-wrap{background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:20px}
+.kanji-wrap-hdr{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.kwh-title{font-size:13px;font-weight:600;color:var(--ink)}.kwh-count{font-size:11px;font-family:var(--font-mono);color:var(--indigo)}
+.kanji-table{width:100%;border-collapse:collapse}
+.kanji-table th{font-size:9px;letter-spacing:.12em;color:var(--ink4);font-family:var(--font-mono);text-align:left;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--cream);text-transform:uppercase}
+.kanji-table td{padding:10px 16px;border-bottom:1px solid rgba(26,21,16,.04);font-size:12px;color:var(--ink2);vertical-align:middle}
+.kanji-table tr:last-child td{border-bottom:none}.kanji-table tr:hover td{background:var(--cream)}
+.kj-char{font-family:var(--font-jp);font-size:24px;color:var(--indigo);cursor:pointer;transition:color .15s}.kj-char:hover{color:#2a3a8f}
+.kj-badge{display:inline-block;font-size:9px;letter-spacing:.1em;padding:2px 7px;border-radius:4px;font-family:var(--font-mono)}
+.kj-st-locked{background:var(--cream);color:var(--ink4)}.kj-st-learning{background:var(--gold-lt);color:var(--gold)}.kj-st-known{background:var(--moss-lt);color:var(--moss)}
+.kj-play{background:var(--indigo-lt);border:1px solid rgba(61,82,176,.2);border-radius:5px;padding:3px 8px;font-size:11px;color:var(--indigo);cursor:pointer}
+.kj-yt{background:none;border:1px solid rgba(192,57,43,.2);border-radius:5px;padding:3px 8px;font-size:11px;color:var(--red);cursor:pointer}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:9000;background:rgba(26,21,16,.65);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity .25s;pointer-events:none}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:white;border:1px solid var(--border2);border-radius:22px;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;position:relative;box-shadow:0 24px 64px rgba(26,21,16,.18);transform:translateY(16px) scale(.97);transition:transform .25s}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+.modal-close-btn{position:absolute;top:14px;right:14px;background:var(--cream);border:1px solid var(--border);color:var(--ink3);width:32px;height:32px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:2;cursor:pointer}
+.modal-hero{background:linear-gradient(135deg,#0e1124,#1a2040);padding:2rem;text-align:center;border-radius:20px 20px 0 0}
+.modal-kj-big{font-family:var(--font-jp);font-size:90px;font-weight:700;line-height:1;display:block;margin-bottom:.25rem;color:#f4f0e8}
+.modal-kj-mean{font-size:18px;color:rgba(255,255,255,.6);font-family:var(--font-mono);letter-spacing:.08em;margin-bottom:.5rem}
+.modal-kj-badge{font-size:9px;letter-spacing:.2em;padding:3px 13px;border-radius:20px;font-family:var(--font-mono);display:inline-block;background:var(--indigo-lt);color:var(--indigo);border:1px solid rgba(61,82,176,.3)}
+.modal-body{padding:1.25rem 1.75rem}
+.modal-audio-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--indigo-lt);border:1px solid rgba(61,82,176,.25);border-radius:10px;padding:.75rem 1rem;cursor:pointer;transition:background .2s;margin-bottom:1rem}
+.modal-audio-btn:hover{background:rgba(61,82,176,.18)}
+.modal-audio-icon{width:28px;height:28px;background:var(--indigo);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;color:#fff}
+.modal-sec-title{font-size:9px;letter-spacing:.2em;color:var(--ink4);font-family:var(--font-mono);margin-bottom:.5rem;text-transform:uppercase}
+.modal-reading-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
+.modal-reading-card{background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:12px}
+.modal-reading-type{font-size:9px;font-family:var(--font-mono);color:var(--ink4);letter-spacing:.12em;margin-bottom:4px}
+.modal-reading-val{font-family:var(--font-jp);font-size:18px;color:var(--ink)}
+.modal-examples{display:flex;flex-direction:column;gap:5px;margin-bottom:1rem}
+.modal-ex-row{background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-family:var(--font-jp);font-size:13px;color:var(--ink2)}
+.modal-yt-btn{display:flex;align-items:center;gap:8px;background:var(--indigo-lt);border:1px solid rgba(61,82,176,.2);border-radius:10px;padding:.6rem 1rem;cursor:pointer;width:100%;margin-bottom:.75rem}
+.modal-yt-icon{width:24px;height:24px;background:var(--indigo);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;flex-shrink:0}
+.modal-yt-label{font-size:11px;font-weight:600;color:var(--ink)}
+.modal-status-row{display:flex;gap:8px}
+.mstatus-btn{flex:1;padding:9px;border-radius:8px;font-size:10px;letter-spacing:.12em;border:1px solid;cursor:pointer;font-family:var(--font-mono)}
+.s-learning{border-color:rgba(184,146,42,.3);color:var(--gold);background:var(--gold-lt)}
+.s-known{border-color:var(--moss);color:#fff;background:var(--moss)}
+.s-reset{border-color:var(--border2);color:var(--ink3);background:var(--cream)}
+.locked-notice{background:linear-gradient(135deg,#0e1124,#1a2040);border-radius:16px;padding:32px;text-align:center;margin-top:20px}
+.ln-icon{font-size:36px;margin-bottom:10px}.ln-title{font-family:var(--font-jp);font-size:20px;font-weight:700;color:#f4f0e8;margin-bottom:8px}.ln-body{font-size:13px;color:rgba(244,240,232,.55);line-height:1.75;max-width:400px;margin:0 auto 18px}.ln-xp{font-size:11px;font-family:var(--font-mono);background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);padding:6px 18px;border-radius:20px;display:inline-block}
+.yt-btn{display:inline-flex;align-items:center;gap:10px;background:var(--indigo-lt);border:1px solid rgba(61,82,176,.25);color:var(--indigo);padding:11px 20px;border-radius:10px;font-size:12px;font-weight:600;letter-spacing:.06em;font-family:var(--font-mono);transition:background .15s;margin-top:14px;margin-right:8px}.yt-btn:hover{background:rgba(61,82,176,.18)}
+.cta{background:linear-gradient(135deg,#0e1124,#1a2040);border-radius:18px;padding:32px;text-align:center;margin-top:48px;}
+.cta-title{font-family:var(--font-jp);font-size:22px;font-weight:700;color:#f4f0e8;margin-bottom:8px}.cta-body{font-size:13px;color:rgba(244,240,232,.5);margin-bottom:22px;line-height:1.7}.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--indigo);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:13px;font-weight:600}
+.toast-container{position:fixed;bottom:1.25rem;right:1.25rem;z-index:9999;display:flex;flex-direction:column;gap:7px}
+.toast{background:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 14px;font-size:12px;color:#f4f0e8;max-width:280px;animation:toastIn .3s ease forwards}
+.toast.success{border-color:rgba(74,124,63,.5)}.toast.error{border-color:rgba(192,57,43,.5)}
+@keyframes toastIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes toastOut{from{opacity:1}to{transform:translateX(110%);opacity:0}}
+@media(max-width:700px){.lesson-hero{padding:40px 24px 36px}.content{padding:32px 20px}}
 </style>
 </head>
 <body>
+<div class="toast-container" id="toastContainer"></div>
+<div class="modal-overlay" id="kanjiModal">
+  <div class="modal-box">
+    <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    <div class="modal-hero">
+      <span class="modal-kj-big" id="mk-char">日</span>
+      <div class="modal-kj-mean" id="mk-mean">Sun / Day</div>
+      <span class="modal-kj-badge" id="mk-jlpt">N5</span>
+    </div>
+    <div class="modal-body">
+      <button class="modal-audio-btn" onclick="playAudio()">
+        <div class="modal-audio-icon">▶</div>
+        <div><div style="font-size:12px;font-weight:600;color:var(--ink)" id="mk-audio-label">Play reading</div><div style="font-size:9px;color:var(--indigo);font-family:var(--font-mono);margin-top:2px">CLICK TO HEAR · ON-YOMI</div></div>
+      </button>
+      <div class="modal-reading-row">
+        <div class="modal-reading-card"><div class="modal-reading-type">ON-YOMI (Chinese)</div><div class="modal-reading-val" id="mk-on"></div></div>
+        <div class="modal-reading-card"><div class="modal-reading-type">KUN-YOMI (Japanese)</div><div class="modal-reading-val" id="mk-kun"></div></div>
+      </div>
+      <div class="modal-sec-title">Example compounds</div>
+      <div class="modal-examples" id="mk-examples"></div>
+      <button class="modal-yt-btn" id="mk-yt"><div class="modal-yt-icon">▶</div><div><div class="modal-yt-label">Stroke order &amp; readings</div><div style="font-size:9px;color:var(--indigo);font-family:var(--font-mono)">OPEN YOUTUBE ↗</div></div></button>
+      <div class="modal-status-row">
+        <button class="mstatus-btn s-learning" onclick="setStatus('learning')">Mark learning</button>
+        <button class="mstatus-btn s-known" onclick="setStatus('known')">✓ Known +20XP</button>
+        <button class="mstatus-btn s-reset" onclick="setStatus('locked')">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
 <nav class="nav">
-  <a href="index.html" class="nav-brand">
-    <div class="nav-logo">道</div>
-    <div><div class="nav-brand-name">日本語道</div><div class="nav-brand-sub">LESSON</div></div>
-  </a>
+  <a href="index.html" class="nav-brand"><div class="nav-logo">道</div><div><div class="nav-brand-name">日本語道</div><div class="nav-brand-sub">LESSON</div></div></a>
   <a href="dashboard.html" class="nav-back">← Back to Dashboard</a>
 </nav>
 <div class="lesson-hero">
-  <div class="lesson-hero-eyebrow">Stage 2 · Lesson 3 of 6</div>
-  <div class="lesson-hero-title">Kanji<br>漢字</div>
-  <div class="lesson-hero-sub">80 core N5 kanji. Each one has a meaning, two readings (On and Kun), and compounds. Unlocks at Stage 2 (500 XP).</div>
-  <span class="hero-pill">80 N5 Kanji</span>
-  <span class="hero-pill">+20 XP each</span>
-  <span class="hero-pill">Stage 2 — Locked</span>
+  <div class="hero-eyebrow">Stage 2 · Lesson 3 of 6</div>
+  <div class="hero-title">Kanji<br>漢字</div>
+  <div class="hero-sub">15 core N5 kanji. Click any character to open the full study popup — readings, compounds, audio, and YouTube stroke order.</div>
+  <span class="hero-pill">15 N5 Kanji</span><span class="hero-pill">+20 XP each</span><span class="hero-pill">Stage 2 — Unlocks at 500 XP</span>
 </div>
-<div class="lesson-content">
-  <div class="lesson-block">
-    <div class="block-eyebrow">Overview</div>
-    <div class="block-title">What is Kanji?</div>
-    <div class="block-body">
-      Kanji are Chinese-origin logographic characters adopted into Japanese. Unlike hiragana and katakana — which represent sounds — each kanji represents a <strong>meaning</strong>.<br><br>
-      日 = sun / day. 本 = origin / book. 語 = language. Combined: 日本語 = Japanese language.<br><br>
-      There are 2,136 <strong>Jōyō kanji</strong> (standard use), but you only need to know about <strong>80 for N5</strong> and 250 for N4. Start here.
-    </div>
-    <div class="info-grid">
-      <div class="info-card"><div class="info-card-icon">日</div><div class="info-card-title">On-yomi (Chinese reading)</div><div class="info-card-body">Typically used in compound words. 日 in 日本 (Nihon) uses On-yomi: ニチ/ニ. Usually written in katakana in dictionaries.</div></div>
-      <div class="info-card"><div class="info-card-icon">月</div><div class="info-card-title">Kun-yomi (Japanese reading)</div><div class="info-card-body">Typically used for standalone words. 月 alone = つき (tsuki, moon). Kun-yomi is the native Japanese reading — usually in hiragana.</div></div>
-      <div class="info-card"><div class="info-card-icon">本</div><div class="info-card-title">Radicals — the components</div><div class="info-card-body">Every kanji is built from smaller components called radicals. Learning radicals helps you recognize and remember new kanji faster.</div></div>
+<div class="content">
+  <div class="lb" id="mainSection">
+    <div class="be">Practice</div>
+    <div class="bt">N5 Kanji — click any character to study</div>
+    <div class="bb">Click any kanji to see its readings, example words, and hear it pronounced. Mark known for +20 XP.</div>
+    <div class="kanji-wrap">
+      <div class="kanji-wrap-hdr"><span class="kwh-title">N5 Kanji log</span><span class="kwh-count" id="kanjiCount">0 / 15 known</span></div>
+      <table class="kanji-table">
+        <thead><tr><th>Kanji</th><th>Meaning</th><th>On-yomi</th><th>Kun-yomi</th><th>JLPT</th><th>Status</th></tr></thead>
+        <tbody id="kanjiTbody"></tbody>
+      </table>
     </div>
   </div>
-  <div class="lesson-block">
-    <div class="block-eyebrow">Study method</div>
-    <div class="block-title">How to learn kanji effectively</div>
-    <div class="step-list">
-      <div class="step"><div class="step-num">01</div><div><div class="step-body-title">Learn the meaning first, then the readings</div><div class="step-body-text">Know that 水 = water before memorizing its readings (スイ/みず). Meaning anchors everything else.</div></div></div>
-      <div class="step"><div class="step-num">02</div><div><div class="step-body-title">Learn kanji in context — with vocab words</div><div class="step-body-text">水 alone is abstract. 水曜日 (Wednesday), お水 (water to drink) — context makes it stick. Always pair kanji with real words.</div></div></div>
-      <div class="step"><div class="step-num">03</div><div><div class="step-body-title">Use the Kanji Log in the dashboard</div><div class="step-body-text">Click any kanji to cycle its status. The log shows On, Kun, meaning, JLPT level, and links to YouTube stroke order guides.</div></div></div>
-      <div class="step"><div class="step-num">04</div><div><div class="step-body-title">Add to Anki for spaced repetition</div><div class="step-body-text">The Kanji Log shows you what to study. Use Anki (free) for daily SRS review — 20–30 new kanji per week is a solid pace.</div></div></div>
-    </div>
+  <div class="lb">
+    <div class="be">Resources</div>
+    <div class="bt">Recommended YouTube</div>
+    <button class="yt-btn" onclick="openYT('learn kanji beginners JLPT N5 complete guide')">▶ N5 Kanji Complete</button>
+    <button class="yt-btn" onclick="openYT('kanji radicals beginner guide Japanese')">▶ Radicals for Beginners</button>
+    <button class="yt-btn" onclick="openYT('how to study kanji effectively anki method')">▶ How to Study Kanji</button>
   </div>
-  <div class="lesson-block">
-    <div class="block-eyebrow">Status</div>
-    <div class="block-title">Unlocks at Stage 2</div>
-    <div class="locked-notice">
-      <div class="locked-icon">🔒</div>
-      <div class="locked-title">Kanji Log — Stage 2</div>
-      <div class="locked-body">Complete Stage 1 first. Master hiragana and katakana, build your N5 vocabulary foundation, and reach 500 XP. Kanji without kana is building a house with no foundation.</div>
-      <div class="locked-xp">500 XP to unlock · Check dashboard for progress</div>
-    </div>
-  </div>
-  <div class="lesson-block">
-    <div class="block-eyebrow">Resources</div>
-    <div class="block-title">Recommended YouTube</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
-      <button class="yt-btn" onclick="openYT('learn kanji beginners JLPT N5 complete')">▶ N5 Kanji Complete Guide</button>
-      <button class="yt-btn" onclick="openYT('kanji radicals beginner guide Japanese')">▶ Radicals for Beginners</button>
-      <button class="yt-btn" onclick="openYT('how to study kanji effectively anki')">▶ How to Study Kanji</button>
-    </div>
-  </div>
-  <div class="dashboard-cta">
-    <div class="dashboard-cta-title">Continue in the Dashboard</div>
-    <div class="dashboard-cta-body">Track your progress, earn XP, and log your study sessions. Everything syncs to your account.</div>
-    <button class="dashboard-cta-btn" onclick="location.href='dashboard.html'">Go to Dashboard →</button>
+  <div class="cta">
+    <div class="cta-title">XP syncs to your dashboard</div>
+    <div class="cta-body">Each kanji marked known adds +20 XP. Reach 500 XP to unlock Stage 2 and access grammar, vocabulary, and more kanji.</div>
+    <button class="cta-btn" onclick="location.href='dashboard.html'">View Dashboard →</button>
   </div>
 </div>
-<script>function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}</script>
+<script>
+const KANJI=[
+ {k:'日',m:'Sun / Day',on:'ニチ・ジツ',kun:'ひ・か',jlpt:'N5',examples:['日本 (nihon) — Japan','日曜日 (nichiyoubi) — Sunday','今日 (kyou) — today']},
+ {k:'本',m:'Book / Origin',on:'ホン',kun:'もと',jlpt:'N5',examples:['日本 (nihon) — Japan','本屋 (honya) — bookstore','本物 (honmono) — genuine']},
+ {k:'人',m:'Person',on:'ジン・ニン',kun:'ひと',jlpt:'N5',examples:['日本人 (nihonjin) — Japanese person','人口 (jinkou) — population','一人 (hitori) — one person']},
+ {k:'山',m:'Mountain',on:'サン',kun:'やま',jlpt:'N5',examples:['富士山 (fujisan) — Mt. Fuji','山田 (yamada) — Yamada (surname)','登山 (tozan) — mountain climbing']},
+ {k:'川',m:'River',on:'セン',kun:'かわ',jlpt:'N5',examples:['川 (kawa) — river','河川 (kasen) — rivers','小川 (ogawa) — stream']},
+ {k:'火',m:'Fire',on:'カ',kun:'ひ',jlpt:'N5',examples:['火曜日 (kayoubi) — Tuesday','火事 (kaji) — fire (disaster)','火山 (kazan) — volcano']},
+ {k:'水',m:'Water',on:'スイ',kun:'みず',jlpt:'N5',examples:['水曜日 (suiyoubi) — Wednesday','水道 (suidou) — waterworks','お水 (omizu) — water (polite)']},
+ {k:'木',m:'Tree / Wood',on:'ボク・モク',kun:'き',jlpt:'N5',examples:['木曜日 (mokuyoubi) — Thursday','木村 (kimura) — Kimura (surname)','木造 (mokuzou) — wooden structure']},
+ {k:'金',m:'Gold / Money',on:'キン・コン',kun:'かね',jlpt:'N5',examples:['金曜日 (kinyoubi) — Friday','お金 (okane) — money','金色 (kiniro) — gold color']},
+ {k:'土',m:'Earth / Soil',on:'ド・ト',kun:'つち',jlpt:'N5',examples:['土曜日 (doyoubi) — Saturday','土地 (tochi) — land','土台 (dodai) — foundation']},
+ {k:'月',m:'Moon / Month',on:'ゲツ・ガツ',kun:'つき',jlpt:'N5',examples:['月曜日 (getsuyoubi) — Monday','一月 (ichigatsu) — January','月見 (tsukimi) — moon viewing']},
+ {k:'学',m:'Study / Learn',on:'ガク',kun:'まな',jlpt:'N5',examples:['学校 (gakkou) — school','大学 (daigaku) — university','学生 (gakusei) — student']},
+ {k:'年',m:'Year',on:'ネン',kun:'とし',jlpt:'N5',examples:['今年 (kotoshi) — this year','来年 (rainen) — next year','毎年 (maitoshi) — every year']},
+ {k:'大',m:'Big / Large',on:'ダイ・タイ',kun:'おお',jlpt:'N5',examples:['大学 (daigaku) — university','大丈夫 (daijoubu) — okay','大きい (ookii) — big']},
+ {k:'時',m:'Time / Hour',on:'ジ',kun:'とき',jlpt:'N5',examples:['時間 (jikan) — time','何時 (nanji) — what time','時計 (tokei) — clock']},
+];
+let progress={},currentKanji=null;
+function loadProgress(){try{progress=JSON.parse(localStorage.getItem('jpProgress_kanji')||'{}');}catch(e){progress={};}}
+function saveProgress(){
+  localStorage.setItem('jpProgress_kanji',JSON.stringify(progress));
+  try{const main=JSON.parse(localStorage.getItem('jpProgress')||'{}');if(!main.kanji)main.kanji={};Object.assign(main.kanji,progress);const knownCount=Object.values(progress).filter(v=>v==='known').length;main.xp=(main.xp||0);localStorage.setItem('jpProgress',JSON.stringify(main));}catch(e){}
+}
+function isUnlocked(){
+  try{const main=JSON.parse(localStorage.getItem('jpProgress')||'{}');return(main.stage||1)>=2||(main.xp||0)>=500;}catch(e){return false;}
+}
+function buildTable(){
+  const tbody=document.getElementById('kanjiTbody');tbody.innerHTML='';
+  const unlocked=isUnlocked();
+  KANJI.forEach(k=>{
+    const st=progress[k.k]||'locked';
+    const tr=document.createElement('tr');
+    const bdgClass=st==='known'?'kj-st-known':st==='learning'?'kj-st-learning':'kj-st-locked';
+    tr.innerHTML=`<td><span class="kj-char" onclick="openModal(${JSON.stringify(k).replace(/"/g,'&quot;')})">${k.k}</span></td>
+     <td>${k.m}</td>
+     <td style="font-family:var(--font-jp);font-size:13px">${k.on}</td>
+     <td style="font-family:var(--font-jp);font-size:13px">${k.kun}</td>
+     <td><span class="kj-badge" style="background:var(--red-lt);color:var(--red)">${k.jlpt}</span></td>
+     <td><div style="display:flex;align-items:center;gap:6px">
+      <span class="kj-badge ${bdgClass}">${st.toUpperCase()}</span>
+      <button class="kj-play" onclick="speakKanji('${k.k}')">▶ Play</button>
+      <button class="kj-yt" onclick="openYT('${k.k} ${k.m} kanji stroke order')">YT</button>
+     </div></td>`;
+    if(!unlocked){tr.style.opacity='.4';tr.style.pointerEvents='none';}
+    tbody.appendChild(tr);
+  });
+  const known=Object.values(progress).filter(v=>v==='known').length;
+  document.getElementById('kanjiCount').textContent=known+' / 15 known';
+  if(!unlocked){
+    const notice=document.getElementById('lockedNotice');
+    if(!notice){
+      const n=document.createElement('div');n.id='lockedNotice';n.className='locked-notice';
+      n.innerHTML='<div class="ln-icon">🔒</div><div class="ln-title">Kanji — Stage 2</div><div class="ln-body">Complete Stage 1 first. Master hiragana and katakana and reach 500 XP. Kanji without kana is building on sand.</div><div class="ln-xp">Need 500 XP — check dashboard for progress</div>';
+      document.querySelector('.kanji-wrap').after(n);
+    }
+  }
+}
+function openModal(k){
+  if(!isUnlocked()){toast('Unlock at Stage 2 (500 XP)','error');return;}
+  currentKanji=k;
+  document.getElementById('mk-char').textContent=k.k;
+  document.getElementById('mk-mean').textContent=k.m;
+  document.getElementById('mk-jlpt').textContent=k.jlpt;
+  document.getElementById('mk-on').textContent=k.on;
+  document.getElementById('mk-kun').textContent=k.kun;
+  document.getElementById('mk-audio-label').textContent='Play: '+k.k+' ('+k.on.split('・')[0]+')';
+  const ex=document.getElementById('mk-examples');ex.innerHTML='';
+  k.examples.forEach(e=>{const d=document.createElement('div');d.className='modal-ex-row';d.textContent=e;ex.appendChild(d);});
+  document.getElementById('mk-yt').onclick=()=>openYT(k.k+' '+k.m+' kanji stroke order reading JLPT');
+  document.getElementById('kanjiModal').classList.add('open');
+}
+function closeModal(){document.getElementById('kanjiModal').classList.remove('open');currentKanji=null;}
+document.getElementById('kanjiModal').addEventListener('click',e=>{if(e.target===document.getElementById('kanjiModal'))closeModal();});
+function playAudio(){
+  if(!currentKanji)return;
+  const synth=window.speechSynthesis;if(!synth){toast('Audio not supported','error');return;}
+  synth.cancel();
+  const reading=currentKanji.on.split('・')[0];
+  const u=new SpeechSynthesisUtterance(currentKanji.k);u.lang='ja-JP';u.rate=0.75;
+  const voices=synth.getVoices();const jp=voices.find(v=>v.lang&&v.lang.startsWith('ja'));if(jp)u.voice=jp;
+  synth.speak(u);
+}
+function speakKanji(char){
+  const synth=window.speechSynthesis;if(!synth)return;synth.cancel();
+  const u=new SpeechSynthesisUtterance(char);u.lang='ja-JP';u.rate=0.75;
+  const voices=synth.getVoices();const jp=voices.find(v=>v.lang&&v.lang.startsWith('ja'));if(jp)u.voice=jp;
+  synth.speak(u);
+}
+document.addEventListener('click',()=>{if(window.speechSynthesis)window.speechSynthesis.getVoices();},{once:true});
+function setStatus(status){
+  if(!currentKanji)return;
+  const prev=progress[currentKanji.k]||'locked';
+  progress[currentKanji.k]=status;
+  if(status==='known'&&prev!=='known'){
+    toast('✓ +20 XP — '+currentKanji.k+' known!','success');
+    try{const main=JSON.parse(localStorage.getItem('jpProgress')||'{}');main.xp=(main.xp||0)+20;localStorage.setItem('jpProgress',JSON.stringify(main));}catch(e){}
+  }
+  saveProgress();buildTable();closeModal();
+}
+function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}
+function toast(msg,type='success'){const t=document.createElement('div');t.className='toast '+(type||'');t.textContent=msg;document.getElementById('toastContainer').appendChild(t);setTimeout(()=>{t.style.animation='toastOut .3s ease forwards';setTimeout(()=>t.remove(),300);},3000);}
+loadProgress();buildTable();
+</script>
 </body>
 </html>
